@@ -52,6 +52,9 @@
     
 <link rel="stylesheet" href="/ossheroes/css/index.v1.css">
 
+    
+<script src="/ossheroes/js/i18n.js"></script>
+
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 
@@ -64,29 +67,29 @@
   <!-- 导航 -->
 <nav class="navbar navbar-expand-lg navbar-dark" id="navWrap">
     <div class="container container-fluid">
-      <a class="navbar-brand" href="https://opensource.win/ossheroes/">中国开源码力榜</a>
+      <a class="navbar-brand" href="https://opensource.win/ossheroes/" data-i18n-zh="中国开源码力榜" data-i18n-en="China Open Source HeroRank">中国开源码力榜</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-sm-end" id="navbarSupportedContent">
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item">
-                <a href="https://opensource.win/ossheroes#ranking" class="nav-link">榜单背景</a>
+                <a href="https://opensource.win/ossheroes#ranking" class="nav-link" data-i18n-zh="榜单背景" data-i18n-en="Background">榜单背景</a>
           </li>
           <li class="nav-item">
-                <a href="https://opensource.win/ossheroes#standard" class="nav-link">评选标准</a>
+                <a href="https://opensource.win/ossheroes#standard" class="nav-link" data-i18n-zh="评选标准" data-i18n-en="Criteria">评选标准</a>
           </li>
           <li class="nav-item">
-            <a href="https://opensource.win/ossheroes#detail" class="nav-link">榜单详情</a>
+            <a href="https://opensource.win/ossheroes#detail" class="nav-link" data-i18n-zh="榜单详情" data-i18n-en="Rankings">榜单详情</a>
           </li>
           <li class="nav-item">
-            <a href="https://opensource.win/ossheroes#partner" class="nav-link">合作伙伴</a>
+            <a href="https://opensource.win/ossheroes#partner" class="nav-link" data-i18n-zh="合作伙伴" data-i18n-en="Partners">合作伙伴</a>
           </li>
           <li class="nav-item">
             <a href="https://github.com/opensourcewin" target="_blank" class="nav-link">GitHub</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-i18n-zh="往年榜单" data-i18n-en="Past Rankings">
               往年榜单
             </a>
             
@@ -103,17 +106,34 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="https://opensource.win/" class="nav-link">回到官网</a>
+            <a href="https://opensource.win/" class="nav-link" data-i18n-zh="回到官网" data-i18n-en="Main Site">回到官网</a>
+          </li>
+          <!-- 语言切换：中 / EN，与官网共用 localStorage key osw-language -->
+          <li class="nav-item lang-switch" aria-label="Language / 语言">
+            <button type="button" class="lang-btn" data-lang-switch="zh" onclick="window.OSW_I18N && OSW_I18N.set('zh')">中</button><span class="lang-sep" aria-hidden="true">/</span><button type="button" class="lang-btn" data-lang-switch="en" onclick="window.OSW_I18N && OSW_I18N.set('en')">EN</button>
           </li>
         </ul>
       </div>
     </div>
-  
+
  </nav>
-  <!-- 头部内容 -->
-  <div class="container">
-      <img src="/ossheroes/img/banner-index-new.png" class="home-head" alt="中国开源码力榜" loading="lazy">
-  </div>
+
+  <!-- 头部内容：与首页一致的终端风 hero，年份取当前榜单 -->
+  
+<div class="hero">
+    <div class="hero-inner container">
+        <div class="hero-badge">
+            <span class="hero-dot" aria-hidden="true"><span class="hero-dot-ping"></span><span class="hero-dot-core"></span></span>
+            <span data-i18n-zh="系统广播" data-i18n-en="System Broadcast">系统广播</span>
+        </div>
+        <h1 class="hero-title">
+            <span class="hero-cmd">./ranking --year 2022</span>
+            <span class="hero-hash" aria-hidden="true">#</span> <span data-i18n-zh="中国开源码力榜" data-i18n-en="China Open Source HeroRank">中国开源码力榜</span>
+        </h1>
+        <p class="hero-subtitle" data-i18n-zh="由 SegmentFault 思否、开源社、X-lab 开放实验室联合发起，基于 OpenRank 开源贡献度算法，甄选年度最具影响力的中国开源开发者。" data-i18n-en="Co-founded by SegmentFault, KAIYUANSHE and X-lab — an annual ranking of China's most impactful open source developers, powered by the OpenRank algorithm.">由 SegmentFault 思否、开源社、X-lab 开放实验室联合发起，基于 OpenRank 开源贡献度算法，甄选年度最具影响力的中国开源开发者。</p>
+    </div>
+</div>
+
 </div>
 
 <div class="container">
@@ -121,10 +141,10 @@
   <img src="/ossheroes/img/coin.png" class="me-3" alt="logo-coin" width="18" height="22">
   <img src="/ossheroes/img/coin.png" class="me-3" alt="logo-coin" width="18" height="22">
   <img src="/ossheroes/img/coin.png" class="" alt="logo-coin" width="18" height="22">
-</div> 
+</div>
 
   <div class="list" id="detail">
-      <div class="main-title">榜单详情-2022</div>
+      <div class="main-title"><span data-i18n-zh="榜单详情" data-i18n-en="Rankings">榜单详情</span>-2022</div>
       
       <li id="2022" style="list-style: none;">
         <div class="row mt-4">
@@ -1713,9 +1733,9 @@
   <img src="/ossheroes/img/coin.png" class="" alt="logo-coin" width="18" height="22">
 </div>
   <div class="list" id="partner">
-    <div class="main-title">合作伙伴</div>
+    <div class="main-title" data-i18n-zh="合作伙伴" data-i18n-en="Partners">合作伙伴</div>
 
-    <div class="subtitle mt-4">联合发起方</div>
+    <div class="subtitle mt-4" data-i18n-zh="联合发起方" data-i18n-en="Co-founders">联合发起方</div>
     <div class="icons-wrap">
         <img src="/ossheroes/img/logo-sf.png" class="icons mb-3" alt="思否" loading="lazy">
         <img src="/ossheroes/img/logo-kys.png" class="icons mb-3" alt="开源社" loading="lazy">
@@ -1728,7 +1748,9 @@
 
 </div>
 
-  <div class="page-footer">Copyright &#169 2022 - 2026 OpenSource.Win</div>
+  
+<div class="page-footer" data-i18n-zh="Copyright &#169; 2022 - 2026 OpenSource.Win" data-i18n-en="Copyright &#169; 2022 - 2026 OpenSource.Win">Copyright &#169; 2022 - 2026 OpenSource.Win</div>
+
 </div>
 
 

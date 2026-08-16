@@ -58,6 +58,9 @@
     
 <link rel="stylesheet" href="/ossheroes/css/index.v1.css">
 
+    
+<script src="/ossheroes/js/i18n.js"></script>
+
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 
@@ -70,29 +73,29 @@
     <!-- 导航 -->
 <nav class="navbar navbar-expand-lg navbar-dark" id="navWrap">
     <div class="container container-fluid">
-      <a class="navbar-brand" href="https://opensource.win/ossheroes/">中国开源码力榜</a>
+      <a class="navbar-brand" href="https://opensource.win/ossheroes/" data-i18n-zh="中国开源码力榜" data-i18n-en="China Open Source HeroRank">中国开源码力榜</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-sm-end" id="navbarSupportedContent">
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item">
-                <a href="https://opensource.win/ossheroes#ranking" class="nav-link">榜单背景</a>
+                <a href="https://opensource.win/ossheroes#ranking" class="nav-link" data-i18n-zh="榜单背景" data-i18n-en="Background">榜单背景</a>
           </li>
           <li class="nav-item">
-                <a href="https://opensource.win/ossheroes#standard" class="nav-link">评选标准</a>
+                <a href="https://opensource.win/ossheroes#standard" class="nav-link" data-i18n-zh="评选标准" data-i18n-en="Criteria">评选标准</a>
           </li>
           <li class="nav-item">
-            <a href="https://opensource.win/ossheroes#detail" class="nav-link">榜单详情</a>
+            <a href="https://opensource.win/ossheroes#detail" class="nav-link" data-i18n-zh="榜单详情" data-i18n-en="Rankings">榜单详情</a>
           </li>
           <li class="nav-item">
-            <a href="https://opensource.win/ossheroes#partner" class="nav-link">合作伙伴</a>
+            <a href="https://opensource.win/ossheroes#partner" class="nav-link" data-i18n-zh="合作伙伴" data-i18n-en="Partners">合作伙伴</a>
           </li>
           <li class="nav-item">
             <a href="https://github.com/opensourcewin" target="_blank" class="nav-link">GitHub</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-i18n-zh="往年榜单" data-i18n-en="Past Rankings">
               往年榜单
             </a>
             
@@ -109,13 +112,18 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="https://opensource.win/" class="nav-link">回到官网</a>
+            <a href="https://opensource.win/" class="nav-link" data-i18n-zh="回到官网" data-i18n-en="Main Site">回到官网</a>
+          </li>
+          <!-- 语言切换：中 / EN，与官网共用 localStorage key osw-language -->
+          <li class="nav-item lang-switch" aria-label="Language / 语言">
+            <button type="button" class="lang-btn" data-lang-switch="zh" onclick="window.OSW_I18N && OSW_I18N.set('zh')">中</button><span class="lang-sep" aria-hidden="true">/</span><button type="button" class="lang-btn" data-lang-switch="en" onclick="window.OSW_I18N && OSW_I18N.set('en')">EN</button>
           </li>
         </ul>
       </div>
     </div>
-  
+
  </nav>
+
     <!-- 头部内容 -->
     <div class="container">
         <div class="row justify-content-center">
@@ -162,21 +170,24 @@
             <div class="contribute mt-4 mt-sm-1">
                 
                 
-<h4>开发活动</h4>
+<h4 data-i18n-zh="开发活动" data-i18n-en="Developer Activity">开发活动</h4>
 <iframe width="100%" height="500" src="https://osgraph.com/graphs/developer-activity/github/tiann?user-limit=10" title="" frameborder="0"></iframe>
 
-<h4>开源伙伴</h4>
+<h4 data-i18n-zh="开源伙伴" data-i18n-en="Open Source Partners">开源伙伴</h4>
 <iframe width="100%" height="500" src="https://osgraph.com/graphs/os-partner/github/tiann?user-limit=10" title="" frameborder="0"></iframe>
 
-<h4>开源兴趣</h4>
+<h4 data-i18n-zh="开源兴趣" data-i18n-en="Open Source Interests">开源兴趣</h4>
 <iframe width="100%" height="500" src="https://osgraph.com/graphs/os-interest/github/tiann?repo-limit=5&topic-limit=3" title="" frameborder="0"></iframe>
+
 
             </div>
         </div>
     </div>
 </div>
 
-<div class="page-footer">Copyright &#169 2022 - 2026 OpenSource.Win</div>
+
+<div class="page-footer" data-i18n-zh="Copyright &#169; 2022 - 2026 OpenSource.Win" data-i18n-en="Copyright &#169; 2022 - 2026 OpenSource.Win">Copyright &#169; 2022 - 2026 OpenSource.Win</div>
+
 
 
 

@@ -15,6 +15,14 @@ export const manifestoContent = {
       en: "January 2026 @ OpenSource.Win",
       zh: "2026 年 1 月于 OpenSource.Win",
     },
+    footerTagline: {
+      en: "Building the future of open source intelligence.",
+      zh: "构建开源智能的未来。",
+    },
+    navHeroes: {
+      en: "Heroes",
+      zh: "码力榜",
+    },
   },
   en: {
     title: "The OpenSource.Win Manifesto: For Our Shared Future",

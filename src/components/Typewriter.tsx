@@ -12,16 +12,31 @@ interface TypewriterProps {
 export function Typewriter({ text, speed = 30, className, onComplete, startDelay = 0 }: TypewriterProps) {
   const [displayedText, setDisplayedText] = useState("");
   const [isStarted, setIsStarted] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+    const handleChange = (event: MediaQueryListEvent) => setPrefersReducedMotion(event.matches);
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      setDisplayedText(text);
+      onComplete?.();
+      return;
+    }
+
     const startTimeout = setTimeout(() => {
       setIsStarted(true);
     }, startDelay);
     return () => clearTimeout(startTimeout);
-  }, [startDelay]);
+  }, [startDelay, prefersReducedMotion, text, onComplete]);
 
   useEffect(() => {
-    if (!isStarted) return;
+    if (!isStarted || prefersReducedMotion) return;
 
     let i = 0;
     setDisplayedText(""); // Reset when text changes
@@ -40,7 +55,7 @@ export function Typewriter({ text, speed = 30, className, onComplete, startDelay
     }, speed);
 
     return () => clearInterval(intervalId);
-  }, [text, speed, isStarted]);
+  }, [text, speed, isStarted, prefersReducedMotion, onComplete]);
 
   return (
     <span className={cn("font-mono", className)}>

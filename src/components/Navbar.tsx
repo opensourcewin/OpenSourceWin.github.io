@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { manifestoContent } from "@/data/manifesto";
 import { Languages, Terminal } from "lucide-react";
 
 export function Navbar() {
@@ -26,7 +27,7 @@ export function Navbar() {
           
           <Button variant="outline" size="sm" className="hidden sm:flex" asChild>
             <a href="https://opensource.win/ossheroes/">
-              Heroes
+              {manifestoContent.meta.navHeroes[language]}
             </a>
           </Button>
         </div>

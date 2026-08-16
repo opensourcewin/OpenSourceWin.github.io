@@ -7,10 +7,26 @@ export const manifestoContent = {
       en: "Sunny Gao",
       zh: "Sunny Gao (高阳)",
     },
-    title: {
-      en: "Co-founder & CEO, SegmentFault | Creator, Apache Answer",
-      zh: "SegmentFault 思否创始人 | Apache Answer 发起人",
-    },
+    roles: [
+      {
+        en: "Founder & CEO, MindMux.ai",
+        zh: "MindMux.ai 创始人兼 CEO",
+        url: "https://mindmux.ai/",
+      },
+      {
+        en: "Co-founder, SegmentFault",
+        zh: "SegmentFault 思否联合创始人",
+      },
+      {
+        en: "Creator, ProjectBrain",
+        zh: "ProjectBrain 发起人",
+        url: "https://projectbrain.md/",
+      },
+      {
+        en: "Creator, Apache Answer",
+        zh: "Apache Answer 项目发起人",
+      },
+    ],
     date: {
       en: "January 2026 @ OpenSource.Win",
       zh: "2026 年 1 月于 OpenSource.Win",

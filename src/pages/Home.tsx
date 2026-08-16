@@ -67,7 +67,13 @@ export default function Home() {
           
           <div className="pt-8 flex flex-col sm:flex-row gap-4">
              <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg h-14 px-8 rounded-none border border-transparent hover:border-primary/50">
-               <a href="#manifesto">
+               <a
+                 href="#manifesto"
+                 onClick={(e) => {
+                   e.preventDefault();
+                   document.getElementById('manifesto')?.scrollIntoView({ behavior: 'smooth' });
+                 }}
+               >
                  {language === 'en' ? 'Read Manifesto' : '阅读宣言'} <ArrowRight className="ml-2" />
                </a>
              </Button>
@@ -81,7 +87,7 @@ export default function Home() {
       </header>
 
       {/* Intro Section */}
-      <section id="manifesto" className="py-24 px-6 border-b border-border bg-card/30 relative">
+      <section id="manifesto" className="py-24 px-6 border-b border-border bg-card/30 relative scroll-mt-16">
         <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6 text-lg leading-relaxed">
              <p className="font-bold text-2xl text-foreground/90">
@@ -211,7 +217,22 @@ export default function Home() {
            
            <div className="text-right space-y-1">
              <p className="font-bold text-foreground">{manifestoContent.meta.author[language]}</p>
-             <p className="text-sm text-muted-foreground">{manifestoContent.meta.title[language]}</p>
+             {manifestoContent.meta.roles.map((role, i) =>
+               role.url ? (
+                 <p key={i} className="text-sm text-muted-foreground">
+                   <a
+                     href={role.url}
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className="hover:text-primary transition-colors"
+                   >
+                     {role[language]}
+                   </a>
+                 </p>
+               ) : (
+                 <p key={i} className="text-sm text-muted-foreground">{role[language]}</p>
+               )
+             )}
              <p className="text-xs text-primary/60 mt-4 font-mono">{manifestoContent.meta.date[language]}</p>
              
              <div className="flex items-center justify-end gap-4 mt-4 pt-2">

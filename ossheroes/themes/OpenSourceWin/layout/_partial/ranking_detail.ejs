@@ -1,17 +1,15 @@
 <!-- 头部 -->
 <div class="header" id="head">
   <%- partial('_partial/menu') %>
-  <!-- 头部内容 -->
-  <div class="container">
-      <%- image_tag('img/banner-index-new.png', {class: 'home-head', alt: '中国开源码力榜', loading: 'lazy'}) %>
-  </div>
+  <!-- 头部内容：与首页一致的终端风 hero，年份取当前榜单 -->
+  <%- partial('_partial/hero', {year: item.data_year}) %>
 </div>
 
 <div class="container">
-  <%- partial('_partial/split') %> 
+  <%- partial('_partial/split') %>
 
   <div class="list" id="detail">
-      <div class="main-title">榜单详情-<%-  item.data_year %></div>
+      <div class="main-title"><span data-i18n-zh="榜单详情" data-i18n-en="Rankings">榜单详情</span>-<%-  item.data_year %></div>
       <%
           const rankingArr = site.data.rankingList?.find((a)=> a.year == item.data_year) || [];
           const userMap = new Map();
@@ -39,9 +37,9 @@
   
   <%- partial('_partial/split') %>
   <div class="list" id="partner">
-    <div class="main-title">合作伙伴</div>
+    <div class="main-title" data-i18n-zh="合作伙伴" data-i18n-en="Partners">合作伙伴</div>
 
-    <div class="subtitle mt-4">联合发起方</div>
+    <div class="subtitle mt-4" data-i18n-zh="联合发起方" data-i18n-en="Co-founders">联合发起方</div>
     <div class="icons-wrap">
         <%- image_tag('img/logo-sf.png', {class: 'icons mb-3', alt: '思否', loading: 'lazy'}) %>
         <%- image_tag('img/logo-kys.png', {class: 'icons mb-3', alt: '开源社', loading: 'lazy'}) %>
@@ -52,11 +50,11 @@
     </div>
 
     <% if (item.data_year == 2021) {%>
-      <div class="subtitle mt-4">官方支持</div>
+      <div class="subtitle mt-4" data-i18n-zh="官方支持" data-i18n-en="Official Support">官方支持</div>
         <div class="icons-wrap">
             <a href="https://github.com" title="GitHub" target="_blank"><%- image_tag('img/logo-github.png', {class: 'icons mb-3', alt: 'GitHub', loading: 'lazy'}) %></a>
         </div>
-        <div class="subtitle mt-4">合作社区</div>
+        <div class="subtitle mt-4" data-i18n-zh="合作社区" data-i18n-en="Community Partners">合作社区</div>
         <div class="icons-wrap">
             <%- image_tag('img/logo-kyuubi.png', {class: 'icons2 m-2', alt: 'Kyuubi', loading: 'lazy'}) %>
             <%- image_tag('img/logo-gitops.png', {class: 'icons2 m-2', alt: 'GITOPS', loading: 'lazy'}) %>

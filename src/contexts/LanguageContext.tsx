@@ -17,6 +17,7 @@ function getInitialLanguage(): Language {
   } catch {
     // localStorage unavailable (e.g. privacy mode) — fall through
   }
+  if (typeof navigator === 'undefined' || !navigator.language) return 'en';
   return navigator.language.toLowerCase().startsWith('zh') ? 'zh' : 'en';
 }
 

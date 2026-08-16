@@ -14,7 +14,13 @@ const XIcon = ({ className }: { className?: string }) => (
 import heroImg from "@/assets/hero_network.jpg";
 import boxImg from "@/assets/breaking_black_box.jpg";
 import handImg from "@/assets/human_ai_symbiosis.jpg";
-import { cn } from "@/lib/utils";
+
+type ManifestoItem = {
+  id?: string;
+  heading?: string;
+  target?: string;
+  content: string;
+};
 
 export default function Home() {
   const { language } = useLanguage();
@@ -28,9 +34,11 @@ export default function Home() {
       <header className="relative min-h-[90vh] flex flex-col items-center justify-center p-8 overflow-hidden border-b border-border">
         {/* Background Overlay */}
         <div className="absolute inset-0 z-0">
-          <img 
-            src={heroImg} 
-            alt="Open Source Network" 
+          <img
+            src={heroImg}
+            alt="Open Source Network"
+            width={1376}
+            height={768}
             className="w-full h-full object-cover opacity-30 mix-blend-screen"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/50 to-background/90" />
@@ -58,18 +66,22 @@ export default function Home() {
           </p>
           
           <div className="pt-8 flex flex-col sm:flex-row gap-4">
-             <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg h-14 px-8 rounded-none border border-transparent hover:border-primary/50">
-               {language === 'en' ? 'Read Manifesto' : '阅读宣言'} <ArrowRight className="ml-2" />
+             <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg h-14 px-8 rounded-none border border-transparent hover:border-primary/50">
+               <a href="#manifesto">
+                 {language === 'en' ? 'Read Manifesto' : '阅读宣言'} <ArrowRight className="ml-2" />
+               </a>
              </Button>
-             <Button variant="outline" size="lg" className="text-lg h-14 px-8 rounded-none border-primary/30 hover:bg-primary/10 hover:text-primary">
-               {language === 'en' ? 'Join Movement' : '加入行动'}
+             <Button asChild variant="outline" size="lg" className="text-lg h-14 px-8 rounded-none border-primary/30 hover:bg-primary/10 hover:text-primary">
+               <a href="https://github.com/opensourcewin" target="_blank" rel="noopener noreferrer">
+                 {language === 'en' ? 'Join Movement' : '加入行动'}
+               </a>
              </Button>
           </div>
         </div>
       </header>
 
       {/* Intro Section */}
-      <section className="py-24 px-6 border-b border-border bg-card/30 relative">
+      <section id="manifesto" className="py-24 px-6 border-b border-border bg-card/30 relative">
         <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6 text-lg leading-relaxed">
              <p className="font-bold text-2xl text-foreground/90">
@@ -85,9 +97,12 @@ export default function Home() {
           <div className="relative group perspective-1000">
              <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
              <div className="relative aspect-square overflow-hidden border border-border bg-black">
-               <img 
-                 src={boxImg} 
-                 alt="Breaking Black Box" 
+               <img
+                 src={boxImg}
+                 alt="Breaking Black Box"
+                 width={1024}
+                 height={1024}
+                 loading="lazy"
                  className="w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-700"
                />
                <div className="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur border border-primary/20 p-3 text-xs text-primary font-mono">
@@ -124,7 +139,7 @@ export default function Home() {
             )}
 
             <div className="grid gap-12">
-              {section.items?.map((item: any, itemIdx: number) => (
+              {section.items?.map((item: ManifestoItem, itemIdx: number) => (
                 <div key={itemIdx} className="group grid md:grid-cols-[1fr_3fr] gap-6 p-6 border border-border/50 hover:border-primary/50 transition-colors bg-card/20 hover:bg-card/40">
                   <div className="space-y-2">
                     {item.heading && (
@@ -149,13 +164,16 @@ export default function Home() {
             {/* Visual Break for Section 2 (Human AI) */}
             {idx === 0 && (
               <div className="mt-24 relative h-64 md:h-96 w-full overflow-hidden border-y border-border group">
-                 <img 
-                  src={handImg} 
-                  alt="Human AI Symbiosis" 
+                 <img
+                  src={handImg}
+                  alt="Human AI Symbiosis"
+                  width={1376}
+                  height={768}
+                  loading="lazy"
                   className="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-700"
                  />
                  <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background"></div>
-                 <div className="absolute center inset-0 flex items-center justify-center">
+                 <div className="absolute inset-0 flex items-center justify-center">
                    <div className="bg-black/80 border border-primary px-6 py-2 text-primary tracking-widest uppercase text-sm backdrop-blur-md">
                      System Architecture: Symbiosis
                    </div>
@@ -187,7 +205,7 @@ export default function Home() {
                <TerminalIcon className="text-primary" /> OpenSource.Win
              </div>
              <p className="text-muted-foreground text-sm max-w-xs">
-               Building the future of open source intelligence.
+               {manifestoContent.meta.footerTagline[language]}
              </p>
            </div>
            

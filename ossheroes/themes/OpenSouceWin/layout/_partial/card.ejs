@@ -1,7 +1,0 @@
-<div class="col-6 col-md-4 col-xl-2 mb-3">
-    <a class="user-item" href=<%= item.source ? config.root + item.slug + '/' : 'javascript:void(0)' %> >
-        <%- partial('avatar', {className: 'avatar', item: item}) %>
-        <div class="nickname mt-2"><%- item.name ? item.name : item.slug %></div>
-        <div class="description mt-1"><%- item.description ? item.description : 'China' %></div>
-    </a>
-</div>

@@ -1,5 +1,3 @@
-import { Toaster } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { Router, Route, Switch } from "wouter";
 import { useHashLocation } from "wouter/use-hash-location";
 import ErrorBoundary from "@/components/ErrorBoundary";
@@ -24,10 +22,7 @@ function App() {
     <ErrorBoundary>
       <LanguageProvider>
         <ThemeProvider defaultTheme="dark">
-          <TooltipProvider>
-            <Toaster />
-            <AppRouter />
-          </TooltipProvider>
+          <AppRouter />
         </ThemeProvider>
       </LanguageProvider>
     </ErrorBoundary>

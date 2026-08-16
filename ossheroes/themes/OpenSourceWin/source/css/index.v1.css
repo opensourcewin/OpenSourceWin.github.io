@@ -1,0 +1,326 @@
+/* OpenSource.Win 设计 token —— 与官网 src/index.css 对齐（暗黑终端黑客风） */
+:root {
+  --osw-background: oklch(0.10 0 0);
+  --osw-card: oklch(0.12 0 0);
+  --osw-primary: oklch(0.85 0.20 140);
+  --osw-foreground: oklch(0.90 0.15 140);
+  --osw-muted: oklch(0.60 0.05 140);
+  --osw-border: oklch(0.25 0.05 140);
+  --osw-font: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
+    "PingFang SC", "Microsoft YaHei", monospace, sans-serif;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: var(--osw-font);
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-bottom: 80px;
+  background-color: var(--osw-background);
+  color: var(--osw-foreground);
+}
+
+/* 全局扫描线 overlay，与官网 body::after 一致 */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.1) 50%
+  );
+  background-size: 100% 4px;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+::selection {
+  background: var(--osw-primary);
+  color: var(--osw-background);
+}
+
+img {
+  vertical-align: top;
+}
+
+/* Bootstrap 亮色链接体系覆盖为终端绿 */
+a {
+  color: var(--osw-primary);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--osw-foreground);
+}
+
+/* Bootstrap 工具类在深色背景上的可读性修正 */
+.text-secondary {
+  color: var(--osw-muted) !important;
+}
+
+.container {
+  max-width: 1140px;
+}
+
+/* 头部 / 导航：深色底 + 暗绿描边 + 绿色强调 */
+.header {
+  padding-top: 104px;
+  background-color: var(--osw-background);
+  border-bottom: 1px solid var(--osw-border);
+}
+.header-detail {
+  padding-bottom: 64px;
+}
+.home-head {
+  width: 100%;
+  height: auto;
+  flex: none;
+}
+#navWrap {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  background-color: var(--osw-card);
+  border-bottom: 1px solid var(--osw-border);
+  z-index: 1030;
+}
+.navbar-brand {
+  font-size: 16px;
+}
+.navbar-dark .navbar-brand,
+#navWrap .navbar-brand {
+  color: var(--osw-primary);
+}
+.navbar-dark .navbar-brand:hover,
+#navWrap .navbar-brand:hover {
+  color: var(--osw-foreground);
+}
+#navWrap .nav-link,
+.navbar-dark .navbar-nav .nav-link {
+  color: var(--osw-muted);
+  white-space: nowrap;
+}
+#navWrap .nav-link:hover,
+#navWrap .nav-link:focus,
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:focus {
+  color: var(--osw-primary);
+}
+
+.nav-item {
+  list-style: none;
+}
+.nav-link {
+  padding: 0.5rem !important;
+}
+
+/* 往年榜单下拉菜单深色化 */
+.dropdown-menu {
+  background-color: var(--osw-card);
+  border: 1px solid var(--osw-border);
+  border-radius: 0;
+}
+.dropdown-item {
+  color: var(--osw-muted);
+}
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: transparent;
+  color: var(--osw-primary);
+}
+.dropdown-divider {
+  border-top: 1px solid var(--osw-border);
+}
+
+/* 标题：`#` 前缀 + 霓虹绿主色，终端风格 */
+.main-title {
+  font-family: var(--osw-font);
+  font-weight: 600;
+  font-size: 40px;
+  color: var(--osw-primary);
+  text-align: center;
+  line-height: 48px;
+}
+.main-title::before {
+  content: "# ";
+  color: var(--osw-muted);
+}
+.list {
+  width: 100%;
+  padding-top: 50px;
+}
+.text {
+  line-height: 28px;
+}
+.text ol > li::marker {
+  color: var(--osw-primary);
+}
+
+/* 用户卡片：深色卡片 + 暗绿边框 + 直角 */
+.user-item {
+  width: 100%;
+  min-height: 160px;
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
+  box-sizing: border-box;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--osw-card);
+  border: 1px solid var(--osw-border);
+  border-radius: 0;
+  transition: border-color 0.15s ease-in-out;
+}
+a.user-item:hover {
+  border-color: var(--osw-primary);
+}
+.nickname {
+  font-weight: 500;
+  text-align: center;
+  color: var(--osw-foreground);
+  line-height: 28px;
+  word-break: break-word;
+}
+a.user-item:hover .nickname {
+  color: var(--osw-primary);
+}
+.description {
+  height: 42px;
+  font-size: 14px;
+  text-align: center;
+  color: var(--osw-muted);
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.subtitle {
+  font-size: 28px;
+  font-weight: 500;
+  text-align: center;
+  color: var(--osw-foreground);
+}
+.subtitle::before {
+  content: "## ";
+  color: var(--osw-primary);
+}
+
+/* 合作伙伴 logo：gap 布局替代 margin 魔法数字 */
+.icons-wrap {
+  max-width: 1090px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 24px auto 0;
+}
+.icons, .icons2 {
+  width: auto;
+  height: 80px;
+  margin: 0 !important;
+}
+.icons-wrap > a {
+  display: inline-flex;
+}
+
+.page-footer {
+  color: var(--osw-muted);
+  text-align: center;
+  line-height: 24px;
+  padding: 4rem 0 2rem;
+  border-top: 1px solid var(--osw-border);
+  margin-top: 3rem;
+}
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 0 !important;
+  border: 1px solid var(--osw-border);
+}
+
+/* detail css */
+.detail-avatar {
+  width: 160px;
+  height: 160px;
+  border-radius: 0 !important;
+  border: 1px solid var(--osw-border);
+}
+.detail-nick {
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 48px;
+  color: var(--osw-primary);
+  word-break: break-word;
+  word-wrap: break-word;
+}
+.detail-list > li {
+  list-style: none;
+}
+
+/* 详情页年份排名下拉框 */
+select.ranking {
+  background-color: var(--osw-card);
+  color: var(--osw-primary);
+  border: 1px solid var(--osw-border);
+  border-radius: 0;
+  padding: 2px 8px;
+  font-family: var(--osw-font);
+}
+
+.contribute img {
+  max-width: 100%;
+  height: auto;
+}
+.contribute br {
+  display: none;
+}
+.contribute a > img {
+  margin-right: 3px;
+}
+
+/* 移动端适配 */
+@media (max-width: 540px)  {
+  .sm-scroll {
+    overflow-x: scroll;
+    padding-left: 17em;
+  }
+  .main-title {
+    font-size: 28px;
+  }
+  .subtitle {
+    font-size: 18px;
+  }
+  .text2 {
+    padding: 0 0 0 15px;
+  }
+  .icons {
+    height: 48px;
+  }
+  .icons2 {
+    height: 48px;
+  }
+  .icons-wrap {
+    gap: 0.5rem;
+  }
+  .detail-nick {
+    font-size: 24px;
+    line-height: 1.5;
+  }
+  .ranking {
+    font-size: 1rem !important;
+  }
+  .contribute li > a {
+    word-wrap: break-word;
+  }
+}

@@ -5,6 +5,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+html {
+  scroll-behavior: smooth;
+}
+
 @theme inline {
   --font-mono: "JetBrains Mono", monospace;
   
@@ -145,8 +149,23 @@
       rgba(0, 0, 0, 0.1) 50%
     );
     background-size: 100% 4px;
-    z-index: 9999;
+    z-index: 40; /* Below shadcn overlay layers (50+) */
     pointer-events: none;
     opacity: 0.2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  /* Disable scanline overlay and looping decorative animations */
+  body::after {
+    display: none;
+  }
+  .animate-ping,
+  .animate-pulse,
+  .animate-cursor-blink {
+    animation: none;
   }
 }

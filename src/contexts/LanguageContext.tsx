@@ -8,14 +8,32 @@ type LanguageContextType = {
   toggleLanguage: () => void;
 };
 
+const STORAGE_KEY = 'osw-language';
+
+function getInitialLanguage(): Language {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored === 'en' || stored === 'zh') return stored;
+  } catch {
+    // localStorage unavailable (e.g. privacy mode) — fall through
+  }
+  return navigator.language.toLowerCase().startsWith('zh') ? 'zh' : 'en';
+}
+
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>('en');
+  const [language, setLanguage] = useState<Language>(getInitialLanguage);
 
-  // Load language from localStorage or browser preference if needed
-  // For now default to 'en' as requested
-  
+  useEffect(() => {
+    document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
+    try {
+      localStorage.setItem(STORAGE_KEY, language);
+    } catch {
+      // ignore write failures
+    }
+  }, [language]);
+
   const toggleLanguage = () => {
     setLanguage(prev => prev === 'en' ? 'zh' : 'en');
   };
@@ -27,6 +45,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components -- context hook co-located with provider
 export function useLanguage() {
   const context = useContext(LanguageContext);
   if (context === undefined) {

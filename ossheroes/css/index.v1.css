@@ -1,26 +1,79 @@
+/* OpenSource.Win 设计 token —— 与官网 src/index.css 对齐（暗黑终端黑客风） */
+:root {
+  --osw-background: oklch(0.10 0 0);
+  --osw-card: oklch(0.12 0 0);
+  --osw-primary: oklch(0.85 0.20 140);
+  --osw-foreground: oklch(0.90 0.15 140);
+  --osw-muted: oklch(0.60 0.05 140);
+  --osw-border: oklch(0.25 0.05 140);
+  --osw-font: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
+    "PingFang SC", "Microsoft YaHei", monospace, sans-serif;
+}
+
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif;
+  font-family: var(--osw-font);
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding-bottom: 80px;
-  color: #212529;
+  background-color: var(--osw-background);
+  color: var(--osw-foreground);
 }
+
+/* 全局扫描线 overlay，与官网 body::after 一致 */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.1) 50%
+  );
+  background-size: 100% 4px;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+::selection {
+  background: var(--osw-primary);
+  color: var(--osw-background);
+}
+
 img {
   vertical-align: top;
 }
+
+/* Bootstrap 亮色链接体系覆盖为终端绿 */
 a {
+  color: var(--osw-primary);
   text-decoration: none;
 }
+a:hover {
+  color: var(--osw-foreground);
+}
+
+/* Bootstrap 工具类在深色背景上的可读性修正 */
+.text-secondary {
+  color: var(--osw-muted) !important;
+}
+
 .container {
   max-width: 1140px;
 }
+
+/* 头部 / 导航：深色底 + 暗绿描边 + 绿色强调 */
 .header {
   padding-top: 104px;
-  background-color:#212529;
+  background-color: var(--osw-background);
+  border-bottom: 1px solid var(--osw-border);
 }
 .header-detail {
   padding-bottom: 64px;
@@ -36,14 +89,31 @@ a {
   top: 0;
   left: 0;
   box-sizing: border-box;
-  background-color: #212529;
+  background-color: var(--osw-card);
+  border-bottom: 1px solid var(--osw-border);
+  z-index: 1030;
 }
 .navbar-brand {
   font-size: 16px;
 }
-#navWrap .nav-link {
-  color: #fff;
+.navbar-dark .navbar-brand,
+#navWrap .navbar-brand {
+  color: var(--osw-primary);
+}
+.navbar-dark .navbar-brand:hover,
+#navWrap .navbar-brand:hover {
+  color: var(--osw-foreground);
+}
+#navWrap .nav-link,
+.navbar-dark .navbar-nav .nav-link {
+  color: var(--osw-muted);
   white-space: nowrap;
+}
+#navWrap .nav-link:hover,
+#navWrap .nav-link:focus,
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:focus {
+  color: var(--osw-primary);
 }
 
 .nav-item {
@@ -52,46 +122,83 @@ a {
 .nav-link {
   padding: 0.5rem !important;
 }
+
+/* 往年榜单下拉菜单深色化 */
+.dropdown-menu {
+  background-color: var(--osw-card);
+  border: 1px solid var(--osw-border);
+  border-radius: 0;
+}
+.dropdown-item {
+  color: var(--osw-muted);
+}
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: transparent;
+  color: var(--osw-primary);
+}
+.dropdown-divider {
+  border-top: 1px solid var(--osw-border);
+}
+
+/* 标题：`#` 前缀 + 霓虹绿主色，终端风格 */
 .main-title {
-  font-family: PingFangSC-Medium;
-  font-weight: 500;
+  font-family: var(--osw-font);
+  font-weight: 600;
   font-size: 40px;
-  color: #F34850;
+  color: var(--osw-primary);
   text-align: center;
   line-height: 48px;
+}
+.main-title::before {
+  content: "# ";
+  color: var(--osw-muted);
 }
 .list {
   width: 100%;
   padding-top: 50px;
 }
 .text {
-  font-family: HelveticaNeue;
   line-height: 28px;
 }
+.text ol > li::marker {
+  color: var(--osw-primary);
+}
+
+/* 用户卡片：深色卡片 + 暗绿边框 + 直角 */
 .user-item {
   width: 100%;
   min-height: 160px;
   padding-top: 1.5rem;
+  padding-bottom: 1rem;
   box-sizing: border-box;
   align-self: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-sizing: border-box;
-  background: #F8F9FA;
+  background: var(--osw-card);
+  border: 1px solid var(--osw-border);
+  border-radius: 0;
+  transition: border-color 0.15s ease-in-out;
+}
+a.user-item:hover {
+  border-color: var(--osw-primary);
 }
 .nickname {
-  font-family: HelveticaNeue-Medium;
   font-weight: 500;
   text-align: center;
-  color: #212529;
+  color: var(--osw-foreground);
   line-height: 28px;
+  word-break: break-word;
+}
+a.user-item:hover .nickname {
+  color: var(--osw-primary);
 }
 .description {
   height: 42px;
   font-size: 14px;
   text-align: center;
-  color: #6C757D;
+  color: var(--osw-muted);
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
@@ -99,62 +206,78 @@ a {
 }
 .subtitle {
   font-size: 28px;
-  font-family: PingFangSC-Medium;
   font-weight: 500;
   text-align: center;
+  color: var(--osw-foreground);
 }
+.subtitle::before {
+  content: "## ";
+  color: var(--osw-primary);
+}
+
+/* 合作伙伴 logo：gap 布局替代 margin 魔法数字 */
 .icons-wrap {
   max-width: 1090px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
   margin: 24px auto 0;
 }
 .icons, .icons2 {
   width: auto;
-  margin-right: 1rem;
   height: 80px;
+  margin: 0 !important;
 }
-.icons:nth-child(3n + 1) {
-  margin-right: 0;
+.icons-wrap > a {
+  display: inline-flex;
 }
-.icons:nth-child(1) {
-  margin-right: 1rem;
-}
-.icons2:nth-child(4n + 1) {
-  margin-right: 0;
-}
-.icons2:nth-child(1) {
-  margin-right: 1rem;
-}
+
 .page-footer {
-  font-family: HelveticaNeue;
-  color: #6C757D;
+  color: var(--osw-muted);
   text-align: center;
   line-height: 24px;
   padding: 4rem 0 2rem;
+  border-top: 1px solid var(--osw-border);
+  margin-top: 3rem;
 }
 .avatar {
   width: 64px;
   height: 64px;
+  border-radius: 0 !important;
+  border: 1px solid var(--osw-border);
 }
+
 /* detail css */
 .detail-avatar {
   width: 160px;
   height: 160px;
+  border-radius: 0 !important;
+  border: 1px solid var(--osw-border);
 }
 .detail-nick {
-  font-family: HelveticaNeue-Medium;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 40px;
   line-height: 48px;
+  color: var(--osw-primary);
   word-break: break-word;
-  word-wrap:break-word
+  word-wrap: break-word;
 }
 .detail-list > li {
   list-style: none;
 }
+
+/* 详情页年份排名下拉框 */
+select.ranking {
+  background-color: var(--osw-card);
+  color: var(--osw-primary);
+  border: 1px solid var(--osw-border);
+  border-radius: 0;
+  padding: 2px 8px;
+  font-family: var(--osw-font);
+}
+
 .contribute img {
   max-width: 100%;
   height: auto;
@@ -182,25 +305,20 @@ a {
     padding: 0 0 0 15px;
   }
   .icons {
-    margin-right: 8px;
     height: 48px;
   }
   .icons2 {
     height: 48px;
-    margin-right: 16px;
   }
-  .icons:nth-child(even) {
-    margin-right: 0;
-  }
-  .icons:nth-child(1) {
-    margin-right: 8px;
+  .icons-wrap {
+    gap: 0.5rem;
   }
   .detail-nick {
     font-size: 24px;
     line-height: 1.5;
   }
   .ranking {
-    font-size: 1rem!important;
+    font-size: 1rem !important;
   }
   .contribute li > a {
     word-wrap: break-word;

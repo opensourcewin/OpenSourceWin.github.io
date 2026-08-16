@@ -25,16 +25,19 @@ jobs:
 
       # 运行第一个脚本 sync_xlab.js，从接口获取最新数据
       - name: Run sync_xlab.js
+        working-directory: ossheroes
         run: node script/sync_xlab.js
 
       # 运行第二个脚本 update_year_user.js， 更新 rankingList.json
       - name: Run update_year_user.js
+        working-directory: ossheroes
         run: node script/update_year_user.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # 运行第三个脚本 front-matter.js， 批量创建详情页
       - name: Run front-matter.js
+        working-directory: ossheroes
         run: node script/front-matter.js
       
       # 提交并推送更改到 main 分支
@@ -42,7 +45,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add .
+          git add ossheroes/
           if git diff --cached --quiet; then
             echo "No changes to commit" && exit 0
           fi

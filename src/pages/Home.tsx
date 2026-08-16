@@ -58,18 +58,22 @@ export default function Home() {
           </p>
           
           <div className="pt-8 flex flex-col sm:flex-row gap-4">
-             <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg h-14 px-8 rounded-none border border-transparent hover:border-primary/50">
-               {language === 'en' ? 'Read Manifesto' : '阅读宣言'} <ArrowRight className="ml-2" />
+             <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg h-14 px-8 rounded-none border border-transparent hover:border-primary/50">
+               <a href="#manifesto">
+                 {language === 'en' ? 'Read Manifesto' : '阅读宣言'} <ArrowRight className="ml-2" />
+               </a>
              </Button>
-             <Button variant="outline" size="lg" className="text-lg h-14 px-8 rounded-none border-primary/30 hover:bg-primary/10 hover:text-primary">
-               {language === 'en' ? 'Join Movement' : '加入行动'}
+             <Button asChild variant="outline" size="lg" className="text-lg h-14 px-8 rounded-none border-primary/30 hover:bg-primary/10 hover:text-primary">
+               <a href="https://github.com/opensourcewin" target="_blank" rel="noopener noreferrer">
+                 {language === 'en' ? 'Join Movement' : '加入行动'}
+               </a>
              </Button>
           </div>
         </div>
       </header>
 
       {/* Intro Section */}
-      <section className="py-24 px-6 border-b border-border bg-card/30 relative">
+      <section id="manifesto" className="py-24 px-6 border-b border-border bg-card/30 relative">
         <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6 text-lg leading-relaxed">
              <p className="font-bold text-2xl text-foreground/90">
@@ -155,7 +159,7 @@ export default function Home() {
                   className="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-700"
                  />
                  <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background"></div>
-                 <div className="absolute center inset-0 flex items-center justify-center">
+                 <div className="absolute inset-0 flex items-center justify-center">
                    <div className="bg-black/80 border border-primary px-6 py-2 text-primary tracking-widest uppercase text-sm backdrop-blur-md">
                      System Architecture: Symbiosis
                    </div>

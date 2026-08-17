@@ -22,6 +22,19 @@ type ManifestoItem = {
   content: string;
 };
 
+/** Renders `**bold**` segments in plain text as <strong> elements. */
+function renderBold(text: string) {
+  return text.split("**").map((part, i) =>
+    i % 2 === 1 ? (
+      <strong key={i} className="text-foreground font-bold">
+        {part}
+      </strong>
+    ) : (
+      part
+    )
+  );
+}
+
 export default function Home() {
   const { language } = useLanguage();
   const content = manifestoContent[language];
@@ -136,7 +149,7 @@ export default function Home() {
 
             {section.intro && (
               <p className="text-xl text-foreground/80 mb-12 max-w-3xl">
-                {section.intro}
+                {renderBold(section.intro)}
               </p>
             )}
 

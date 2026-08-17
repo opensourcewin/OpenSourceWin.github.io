@@ -40,8 +40,8 @@ export const manifestoContent = {
       zh: "码力榜",
     },
     shareText: {
-      en: "I believe in OpenSource.Win — Open Source Will Win the Future. https://opensource.win/",
-      zh: "我相信 OpenSource.Win —— 相信开放的力量，开源终将赢得未来。 https://opensource.win/",
+      en: "\"We believe that closed systems offer only temporary moats, while open source leads to an infinite universe of possibilities.\" I believe in OpenSource.Win — open source will win the future. Join us: https://opensource.win/",
+      zh: "「封闭的系统只能带来短暂的护城河，而开源将造就无尽的星辰大海。」我相信 OpenSource.Win —— 开源必胜，加入我们。 https://opensource.win/",
     },
   },
   en: {

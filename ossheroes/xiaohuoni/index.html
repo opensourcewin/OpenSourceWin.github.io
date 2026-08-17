@@ -8,21 +8,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+    <!-- 开发者详情页判定：page 布局、非年度榜单页（无 data_year）、带 slug -->
+    
+
     <!-- Title -->
     
-    <title>聪小陈 - 中国开源码力榜</title>
+    <title>聪小陈 (@xiaohuoni) - 中国开源码力榜开发者档案</title>
 
     <!--Description-->
 
     
 
     
-        <meta name="description" content="福州 wechat:yu_xiaohu dd:xiaohuoni"/>
+        <meta name="description" content="聪小陈 (GitHub @xiaohuoni)，所在地 福州 wechat:yu_xiaohu dd:xiaohuoni，中国开源码力榜上榜开发者，主要贡献项目包括 ant-design-kit、dva-umi-mobile、dva-umi 等。"/>
     
 
     <!--Keywords-->
     
-        <meta name="keywords" content="中国开源码力榜,开源,OpenSource.Win,OpenRank,开源社,X-lab,GitHub 开发者"/>
+        <meta name="keywords" content="xiaohuoni,聪小陈,@xiaohuoni,GitHub 开发者,开源开发者,中国开源码力榜,OpenSource.Win"/>
     
 
     <!--Author-->
@@ -31,20 +34,22 @@
     
 
     <!--Open Graph Title-->
-    <meta property="og:title" content="聪小陈 - 中国开源码力榜" />
+    <meta property="og:title" content="聪小陈 (@xiaohuoni) - 中国开源码力榜开发者档案" />
 
     <!--Open Graph Description-->
     
-        <meta property="og:description" content="福州 wechat:yu_xiaohu dd:xiaohuoni"/>
+        <meta property="og:description" content="聪小陈 (GitHub @xiaohuoni)，所在地 福州 wechat:yu_xiaohu dd:xiaohuoni，中国开源码力榜上榜开发者，主要贡献项目包括 ant-design-kit、dva-umi-mobile、dva-umi 等。"/>
     
 
     <!--Open Graph Site Name-->
         <meta property="og:site_name" content="中国开源码力榜"/>
 
-    <!--Open Graph URL / Locale / Image-->
+    <!--Open Graph URL / Locale / Image（开发者页 og:image 用其 GitHub avatar）-->
         <meta property="og:url" content="https://opensource.win/ossheroes/xiaohuoni/"/>
         <meta property="og:locale" content="zh_CN"/>
-        <meta property="og:image" content="https://opensource.win/ossheroes/img/banner-index-new.png"/>
+    
+        <meta property="og:image" content="https://avatars.githubusercontent.com/u/11746742?v=4"/>
+    
 
     <!--Canonical / Theme Color-->
         <link rel="canonical" href="https://opensource.win/ossheroes/xiaohuoni/"/>
@@ -57,11 +62,18 @@
 
     <meta name="twitter:site" content="中国开源码力榜">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="聪小陈 - 中国开源码力榜">
+    <meta name="twitter:title" content="聪小陈 (@xiaohuoni) - 中国开源码力榜开发者档案">
     
-        <meta name="twitter:description" content="福州 wechat:yu_xiaohu dd:xiaohuoni">
+        <meta name="twitter:description" content="聪小陈 (GitHub @xiaohuoni)，所在地 福州 wechat:yu_xiaohu dd:xiaohuoni，中国开源码力榜上榜开发者，主要贡献项目包括 ant-design-kit、dva-umi-mobile、dva-umi 等。">
     
-    <meta name="twitter:image" content="https://opensource.win/ossheroes/img/banner-index-new.png">
+    
+        <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/11746742?v=4">
+    
+
+    <!--开发者详情页 JSON-LD 结构化数据：ProfilePage + Person-->
+    
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage","name":"聪小陈 (@xiaohuoni) - 中国开源码力榜开发者档案","url":"https://opensource.win/ossheroes/xiaohuoni/","mainEntity":{"@type":"Person","name":"聪小陈","alternateName":"xiaohuoni","url":"https://opensource.win/ossheroes/xiaohuoni/","sameAs":["https://github.com/xiaohuoni"],"image":"https://avatars.githubusercontent.com/u/11746742?v=4","address":{"@type":"PostalAddress","addressLocality":"福州 wechat:yu_xiaohu dd:xiaohuoni"}},"description":"聪小陈 (GitHub @xiaohuoni)，所在地 福州 wechat:yu_xiaohu dd:xiaohuoni，中国开源码力榜上榜开发者，主要贡献项目包括 ant-design-kit、dva-umi-mobile、dva-umi 等。"}</script>
+    
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -196,7 +208,7 @@
                             </div>
                             <div class="detail-term-line">
                                 <span class="detail-term-out" aria-hidden="true">&gt;</span>
-                                <span class="detail-term-key" data-i18n-zh="简介" data-i18n-en="bio">简介</span>
+                                <span class="detail-term-key" data-i18n-zh="所在地" data-i18n-en="location">所在地</span>
                                 <span class="detail-term-sep" aria-hidden="true">::</span>
                                 <span class="text-secondary">福州 wechat:yu_xiaohu dd:xiaohuoni</span>
                             </div>
@@ -245,6 +257,132 @@
 
             
             <div class="contribute">
+                
+                    
+                    <h2 class="detail-section-title" data-i18n-zh="主要贡献项目" data-i18n-en="Top Contributions">主要贡献项目</h2>
+                    <div class="detail-term detail-repos">
+                        <div class="detail-term-bar">
+                            <span class="detail-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                            <span class="detail-term-title">~/contributions</span>
+                            <span class="detail-repos-count">10 <span data-i18n-zh="个仓库" data-i18n-en="repos">个仓库</span></span>
+                        </div>
+                        <div class="detail-term-body">
+                            <div class="detail-term-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> ls -la ~/contributions</div>
+                            <ul class="detail-repos-list">
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/xiaohuoni/ant-design-kit" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">xiaohuoni/ant-design-kit</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/xiaohuoni/dva-umi-mobile" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">xiaohuoni/dva-umi-mobile</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/xiaohuoni/dva-umi" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">xiaohuoni/dva-umi</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/xiaohuoni/antd4-generate-picker" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">xiaohuoni/antd4-generate-picker</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/xiaohuoni/angular" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">xiaohuoni/angular</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/xiaohuoni/antd4-use-dayjs-replace-moment" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">xiaohuoni/antd4-use-dayjs-replace-moment</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/xiaohuoni/antd-pro-server" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">xiaohuoni/antd-pro-server</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/xiaohuoni/gg-editor-flow" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">xiaohuoni/gg-editor-flow</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/xiaohuoni/autoprettier" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">xiaohuoni/autoprettier</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/xiaohuoni/byme" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">xiaohuoni/byme</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
                 
             </div>
         </div>

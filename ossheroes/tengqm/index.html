@@ -8,21 +8,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+    <!-- 开发者详情页判定：page 布局、非年度榜单页（无 data_year）、带 slug -->
+    
+
     <!-- Title -->
     
-    <title>Qiming Teng - 中国开源码力榜</title>
+    <title>Qiming Teng (@tengqm) - 中国开源码力榜开发者档案</title>
 
     <!--Description-->
 
     
 
     
-        <meta name="description" content="Beijing, China"/>
+        <meta name="description" content="Qiming Teng (GitHub @tengqm)，所在地 Beijing, China，中国开源码力榜上榜开发者，主要贡献项目包括 vllm-plugin-FL、kab、senlin 等。"/>
     
 
     <!--Keywords-->
     
-        <meta name="keywords" content="中国开源码力榜,开源,OpenSource.Win,OpenRank,开源社,X-lab,GitHub 开发者"/>
+        <meta name="keywords" content="tengqm,Qiming Teng,@tengqm,GitHub 开发者,开源开发者,中国开源码力榜,OpenSource.Win"/>
     
 
     <!--Author-->
@@ -31,20 +34,22 @@
     
 
     <!--Open Graph Title-->
-    <meta property="og:title" content="Qiming Teng - 中国开源码力榜" />
+    <meta property="og:title" content="Qiming Teng (@tengqm) - 中国开源码力榜开发者档案" />
 
     <!--Open Graph Description-->
     
-        <meta property="og:description" content="Beijing, China"/>
+        <meta property="og:description" content="Qiming Teng (GitHub @tengqm)，所在地 Beijing, China，中国开源码力榜上榜开发者，主要贡献项目包括 vllm-plugin-FL、kab、senlin 等。"/>
     
 
     <!--Open Graph Site Name-->
         <meta property="og:site_name" content="中国开源码力榜"/>
 
-    <!--Open Graph URL / Locale / Image-->
+    <!--Open Graph URL / Locale / Image（开发者页 og:image 用其 GitHub avatar）-->
         <meta property="og:url" content="https://opensource.win/ossheroes/tengqm/"/>
         <meta property="og:locale" content="zh_CN"/>
-        <meta property="og:image" content="https://opensource.win/ossheroes/img/banner-index-new.png"/>
+    
+        <meta property="og:image" content="https://avatars.githubusercontent.com/u/5094756?v=4"/>
+    
 
     <!--Canonical / Theme Color-->
         <link rel="canonical" href="https://opensource.win/ossheroes/tengqm/"/>
@@ -57,11 +62,18 @@
 
     <meta name="twitter:site" content="中国开源码力榜">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Qiming Teng - 中国开源码力榜">
+    <meta name="twitter:title" content="Qiming Teng (@tengqm) - 中国开源码力榜开发者档案">
     
-        <meta name="twitter:description" content="Beijing, China">
+        <meta name="twitter:description" content="Qiming Teng (GitHub @tengqm)，所在地 Beijing, China，中国开源码力榜上榜开发者，主要贡献项目包括 vllm-plugin-FL、kab、senlin 等。">
     
-    <meta name="twitter:image" content="https://opensource.win/ossheroes/img/banner-index-new.png">
+    
+        <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/5094756?v=4">
+    
+
+    <!--开发者详情页 JSON-LD 结构化数据：ProfilePage + Person-->
+    
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage","name":"Qiming Teng (@tengqm) - 中国开源码力榜开发者档案","url":"https://opensource.win/ossheroes/tengqm/","mainEntity":{"@type":"Person","name":"Qiming Teng","alternateName":"tengqm","url":"https://opensource.win/ossheroes/tengqm/","sameAs":["https://github.com/tengqm"],"image":"https://avatars.githubusercontent.com/u/5094756?v=4","address":{"@type":"PostalAddress","addressLocality":"Beijing, China"}},"description":"Qiming Teng (GitHub @tengqm)，所在地 Beijing, China，中国开源码力榜上榜开发者，主要贡献项目包括 vllm-plugin-FL、kab、senlin 等。"}</script>
+    
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -196,7 +208,7 @@
                             </div>
                             <div class="detail-term-line">
                                 <span class="detail-term-out" aria-hidden="true">&gt;</span>
-                                <span class="detail-term-key" data-i18n-zh="简介" data-i18n-en="bio">简介</span>
+                                <span class="detail-term-key" data-i18n-zh="所在地" data-i18n-en="location">所在地</span>
                                 <span class="detail-term-sep" aria-hidden="true">::</span>
                                 <span class="text-secondary">Beijing, China</span>
                             </div>
@@ -257,6 +269,132 @@
 
             
             <div class="contribute">
+                
+                    
+                    <h2 class="detail-section-title" data-i18n-zh="主要贡献项目" data-i18n-en="Top Contributions">主要贡献项目</h2>
+                    <div class="detail-term detail-repos">
+                        <div class="detail-term-bar">
+                            <span class="detail-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                            <span class="detail-term-title">~/contributions</span>
+                            <span class="detail-repos-count">10 <span data-i18n-zh="个仓库" data-i18n-en="repos">个仓库</span></span>
+                        </div>
+                        <div class="detail-term-body">
+                            <div class="detail-term-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> ls -la ~/contributions</div>
+                            <ul class="detail-repos-list">
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/flagos-ai/vllm-plugin-FL" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">flagos-ai/vllm-plugin-FL</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/tengqm/kab" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">tengqm/kab</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/tengqm/senlin" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">tengqm/senlin</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/flagos-ai/build-infra" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">flagos-ai/build-infra</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/flagos-ai/release-info" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">flagos-ai/release-info</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/tengqm/genref" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">tengqm/genref</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/tengqm/kubeconfig" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">tengqm/kubeconfig</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/tengqm/python-senlinclient" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">tengqm/python-senlinclient</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/tengqm/schemastore" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">tengqm/schemastore</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/tengqm/senlin-tempest-plugin" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">tengqm/senlin-tempest-plugin</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
                 
             </div>
         </div>

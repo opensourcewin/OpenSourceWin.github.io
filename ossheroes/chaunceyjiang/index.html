@@ -8,21 +8,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+    <!-- 开发者详情页判定：page 布局、非年度榜单页（无 data_year）、带 slug -->
+    
+
     <!-- Title -->
     
-    <title>Chauncey - 中国开源码力榜</title>
+    <title>Chauncey (@chaunceyjiang) - 中国开源码力榜开发者档案</title>
 
     <!--Description-->
 
     
 
     
-        <meta name="description" content="Chengdu, China"/>
+        <meta name="description" content="Chauncey (GitHub @chaunceyjiang)，所在地 Chengdu, China，中国开源码力榜上榜开发者，主要贡献项目包括 vllm、fake-gpu、interpreter 等。"/>
     
 
     <!--Keywords-->
     
-        <meta name="keywords" content="中国开源码力榜,开源,OpenSource.Win,OpenRank,开源社,X-lab,GitHub 开发者"/>
+        <meta name="keywords" content="chaunceyjiang,Chauncey,@chaunceyjiang,GitHub 开发者,开源开发者,中国开源码力榜,OpenSource.Win"/>
     
 
     <!--Author-->
@@ -31,20 +34,22 @@
     
 
     <!--Open Graph Title-->
-    <meta property="og:title" content="Chauncey - 中国开源码力榜" />
+    <meta property="og:title" content="Chauncey (@chaunceyjiang) - 中国开源码力榜开发者档案" />
 
     <!--Open Graph Description-->
     
-        <meta property="og:description" content="Chengdu, China"/>
+        <meta property="og:description" content="Chauncey (GitHub @chaunceyjiang)，所在地 Chengdu, China，中国开源码力榜上榜开发者，主要贡献项目包括 vllm、fake-gpu、interpreter 等。"/>
     
 
     <!--Open Graph Site Name-->
         <meta property="og:site_name" content="中国开源码力榜"/>
 
-    <!--Open Graph URL / Locale / Image-->
+    <!--Open Graph URL / Locale / Image（开发者页 og:image 用其 GitHub avatar）-->
         <meta property="og:url" content="https://opensource.win/ossheroes/chaunceyjiang/"/>
         <meta property="og:locale" content="zh_CN"/>
-        <meta property="og:image" content="https://opensource.win/ossheroes/img/banner-index-new.png"/>
+    
+        <meta property="og:image" content="https://avatars.githubusercontent.com/u/17962021?v=4"/>
+    
 
     <!--Canonical / Theme Color-->
         <link rel="canonical" href="https://opensource.win/ossheroes/chaunceyjiang/"/>
@@ -57,11 +62,18 @@
 
     <meta name="twitter:site" content="中国开源码力榜">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Chauncey - 中国开源码力榜">
+    <meta name="twitter:title" content="Chauncey (@chaunceyjiang) - 中国开源码力榜开发者档案">
     
-        <meta name="twitter:description" content="Chengdu, China">
+        <meta name="twitter:description" content="Chauncey (GitHub @chaunceyjiang)，所在地 Chengdu, China，中国开源码力榜上榜开发者，主要贡献项目包括 vllm、fake-gpu、interpreter 等。">
     
-    <meta name="twitter:image" content="https://opensource.win/ossheroes/img/banner-index-new.png">
+    
+        <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/17962021?v=4">
+    
+
+    <!--开发者详情页 JSON-LD 结构化数据：ProfilePage + Person-->
+    
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage","name":"Chauncey (@chaunceyjiang) - 中国开源码力榜开发者档案","url":"https://opensource.win/ossheroes/chaunceyjiang/","mainEntity":{"@type":"Person","name":"Chauncey","alternateName":"chaunceyjiang","url":"https://opensource.win/ossheroes/chaunceyjiang/","sameAs":["https://github.com/chaunceyjiang"],"image":"https://avatars.githubusercontent.com/u/17962021?v=4","address":{"@type":"PostalAddress","addressLocality":"Chengdu, China"}},"description":"Chauncey (GitHub @chaunceyjiang)，所在地 Chengdu, China，中国开源码力榜上榜开发者，主要贡献项目包括 vllm、fake-gpu、interpreter 等。"}</script>
+    
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -196,7 +208,7 @@
                             </div>
                             <div class="detail-term-line">
                                 <span class="detail-term-out" aria-hidden="true">&gt;</span>
-                                <span class="detail-term-key" data-i18n-zh="简介" data-i18n-en="bio">简介</span>
+                                <span class="detail-term-key" data-i18n-zh="所在地" data-i18n-en="location">所在地</span>
                                 <span class="detail-term-sep" aria-hidden="true">::</span>
                                 <span class="text-secondary">Chengdu, China</span>
                             </div>
@@ -245,6 +257,132 @@
 
             
             <div class="contribute">
+                
+                    
+                    <h2 class="detail-section-title" data-i18n-zh="主要贡献项目" data-i18n-en="Top Contributions">主要贡献项目</h2>
+                    <div class="detail-term detail-repos">
+                        <div class="detail-term-bar">
+                            <span class="detail-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                            <span class="detail-term-title">~/contributions</span>
+                            <span class="detail-repos-count">10 <span data-i18n-zh="个仓库" data-i18n-en="repos">个仓库</span></span>
+                        </div>
+                        <div class="detail-term-body">
+                            <div class="detail-term-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> ls -la ~/contributions</div>
+                            <ul class="detail-repos-list">
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/vllm-project/vllm" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">vllm-project/vllm</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/chaunceyjiang/fake-gpu" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">chaunceyjiang/fake-gpu</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/chaunceyjiang/interpreter" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">chaunceyjiang/interpreter</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/chaunceyjiang/PortScan" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">chaunceyjiang/PortScan</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/chaunceyjiang/go_eureka_client" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">chaunceyjiang/go_eureka_client</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/chaunceyjiang/python" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">chaunceyjiang/python</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/chaunceyjiang/raft" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">chaunceyjiang/raft</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/chaunceyjiang/single-process-oom" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">chaunceyjiang/single-process-oom</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/chaunceyjiang/actions" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">chaunceyjiang/actions</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/chaunceyjiang/cache" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">chaunceyjiang/cache</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
                 
             </div>
         </div>

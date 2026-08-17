@@ -8,21 +8,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+    <!-- 开发者详情页判定：page 布局、非年度榜单页（无 data_year）、带 slug -->
+    
+
     <!-- Title -->
     
-    <title>Danny Chan - 中国开源码力榜</title>
+    <title>Danny Chan (@danny0405) - 中国开源码力榜开发者档案</title>
 
     <!--Description-->
 
     
 
     
-        <meta name="description" content="Hangzhou China"/>
+        <meta name="description" content="Danny Chan (GitHub @danny0405)，所在地 Hangzhou China，中国开源码力榜上榜开发者，主要贡献项目包括 hudi、flink-source-code-analysis、flink-sql-e2e-tests 等。"/>
     
 
     <!--Keywords-->
     
-        <meta name="keywords" content="中国开源码力榜,开源,OpenSource.Win,OpenRank,开源社,X-lab,GitHub 开发者"/>
+        <meta name="keywords" content="danny0405,Danny Chan,@danny0405,GitHub 开发者,开源开发者,中国开源码力榜,OpenSource.Win"/>
     
 
     <!--Author-->
@@ -31,20 +34,22 @@
     
 
     <!--Open Graph Title-->
-    <meta property="og:title" content="Danny Chan - 中国开源码力榜" />
+    <meta property="og:title" content="Danny Chan (@danny0405) - 中国开源码力榜开发者档案" />
 
     <!--Open Graph Description-->
     
-        <meta property="og:description" content="Hangzhou China"/>
+        <meta property="og:description" content="Danny Chan (GitHub @danny0405)，所在地 Hangzhou China，中国开源码力榜上榜开发者，主要贡献项目包括 hudi、flink-source-code-analysis、flink-sql-e2e-tests 等。"/>
     
 
     <!--Open Graph Site Name-->
         <meta property="og:site_name" content="中国开源码力榜"/>
 
-    <!--Open Graph URL / Locale / Image-->
+    <!--Open Graph URL / Locale / Image（开发者页 og:image 用其 GitHub avatar）-->
         <meta property="og:url" content="https://opensource.win/ossheroes/danny0405/"/>
         <meta property="og:locale" content="zh_CN"/>
-        <meta property="og:image" content="https://opensource.win/ossheroes/img/banner-index-new.png"/>
+    
+        <meta property="og:image" content="https://avatars.githubusercontent.com/u/7644508?v=4"/>
+    
 
     <!--Canonical / Theme Color-->
         <link rel="canonical" href="https://opensource.win/ossheroes/danny0405/"/>
@@ -57,11 +62,18 @@
 
     <meta name="twitter:site" content="中国开源码力榜">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Danny Chan - 中国开源码力榜">
+    <meta name="twitter:title" content="Danny Chan (@danny0405) - 中国开源码力榜开发者档案">
     
-        <meta name="twitter:description" content="Hangzhou China">
+        <meta name="twitter:description" content="Danny Chan (GitHub @danny0405)，所在地 Hangzhou China，中国开源码力榜上榜开发者，主要贡献项目包括 hudi、flink-source-code-analysis、flink-sql-e2e-tests 等。">
     
-    <meta name="twitter:image" content="https://opensource.win/ossheroes/img/banner-index-new.png">
+    
+        <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/7644508?v=4">
+    
+
+    <!--开发者详情页 JSON-LD 结构化数据：ProfilePage + Person-->
+    
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage","name":"Danny Chan (@danny0405) - 中国开源码力榜开发者档案","url":"https://opensource.win/ossheroes/danny0405/","mainEntity":{"@type":"Person","name":"Danny Chan","alternateName":"danny0405","url":"https://opensource.win/ossheroes/danny0405/","sameAs":["https://github.com/danny0405"],"image":"https://avatars.githubusercontent.com/u/7644508?v=4","address":{"@type":"PostalAddress","addressLocality":"Hangzhou China"}},"description":"Danny Chan (GitHub @danny0405)，所在地 Hangzhou China，中国开源码力榜上榜开发者，主要贡献项目包括 hudi、flink-source-code-analysis、flink-sql-e2e-tests 等。"}</script>
+    
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -196,7 +208,7 @@
                             </div>
                             <div class="detail-term-line">
                                 <span class="detail-term-out" aria-hidden="true">&gt;</span>
-                                <span class="detail-term-key" data-i18n-zh="简介" data-i18n-en="bio">简介</span>
+                                <span class="detail-term-key" data-i18n-zh="所在地" data-i18n-en="location">所在地</span>
                                 <span class="detail-term-sep" aria-hidden="true">::</span>
                                 <span class="text-secondary">Hangzhou China</span>
                             </div>
@@ -253,6 +265,88 @@
 
             
             <div class="contribute">
+                
+                    
+                    <h2 class="detail-section-title" data-i18n-zh="主要贡献项目" data-i18n-en="Top Contributions">主要贡献项目</h2>
+                    <div class="detail-term detail-repos">
+                        <div class="detail-term-bar">
+                            <span class="detail-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                            <span class="detail-term-title">~/contributions</span>
+                            <span class="detail-repos-count">6 <span data-i18n-zh="个仓库" data-i18n-en="repos">个仓库</span></span>
+                        </div>
+                        <div class="detail-term-body">
+                            <div class="detail-term-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> ls -la ~/contributions</div>
+                            <ul class="detail-repos-list">
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/apache/hudi" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">apache/hudi</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/danny0405/flink-source-code-analysis" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">danny0405/flink-source-code-analysis</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/danny0405/flink-sql-e2e-tests" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">danny0405/flink-sql-e2e-tests</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/danny0405/danny0405.github.io" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">danny0405/danny0405.github.io</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/danny0405/draw.io" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">danny0405/draw.io</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/danny0405/flink-1" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">danny0405/flink-1</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
                 
             </div>
         </div>

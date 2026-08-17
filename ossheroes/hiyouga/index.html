@@ -8,21 +8,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+    <!-- 开发者详情页判定：page 布局、非年度榜单页（无 data_year）、带 slug -->
+    
+
     <!-- Title -->
     
-    <title>hoshi-hiyouga - 中国开源码力榜</title>
+    <title>hoshi-hiyouga (@hiyouga) - 中国开源码力榜开发者档案</title>
 
     <!--Description-->
 
     
 
     
-        <meta name="description" content="Beijing, China"/>
+        <meta name="description" content="hoshi-hiyouga (GitHub @hiyouga)，所在地 Beijing, China，中国开源码力榜上榜开发者，主要贡献项目包括 LlamaFactory、EasyR1、ChatGLM-Efficient-Tuning 等。"/>
     
 
     <!--Keywords-->
     
-        <meta name="keywords" content="中国开源码力榜,开源,OpenSource.Win,OpenRank,开源社,X-lab,GitHub 开发者"/>
+        <meta name="keywords" content="hiyouga,hoshi-hiyouga,@hiyouga,GitHub 开发者,开源开发者,中国开源码力榜,OpenSource.Win"/>
     
 
     <!--Author-->
@@ -31,20 +34,22 @@
     
 
     <!--Open Graph Title-->
-    <meta property="og:title" content="hoshi-hiyouga - 中国开源码力榜" />
+    <meta property="og:title" content="hoshi-hiyouga (@hiyouga) - 中国开源码力榜开发者档案" />
 
     <!--Open Graph Description-->
     
-        <meta property="og:description" content="Beijing, China"/>
+        <meta property="og:description" content="hoshi-hiyouga (GitHub @hiyouga)，所在地 Beijing, China，中国开源码力榜上榜开发者，主要贡献项目包括 LlamaFactory、EasyR1、ChatGLM-Efficient-Tuning 等。"/>
     
 
     <!--Open Graph Site Name-->
         <meta property="og:site_name" content="中国开源码力榜"/>
 
-    <!--Open Graph URL / Locale / Image-->
+    <!--Open Graph URL / Locale / Image（开发者页 og:image 用其 GitHub avatar）-->
         <meta property="og:url" content="https://opensource.win/ossheroes/hiyouga/"/>
         <meta property="og:locale" content="zh_CN"/>
-        <meta property="og:image" content="https://opensource.win/ossheroes/img/banner-index-new.png"/>
+    
+        <meta property="og:image" content="https://avatars.githubusercontent.com/u/16256802?v=4"/>
+    
 
     <!--Canonical / Theme Color-->
         <link rel="canonical" href="https://opensource.win/ossheroes/hiyouga/"/>
@@ -57,11 +62,18 @@
 
     <meta name="twitter:site" content="中国开源码力榜">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="hoshi-hiyouga - 中国开源码力榜">
+    <meta name="twitter:title" content="hoshi-hiyouga (@hiyouga) - 中国开源码力榜开发者档案">
     
-        <meta name="twitter:description" content="Beijing, China">
+        <meta name="twitter:description" content="hoshi-hiyouga (GitHub @hiyouga)，所在地 Beijing, China，中国开源码力榜上榜开发者，主要贡献项目包括 LlamaFactory、EasyR1、ChatGLM-Efficient-Tuning 等。">
     
-    <meta name="twitter:image" content="https://opensource.win/ossheroes/img/banner-index-new.png">
+    
+        <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/16256802?v=4">
+    
+
+    <!--开发者详情页 JSON-LD 结构化数据：ProfilePage + Person-->
+    
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage","name":"hoshi-hiyouga (@hiyouga) - 中国开源码力榜开发者档案","url":"https://opensource.win/ossheroes/hiyouga/","mainEntity":{"@type":"Person","name":"hoshi-hiyouga","alternateName":"hiyouga","url":"https://opensource.win/ossheroes/hiyouga/","sameAs":["https://github.com/hiyouga"],"image":"https://avatars.githubusercontent.com/u/16256802?v=4","address":{"@type":"PostalAddress","addressLocality":"Beijing, China"}},"description":"hoshi-hiyouga (GitHub @hiyouga)，所在地 Beijing, China，中国开源码力榜上榜开发者，主要贡献项目包括 LlamaFactory、EasyR1、ChatGLM-Efficient-Tuning 等。"}</script>
+    
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -196,7 +208,7 @@
                             </div>
                             <div class="detail-term-line">
                                 <span class="detail-term-out" aria-hidden="true">&gt;</span>
-                                <span class="detail-term-key" data-i18n-zh="简介" data-i18n-en="bio">简介</span>
+                                <span class="detail-term-key" data-i18n-zh="所在地" data-i18n-en="location">所在地</span>
                                 <span class="detail-term-sep" aria-hidden="true">::</span>
                                 <span class="text-secondary">Beijing, China</span>
                             </div>
@@ -255,6 +267,132 @@
 
             
             <div class="contribute">
+                
+                    
+                    <h2 class="detail-section-title" data-i18n-zh="主要贡献项目" data-i18n-en="Top Contributions">主要贡献项目</h2>
+                    <div class="detail-term detail-repos">
+                        <div class="detail-term-bar">
+                            <span class="detail-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                            <span class="detail-term-title">~/contributions</span>
+                            <span class="detail-repos-count">10 <span data-i18n-zh="个仓库" data-i18n-en="repos">个仓库</span></span>
+                        </div>
+                        <div class="detail-term-body">
+                            <div class="detail-term-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> ls -la ~/contributions</div>
+                            <ul class="detail-repos-list">
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/hiyouga/LlamaFactory" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">hiyouga/LlamaFactory</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/hiyouga/EasyR1" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">hiyouga/EasyR1</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/hiyouga/ChatGLM-Efficient-Tuning" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">hiyouga/ChatGLM-Efficient-Tuning</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/Prism-Shadow/penguin-harness" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">Prism-Shadow/penguin-harness</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/hiyouga/FastEdit" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">hiyouga/FastEdit</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/hiyouga/Dual-Contrastive-Learning" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">hiyouga/Dual-Contrastive-Learning</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/Prism-Shadow/agenthub" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">Prism-Shadow/agenthub</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/hiyouga/MathRuler" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">hiyouga/MathRuler</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/hiyouga/AMP-Regularizer" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">hiyouga/AMP-Regularizer</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/hiyouga/PBAN-PyTorch" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">hiyouga/PBAN-PyTorch</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
                 
             </div>
         </div>

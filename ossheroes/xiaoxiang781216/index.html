@@ -8,21 +8,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+    <!-- 开发者详情页判定：page 布局、非年度榜单页（无 data_year）、带 slug -->
+    
+
     <!-- Title -->
     
-    <title>Xiang Xiao - 中国开源码力榜</title>
+    <title>Xiang Xiao (@xiaoxiang781216) - 中国开源码力榜开发者档案</title>
 
     <!--Description-->
 
     
 
     
-        <meta name="description" content="Beijing"/>
+        <meta name="description" content="Xiang Xiao (GitHub @xiaoxiang781216)，所在地 Beijing，中国开源码力榜上榜开发者，主要贡献项目包括 nuttx、nuttx-apps 等。"/>
     
 
     <!--Keywords-->
     
-        <meta name="keywords" content="中国开源码力榜,开源,OpenSource.Win,OpenRank,开源社,X-lab,GitHub 开发者"/>
+        <meta name="keywords" content="xiaoxiang781216,Xiang Xiao,@xiaoxiang781216,GitHub 开发者,开源开发者,中国开源码力榜,OpenSource.Win"/>
     
 
     <!--Author-->
@@ -31,20 +34,22 @@
     
 
     <!--Open Graph Title-->
-    <meta property="og:title" content="Xiang Xiao - 中国开源码力榜" />
+    <meta property="og:title" content="Xiang Xiao (@xiaoxiang781216) - 中国开源码力榜开发者档案" />
 
     <!--Open Graph Description-->
     
-        <meta property="og:description" content="Beijing"/>
+        <meta property="og:description" content="Xiang Xiao (GitHub @xiaoxiang781216)，所在地 Beijing，中国开源码力榜上榜开发者，主要贡献项目包括 nuttx、nuttx-apps 等。"/>
     
 
     <!--Open Graph Site Name-->
         <meta property="og:site_name" content="中国开源码力榜"/>
 
-    <!--Open Graph URL / Locale / Image-->
+    <!--Open Graph URL / Locale / Image（开发者页 og:image 用其 GitHub avatar）-->
         <meta property="og:url" content="https://opensource.win/ossheroes/xiaoxiang781216/"/>
         <meta property="og:locale" content="zh_CN"/>
-        <meta property="og:image" content="https://opensource.win/ossheroes/img/banner-index-new.png"/>
+    
+        <meta property="og:image" content="https://avatars.githubusercontent.com/u/18066964?v=4"/>
+    
 
     <!--Canonical / Theme Color-->
         <link rel="canonical" href="https://opensource.win/ossheroes/xiaoxiang781216/"/>
@@ -57,11 +62,18 @@
 
     <meta name="twitter:site" content="中国开源码力榜">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Xiang Xiao - 中国开源码力榜">
+    <meta name="twitter:title" content="Xiang Xiao (@xiaoxiang781216) - 中国开源码力榜开发者档案">
     
-        <meta name="twitter:description" content="Beijing">
+        <meta name="twitter:description" content="Xiang Xiao (GitHub @xiaoxiang781216)，所在地 Beijing，中国开源码力榜上榜开发者，主要贡献项目包括 nuttx、nuttx-apps 等。">
     
-    <meta name="twitter:image" content="https://opensource.win/ossheroes/img/banner-index-new.png">
+    
+        <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/18066964?v=4">
+    
+
+    <!--开发者详情页 JSON-LD 结构化数据：ProfilePage + Person-->
+    
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage","name":"Xiang Xiao (@xiaoxiang781216) - 中国开源码力榜开发者档案","url":"https://opensource.win/ossheroes/xiaoxiang781216/","mainEntity":{"@type":"Person","name":"Xiang Xiao","alternateName":"xiaoxiang781216","url":"https://opensource.win/ossheroes/xiaoxiang781216/","sameAs":["https://github.com/xiaoxiang781216"],"image":"https://avatars.githubusercontent.com/u/18066964?v=4","address":{"@type":"PostalAddress","addressLocality":"Beijing"}},"description":"Xiang Xiao (GitHub @xiaoxiang781216)，所在地 Beijing，中国开源码力榜上榜开发者，主要贡献项目包括 nuttx、nuttx-apps 等。"}</script>
+    
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -196,7 +208,7 @@
                             </div>
                             <div class="detail-term-line">
                                 <span class="detail-term-out" aria-hidden="true">&gt;</span>
-                                <span class="detail-term-key" data-i18n-zh="简介" data-i18n-en="bio">简介</span>
+                                <span class="detail-term-key" data-i18n-zh="所在地" data-i18n-en="location">所在地</span>
                                 <span class="detail-term-sep" aria-hidden="true">::</span>
                                 <span class="text-secondary">Beijing</span>
                             </div>
@@ -261,6 +273,44 @@
 
             
             <div class="contribute">
+                
+                    
+                    <h2 class="detail-section-title" data-i18n-zh="主要贡献项目" data-i18n-en="Top Contributions">主要贡献项目</h2>
+                    <div class="detail-term detail-repos">
+                        <div class="detail-term-bar">
+                            <span class="detail-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                            <span class="detail-term-title">~/contributions</span>
+                            <span class="detail-repos-count">2 <span data-i18n-zh="个仓库" data-i18n-en="repos">个仓库</span></span>
+                        </div>
+                        <div class="detail-term-body">
+                            <div class="detail-term-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> ls -la ~/contributions</div>
+                            <ul class="detail-repos-list">
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/apache/nuttx" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">apache/nuttx</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/apache/nuttx-apps" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">apache/nuttx-apps</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
                 
             </div>
         </div>

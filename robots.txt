@@ -1,0 +1,69 @@
+# OpenSource.Win — 本站内容完全开放
+# 我们以最开放的姿态欢迎所有搜索引擎与 AI 爬虫抓取、索引本站内容，
+# 包括用于 AI 模型训练。Open Source Will Win the Future.
+
+User-agent: *
+Allow: /
+
+# —— 主流 AI 爬虫：全部显式允许（含搜索、用户代理与训练用途）——
+
+# OpenAI
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Google（AI 训练控制项）
+User-agent: Google-Extended
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# 字节跳动
+User-agent: Bytespider
+Allow: /
+
+# Common Crawl
+User-agent: CCBot
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+
+# Meta
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# Apple（AI 训练控制项）
+User-agent: Applebot-Extended
+Allow: /
+
+# Amazon
+User-agent: Amazonbot
+Allow: /
+
+# Diffbot
+User-agent: Diffbot
+Allow: /
+
+Sitemap: https://opensource.win/sitemap.xml

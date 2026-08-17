@@ -5,8 +5,8 @@
 # Site
 title: '中国开源码力榜'
 subtitle: ''
-description: ''
-keywords:
+description: '中国开源码力榜：由 OpenSource.Win、开源社、X-lab 开放实验室联合发起的中国开源开发者年度榜单，基于 OpenRank 算法评选。'
+keywords: 中国开源码力榜,开源,OpenSource.Win,OpenRank,开源社,X-lab,GitHub 开发者
 author: OpenSource.Win
 language: zh-CN
 timezone: ''

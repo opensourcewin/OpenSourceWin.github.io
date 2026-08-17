@@ -9,6 +9,17 @@ export default function NotFound() {
       <Link href="/">
         <Button>Go Home</Button>
       </Link>
+      <div className="mt-16 text-center text-xs text-muted-foreground">
+        Built With{' '}
+        <a
+          href="https://mindmux.ai/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary hover:underline"
+        >
+          MindMux
+        </a>
+      </div>
     </div>
   );
 }

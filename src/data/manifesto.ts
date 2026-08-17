@@ -39,6 +39,10 @@ export const manifestoContent = {
       en: "Heroes",
       zh: "码力榜",
     },
+    shareText: {
+      en: "I believe in OpenSource.Win — Open Source Will Win the Future. https://opensource.win/",
+      zh: "我相信 OpenSource.Win —— 相信开放的力量，开源终将赢得未来。 https://opensource.win/",
+    },
   },
   en: {
     title: "The OpenSource.Win Manifesto: For Our Shared Future",
@@ -164,7 +168,7 @@ export const manifestoContent = {
           "未来不是预测出来的，而是我们共同构建的。",
           "我们相信，封闭只能带来短暂的护城河，而开源将造就无尽的星辰大海。让我们携手，在 AI 时代重塑开源精神，汇聚全人类与 AI 的集体智慧。"
         ],
-        slogan: "Open Source Wins. Join Us."
+        slogan: "开源必胜，加入我们。"
       }
     ]
   }

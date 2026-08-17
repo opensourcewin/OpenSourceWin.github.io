@@ -25,13 +25,14 @@ type ManifestoItem = {
 export default function Home() {
   const { language } = useLanguage();
   const content = manifestoContent[language];
+  const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(manifestoContent.meta.shareText[language])}&hashtags=OpenSourceWin`;
 
   return (
     <div className="min-h-screen font-mono selection:bg-primary selection:text-black">
       <Navbar />
 
       {/* Hero Section */}
-      <header className="relative min-h-[90vh] flex flex-col items-center justify-center p-8 overflow-hidden border-b border-border">
+      <header className="relative min-h-[90vh] flex flex-col items-center justify-center px-8 py-24 overflow-hidden border-b border-border">
         {/* Background Overlay */}
         <div className="absolute inset-0 z-0">
           <img
@@ -54,8 +55,8 @@ export default function Home() {
             System Broadcast
           </div>
 
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight">
-            <span className="text-primary block mb-2 text-2xl md:text-3xl opacity-80 font-normal">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight">
+            <span className="text-primary block mb-2 text-xl sm:text-2xl md:text-3xl opacity-80 font-normal">
               ./manifesto --init
             </span>
             {content.title}
@@ -75,11 +76,6 @@ export default function Home() {
                  }}
                >
                  {language === 'en' ? 'Read Manifesto' : '阅读宣言'} <ArrowRight className="ml-2" />
-               </a>
-             </Button>
-             <Button asChild variant="outline" size="lg" className="text-lg h-14 px-8 rounded-none border-primary/30 hover:bg-primary/10 hover:text-primary">
-               <a href="https://github.com/opensourcewin" target="_blank" rel="noopener noreferrer">
-                 {language === 'en' ? 'Join Movement' : '加入行动'}
                </a>
              </Button>
           </div>
@@ -188,7 +184,7 @@ export default function Home() {
             )}
 
             {section.slogan && (
-              <div className="mt-24 text-center space-y-8 py-12 border border-primary/30 bg-primary/5">
+              <div className="mt-12 text-center space-y-8 py-12 bg-primary/5">
                 <div className="text-4xl md:text-6xl font-bold text-primary animate-pulse">
                   {section.slogan}
                 </div>
@@ -196,6 +192,13 @@ export default function Home() {
                    {section.content?.map((line: string, i: number) => (
                      <p key={i} className="text-xl text-foreground/80">{line}</p>
                    ))}
+                </div>
+                <div className="pt-4">
+                  <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg h-14 px-8 rounded-none border border-transparent hover:border-primary/50">
+                    <a href={shareUrl} target="_blank" rel="noopener noreferrer">
+                      {language === 'en' ? 'Support Us' : '支持我们'}
+                    </a>
+                  </Button>
                 </div>
               </div>
             )}
@@ -215,7 +218,7 @@ export default function Home() {
              </p>
            </div>
            
-           <div className="text-right space-y-1">
+           <div className="text-right space-y-1 self-end md:self-center">
              <p className="font-bold text-foreground">{manifestoContent.meta.author[language]}</p>
              {manifestoContent.meta.roles.map((role, i) =>
                role.url ? (
@@ -250,6 +253,17 @@ export default function Home() {
                 </a>
              </div>
            </div>
+        </div>
+        <div className="max-w-4xl mx-auto mt-12 text-center text-xs text-muted-foreground">
+          Built With{' '}
+          <a
+            href="https://mindmux.ai/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:underline"
+          >
+            MindMux
+          </a>
         </div>
       </footer>
     </div>

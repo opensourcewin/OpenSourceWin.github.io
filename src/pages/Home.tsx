@@ -98,7 +98,7 @@ export default function Home() {
                 key={i}
                 className={
                   i === 0
-                    ? "block text-primary text-xl sm:text-2xl md:text-3xl lg:text-4xl opacity-90 font-normal tracking-tight mb-1"
+                    ? "block text-primary mb-1"
                     : "block"
                 }
               >

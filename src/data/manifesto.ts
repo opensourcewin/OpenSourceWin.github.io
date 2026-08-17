@@ -26,12 +26,12 @@ export const manifestoContent = {
         zh: "SegmentFault 思否联合创始人",
       },
       {
-        en: "Creator, ProjectBrain",
-        zh: "ProjectBrain 发起人",
+        en: "Initiator, ProjectBrain.md",
+        zh: "ProjectBrain.md 发起人",
         url: "https://projectbrain.md/",
       },
       {
-        en: "Creator, Apache Answer",
+        en: "Initiator, Apache Answer",
         zh: "Apache Answer 项目发起人",
       },
     ],
@@ -59,7 +59,7 @@ export const manifestoContent = {
       bold: "We stand at a critical crossroads in the history of technology.",
       text: [
         "The explosion of Artificial Intelligence is not merely a technical upgrade; it is a profound paradigm shift. It is fundamentally reshaping how we acquire information, redefining how we learn, and rewriting the logic of research and creation.",
-        "In this era of rapid change, anxiety coexists with hope. Some fear that technology will build new walls; others dread the \"black box\" of algorithms. But as a lifelong builder in the tech community, and as the creator of SegmentFault and Apache Answer, I am more certain now than ever before:",
+        "In this era of rapid change, anxiety coexists with hope. Some fear that technology will build new walls; others dread the \"black box\" of algorithms. But as a lifelong builder in the tech community, and as the builder of [MindMux.ai](https://mindmux.ai/), [ProjectBrain.md](https://projectbrain.md/) and [Apache Answer](https://answer.apache.org/), I am more certain now than ever before:",
       ],
       highlight: "Open Source Will Win the Future."
     },
@@ -123,7 +123,7 @@ export const manifestoContent = {
       bold: "我们正站在人类科技史的又一个十字路口。",
       text: [
         "人工智能（AI）的爆发，不仅仅是一次技术的升级，更是一场深刻的范式转移。它正在重塑我们获取信息的方式、重新定义学习的路径，甚至彻底改变了人类研究与创作的基本逻辑。",
-        "在这个极速变革的时代，焦虑与希望并存。有人担心技术将筑起新的围墙，有人恐惧算法的黑箱。但作为一名长期耕耘在技术社区的 Builder，作为 SegmentFault 和 Apache Answer 的构建者，我比以往任何时候都更加确信：",
+        "在这个极速变革的时代，焦虑与希望并存。有人担心技术将筑起新的围墙，有人恐惧算法的黑箱。但作为一名长期耕耘在技术社区的 Builder，作为 [MindMux.ai](https://mindmux.ai/)、[ProjectBrain.md](https://projectbrain.md/) 和 [Apache Answer](https://answer.apache.org/) 的构建者，我比以往任何时候都更加确信：",
       ],
       highlight: "Open Source Will Win the Future.（开源终将赢得未来。）"
     },

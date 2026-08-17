@@ -35,6 +35,27 @@ function renderBold(text: string) {
   );
 }
 
+/** Renders `[text](url)` links and `**bold**` segments in plain text. */
+function renderInline(text: string) {
+  return text.split(/(\[[^\]]+\]\([^)]+\))/g).map((part, i) => {
+    const link = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (link) {
+      return (
+        <a
+          key={i}
+          href={link[2]}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary hover:underline"
+        >
+          {link[1]}
+        </a>
+      );
+    }
+    return <span key={i}>{renderBold(part)}</span>;
+  });
+}
+
 export default function Home() {
   const { language } = useLanguage();
   const content = manifestoContent[language];
@@ -103,7 +124,7 @@ export default function Home() {
                {content.intro.bold}
              </p>
              {content.intro.text.map((p, i) => (
-               <p key={i} className="text-muted-foreground">{p}</p>
+               <p key={i} className="text-muted-foreground">{renderInline(p)}</p>
              ))}
              <div className="text-3xl font-bold text-primary pt-4 tracking-tight">
                <Typewriter text={content.intro.highlight} speed={50} startDelay={1000} />
@@ -260,7 +281,7 @@ export default function Home() {
                   <Linkedin className="h-5 w-5" />
                   <span className="sr-only">LinkedIn</span>
                 </a>
-                <a href="https://x.com/sunnygao" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" title="X (Twitter)">
+                <a href={language === 'zh' ? "https://x.com/gaoyangio" : "https://x.com/sunnyygao"} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" title="X (Twitter)">
                   <XIcon className="h-4 w-4" />
                   <span className="sr-only">X</span>
                 </a>

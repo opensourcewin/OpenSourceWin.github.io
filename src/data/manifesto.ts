@@ -53,7 +53,7 @@ export const manifestoContent = {
     },
   },
   en: {
-    title: "The OpenSource.Win Manifesto: For Our Shared Future",
+    title: ["The OpenSource.Win", "Manifesto:", "For Our Shared Future"],
     subtitle: "—— Believing in Openness to Build a Co-Evolving Human-AI Civilization",
     intro: {
       bold: "We stand at a critical crossroads in the history of technology.",
@@ -117,7 +117,7 @@ export const manifestoContent = {
     ]
   },
   zh: {
-    title: "OpenSource.Win 宣言：致未来",
+    title: ["OpenSource.Win", "宣言：", "致我们共同的未来"],
     subtitle: "—— 相信开放的力量，构建人机共进的文明",
     intro: {
       bold: "我们正站在人类科技史的又一个十字路口。",

@@ -93,7 +93,18 @@ export default function Home() {
             <span className="text-primary block mb-2 text-xl sm:text-2xl md:text-3xl opacity-80 font-normal">
               ./manifesto --init
             </span>
-            {content.title}
+            {content.title.map((line, i) => (
+              <span
+                key={i}
+                className={
+                  i === 0
+                    ? "block text-primary text-xl sm:text-2xl md:text-3xl lg:text-4xl opacity-90 font-normal tracking-tight mb-1"
+                    : "block"
+                }
+              >
+                {line}
+              </span>
+            ))}
           </h1>
 
           <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl border-l-2 border-primary/50 pl-6 italic">
@@ -253,7 +264,16 @@ export default function Home() {
            </div>
            
            <div className="text-right space-y-1 self-end md:self-center">
-             <p className="font-bold text-foreground">{manifestoContent.meta.author[language]}</p>
+             <p className="font-bold text-foreground">
+               <a
+                 href="https://sunshineg.github.io/"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 className="hover:text-primary transition-colors"
+               >
+                 {manifestoContent.meta.author[language]}
+               </a>
+             </p>
              {manifestoContent.meta.roles.map((role, i) =>
                role.url ? (
                  <p key={i} className="text-sm text-muted-foreground">

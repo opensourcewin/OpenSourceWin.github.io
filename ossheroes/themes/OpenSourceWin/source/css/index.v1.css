@@ -76,7 +76,8 @@ a:hover {
   border-bottom: 1px solid var(--osw-border);
 }
 .header-detail {
-  padding-bottom: 64px;
+  /* banner 已移除，头部仅保留导航占位 */
+  padding-bottom: 0;
 }
 .home-head {
   width: 100%;
@@ -242,6 +243,11 @@ a.user-item:hover .nickname {
   border-top: 1px solid var(--osw-border);
   margin-top: 3rem;
 }
+.page-footer-credit {
+  margin-top: 0.25rem;
+  font-size: 13px;
+  color: var(--osw-muted);
+}
 .avatar {
   width: 64px;
   height: 64px;
@@ -249,33 +255,112 @@ a.user-item:hover .nickname {
   border: 1px solid var(--osw-border);
 }
 
-/* detail css */
+/* detail css —— 终端风 profile 卡片 */
 .detail-avatar {
   width: 160px;
   height: 160px;
+  flex: none;
   border-radius: 0 !important;
-  border: 1px solid var(--osw-border);
-}
-.detail-nick {
-  font-weight: 600;
-  font-size: 40px;
-  line-height: 48px;
-  color: var(--osw-primary);
-  word-break: break-word;
-  word-wrap: break-word;
-}
-.detail-list > li {
-  list-style: none;
+  border: 1px solid var(--osw-primary);
+  box-shadow: 0 0 16px oklch(0.85 0.20 140 / 0.25);
 }
 
-/* 详情页年份排名下拉框 */
-select.ranking {
-  background-color: var(--osw-card);
-  color: var(--osw-primary);
+.detail-term {
+  background: var(--osw-card);
   border: 1px solid var(--osw-border);
   border-radius: 0;
-  padding: 2px 8px;
-  font-family: var(--osw-font);
+  overflow: hidden;
+}
+.detail-term-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--osw-border);
+  color: var(--osw-muted);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+}
+.detail-term-dots {
+  display: inline-flex;
+  gap: 6px;
+}
+.detail-term-dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--osw-border);
+}
+.detail-term-dots i:nth-child(2) {
+  background: var(--osw-muted);
+}
+.detail-term-dots i:nth-child(3) {
+  background: var(--osw-primary);
+}
+.detail-term-body {
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+.detail-term-cmd {
+  color: var(--osw-foreground);
+  margin-bottom: 1rem;
+  word-break: break-all;
+}
+.detail-term-prompt {
+  color: var(--osw-primary);
+  margin-right: 0.25rem;
+}
+.detail-term-result {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.detail-term-info {
+  flex: 1;
+  min-width: 0;
+}
+.detail-term-line {
+  line-height: 1.8;
+  word-break: break-word;
+}
+.detail-term-out {
+  color: var(--osw-muted);
+  margin-right: 0.5rem;
+}
+.detail-term-key {
+  display: inline-block;
+  /* 等宽字体下按最长 key（github，6 字符）对齐 :: 分隔符 */
+  min-width: 6ch;
+  color: var(--osw-primary);
+}
+.detail-term-sep {
+  color: var(--osw-muted);
+  margin: 0 0.5rem;
+}
+.detail-term-name {
+  font-weight: 600;
+  color: var(--osw-foreground);
+}
+
+/* 历年排名徽章：[2026] RANK #12 —— 直角 + 暗绿边框 + 霓虹绿文字 */
+.detail-ranks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+.rank-badge {
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--osw-border);
+  border-radius: 0;
+  background: oklch(0.85 0.20 140 / 0.06);
+  color: var(--osw-primary);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.detail-list > li {
+  list-style: none;
 }
 
 .contribute img {
@@ -441,12 +526,15 @@ select.ranking {
   .icons-wrap {
     gap: 0.5rem;
   }
-  .detail-nick {
-    font-size: 24px;
-    line-height: 1.5;
+  .detail-term-result {
+    flex-direction: column;
   }
-  .ranking {
-    font-size: 1rem !important;
+  .detail-term-body {
+    padding: 1rem;
+  }
+  .detail-avatar {
+    width: 96px;
+    height: 96px;
   }
   .contribute li > a {
     word-wrap: break-word;

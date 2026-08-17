@@ -1,43 +1,55 @@
-<!-- 头部 -->
+<!-- 头部（banner 大图已移除，图片文件仍保留在 source/img/） -->
 <div class="header header-detail">
     <%- partial('menu') %>
-    <!-- 头部内容 -->
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-8">
-                <%- image_tag('img/banner-detail-new.png', {class: 'home-head', alt: 'logo'}) %>
-            </div>
-        </div>
-    </div>
 </div>
 <!-- 详情 -->
 <div class="container pt-5 detail-content">
     <div class="row justify-content-center">
         <div class="col-sm-12 col-md-8">
-            <div class="d-flex flex-column flex-md-row  justify-content-between">
-                <div class="d-flex">
-                    <%- partial('avatar', {className: 'detail-avatar me-4', item: item}) %>
-                    <div>
-                        <div class="detail-nick">
-                            <%- item.name ? item.name : item.slug %>
-                            <%
-                                const years = site.data.rankingList?.sort((a,b)=>b.year - a.year).flatMap(({ year, annualRanking }) =>
-                                  annualRanking
-                                    .filter(({ login }) => login == item.slug)
-                                    .map(({ ranking }) => ({ year, ranking }))
-                                );
-                            %>
+            <!-- 终端风 profile 卡片：$ ./whois <login> -->
+            <div class="detail-term">
+                <div class="detail-term-bar">
+                    <span class="detail-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="detail-term-title">opensource@win: ~</span>
+                </div>
+                <div class="detail-term-body">
+                    <div class="detail-term-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> ./whois <%- item.slug %></div>
+                    <%
+                        const years = site.data.rankingList?.sort((a,b)=>b.year - a.year).flatMap(({ year, annualRanking }) =>
+                          annualRanking
+                            .filter(({ login }) => login == item.slug)
+                            .map(({ ranking }) => ({ year, ranking }))
+                        );
+                    %>
+                    <div class="detail-term-result">
+                        <%- partial('avatar', {className: 'detail-avatar', item: item}) %>
+                        <div class="detail-term-info">
+                            <div class="detail-term-line">
+                                <span class="detail-term-out" aria-hidden="true">&gt;</span>
+                                <span class="detail-term-key" data-i18n-zh="名称" data-i18n-en="name">名称</span>
+                                <span class="detail-term-sep" aria-hidden="true">::</span>
+                                <span class="detail-term-name"><%- item.name ? item.name : item.slug %></span>
+                            </div>
+                            <div class="detail-term-line">
+                                <span class="detail-term-out" aria-hidden="true">&gt;</span>
+                                <span class="detail-term-key" data-i18n-zh="简介" data-i18n-en="bio">简介</span>
+                                <span class="detail-term-sep" aria-hidden="true">::</span>
+                                <span class="text-secondary"><%- item.description %></span>
+                            </div>
+                            <div class="detail-term-line">
+                                <span class="detail-term-out" aria-hidden="true">&gt;</span>
+                                <span class="detail-term-key">github</span>
+                                <span class="detail-term-sep" aria-hidden="true">::</span>
+                                <%- link_to('https://github.com/' + item.slug, '@' + item.slug, {external: true}) %>
+                            </div>
                             <% if(years.length) { %>
-                                <%- partial('_partial/ranking', {years: years}) %>
+                                <div class="detail-ranks">
+                                    <%- partial('_partial/ranking', {years: years}) %>
+                                </div>
                             <% } %>
-                        </div>
-                        <div class="text-secondary mt-2"><%- item.description %></div>
-                        <div class="mt-2">
-                            <%- link_to('https://github.com/' + item.slug, '@' + item.slug, {external: true}) %>
                         </div>
                     </div>
                 </div>
-                <%- image_tag('img/award.png', {class: 'mt-3 mt-sm-0 d-none d-lg-block', alt: 'Hacking Heros Logo', width: 250, height: 170}) %>
             </div>
 
             <div class="contribute mt-4 mt-sm-1">

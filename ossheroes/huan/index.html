@@ -61,6 +61,9 @@
     
 <script src="/ossheroes/js/i18n.js"></script>
 
+    
+<script src="/ossheroes/js/detail-readme.js"></script>
+
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 
@@ -127,8 +130,22 @@
  </nav>
 
 </div>
+
+<!-- 终端风页面头部：纯 HTML/CSS 装饰（grid 背景 + 辉光 + 扫描线），零图片素材 -->
+<div class="detail-hero">
+    <div class="detail-hero-scan" aria-hidden="true"></div>
+    <div class="detail-hero-inner container">
+        <div class="detail-hero-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> ./whois huan</div>
+        <div class="detail-hero-title" aria-hidden="true">&gt; DEVELOPER PROFILE<span class="detail-hero-cursor"></span></div>
+        <div class="detail-hero-meta">
+            <span class="hero-dot" aria-hidden="true"><span class="hero-dot-ping"></span><span class="hero-dot-core"></span></span>
+            <span data-i18n-zh="码力榜开发者档案" data-i18n-en="HeroRank Developer Profile">码力榜开发者档案</span>
+        </div>
+    </div>
+</div>
+
 <!-- 详情 -->
-<div class="container pt-5 detail-content">
+<div class="container detail-content">
     <div class="row justify-content-center">
         <div class="col-sm-12 col-md-8">
             <!-- 终端风 profile 卡片：$ ./whois <login> -->
@@ -176,11 +193,44 @@
                             
                         </div>
                     </div>
+                    <!-- osgraph 嵌入已失效（对方证书过期），改为外链访问 -->
+                    <div class="detail-term-graphs">
+                        <span class="detail-term-prompt" aria-hidden="true">$</span>
+                        <span class="detail-graphs-cmd">open ./graphs</span>
+                        <span class="detail-graphs-arrow" aria-hidden="true">-&gt;</span>
+                        <span class="detail-graphs-links">
+                            <a class="detail-graph-link" href="https://osgraph.com/graphs/developer-activity/github/huan?user-limit=10" target="_blank" rel="noopener" data-i18n-zh="开发活动" data-i18n-en="Developer Activity">开发活动</a>
+                            <a class="detail-graph-link" href="https://osgraph.com/graphs/os-partner/github/huan?user-limit=10" target="_blank" rel="noopener" data-i18n-zh="开源伙伴" data-i18n-en="Open Source Partners">开源伙伴</a>
+                            <a class="detail-graph-link" href="https://osgraph.com/graphs/os-interest/github/huan?repo-limit=5&amp;topic-limit=3" target="_blank" rel="noopener" data-i18n-zh="开源兴趣" data-i18n-en="Open Source Interests">开源兴趣</a>
+                        </span>
+                    </div>
                 </div>
             </div>
 
-            <div class="contribute mt-4 mt-sm-1">
-                <p>Huan is a serial entrepreneur, <a target="_blank" rel="noopener" href="http://pre-angel.com/peoples/zhuohuan-li/">active angel investor</a> with strong technology background. He is a widely recognized technical leader on conversational AI and open source cloud architectures. Huan is a <a target="_blank" rel="noopener" href="https://stars.github.com/profiles/huan/">GitHub Star</a>, co-authored guide books <a target="_blank" rel="noopener" href="https://item.jd.com/12630213.html">“Chatbot 0 to 1”</a> and <a target="_blank" rel="noopener" href="https://item.jd.com/12980534.html">“Concise Handbook of TensorFlow 2”</a> and has been recognized by Microsoft, Google, and Tencent as <a target="_blank" rel="noopener" href="https://mvp.microsoft.com/en-us/PublicProfile/5003061">MVP</a>, <a target="_blank" rel="noopener" href="https://developers.google.com/community/experts/directory/profile/profile-huan-li">GDE</a>, and <a target="_blank" rel="noopener" href="https://cloud.tencent.com/tvp/138">TVP</a>. He is a Chatbot Architect and speaks regularly at technical conferences around the world. Find out more about his experiences at <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/zixia/">https://www.linkedin.com/in/zixia/</a></p>
+            <div class="detail-divider" aria-hidden="true">---</div>
+
+            <!-- GitHub Profile README：客户端拉取 <login>/<login> 仓库 README，失败整体隐藏 -->
+            <div class="detail-term detail-readme" id="detailReadme" data-login="huan" hidden>
+                <div class="detail-term-bar">
+                    <span class="detail-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="detail-term-title">~/profile/README.md</span>
+                </div>
+                <div class="detail-term-body">
+                    <div class="detail-term-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> cat ~/profile/README.md</div>
+                    <pre class="detail-readme-pre" id="detailReadmeContent"></pre>
+                    <div class="detail-readme-src">
+                        <span class="detail-term-out" aria-hidden="true">&gt;</span>
+                        <span data-i18n-zh="来源" data-i18n-en="source">来源</span>
+                        <span class="detail-term-sep" aria-hidden="true">::</span>
+                        <a href="https://github.com/huan/huan" target="_blank" rel="noopener">github.com/huan/huan</a>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="contribute">
+                
+                    <p>Huan is a serial entrepreneur, <a target="_blank" rel="noopener" href="http://pre-angel.com/peoples/zhuohuan-li/">active angel investor</a> with strong technology background. He is a widely recognized technical leader on conversational AI and open source cloud architectures. Huan is a <a target="_blank" rel="noopener" href="https://stars.github.com/profiles/huan/">GitHub Star</a>, co-authored guide books <a target="_blank" rel="noopener" href="https://item.jd.com/12630213.html">“Chatbot 0 to 1”</a> and <a target="_blank" rel="noopener" href="https://item.jd.com/12980534.html">“Concise Handbook of TensorFlow 2”</a> and has been recognized by Microsoft, Google, and Tencent as <a target="_blank" rel="noopener" href="https://mvp.microsoft.com/en-us/PublicProfile/5003061">MVP</a>, <a target="_blank" rel="noopener" href="https://developers.google.com/community/experts/directory/profile/profile-huan-li">GDE</a>, and <a target="_blank" rel="noopener" href="https://cloud.tencent.com/tvp/138">TVP</a>. He is a Chatbot Architect and speaks regularly at technical conferences around the world. Find out more about his experiences at <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/zixia/">https://www.linkedin.com/in/zixia/</a></p>
 <p><a target="_blank" rel="noopener" href="https://wechaty.js.org/"><img src="https://wechaty.js.org/img/wechaty-logo.svg" alt="Wechaty"></a></p>
 
 <center>
@@ -308,16 +358,6 @@
 </ul>
 
                 
-<h4 data-i18n-zh="开发活动" data-i18n-en="Developer Activity">开发活动</h4>
-<iframe width="100%" height="500" src="https://osgraph.com/graphs/developer-activity/github/huan?user-limit=10" title="" frameborder="0"></iframe>
-
-<h4 data-i18n-zh="开源伙伴" data-i18n-en="Open Source Partners">开源伙伴</h4>
-<iframe width="100%" height="500" src="https://osgraph.com/graphs/os-partner/github/huan?user-limit=10" title="" frameborder="0"></iframe>
-
-<h4 data-i18n-zh="开源兴趣" data-i18n-en="Open Source Interests">开源兴趣</h4>
-<iframe width="100%" height="500" src="https://osgraph.com/graphs/os-interest/github/huan?repo-limit=5&topic-limit=3" title="" frameborder="0"></iframe>
-
-
             </div>
         </div>
     </div>

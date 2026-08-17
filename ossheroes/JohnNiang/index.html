@@ -61,6 +61,9 @@
     
 <script src="/ossheroes/js/i18n.js"></script>
 
+    
+<script src="/ossheroes/js/detail-readme.js"></script>
+
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 
@@ -127,8 +130,22 @@
  </nav>
 
 </div>
+
+<!-- 终端风页面头部：纯 HTML/CSS 装饰（grid 背景 + 辉光 + 扫描线），零图片素材 -->
+<div class="detail-hero">
+    <div class="detail-hero-scan" aria-hidden="true"></div>
+    <div class="detail-hero-inner container">
+        <div class="detail-hero-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> ./whois JohnNiang</div>
+        <div class="detail-hero-title" aria-hidden="true">&gt; DEVELOPER PROFILE<span class="detail-hero-cursor"></span></div>
+        <div class="detail-hero-meta">
+            <span class="hero-dot" aria-hidden="true"><span class="hero-dot-ping"></span><span class="hero-dot-core"></span></span>
+            <span data-i18n-zh="码力榜开发者档案" data-i18n-en="HeroRank Developer Profile">码力榜开发者档案</span>
+        </div>
+    </div>
+</div>
+
 <!-- 详情 -->
-<div class="container pt-5 detail-content">
+<div class="container detail-content">
     <div class="row justify-content-center">
         <div class="col-sm-12 col-md-8">
             <!-- 终端风 profile 卡片：$ ./whois <login> -->
@@ -180,34 +197,169 @@
                             
                         </div>
                     </div>
+                    <!-- osgraph 嵌入已失效（对方证书过期），改为外链访问 -->
+                    <div class="detail-term-graphs">
+                        <span class="detail-term-prompt" aria-hidden="true">$</span>
+                        <span class="detail-graphs-cmd">open ./graphs</span>
+                        <span class="detail-graphs-arrow" aria-hidden="true">-&gt;</span>
+                        <span class="detail-graphs-links">
+                            <a class="detail-graph-link" href="https://osgraph.com/graphs/developer-activity/github/JohnNiang?user-limit=10" target="_blank" rel="noopener" data-i18n-zh="开发活动" data-i18n-en="Developer Activity">开发活动</a>
+                            <a class="detail-graph-link" href="https://osgraph.com/graphs/os-partner/github/JohnNiang?user-limit=10" target="_blank" rel="noopener" data-i18n-zh="开源伙伴" data-i18n-en="Open Source Partners">开源伙伴</a>
+                            <a class="detail-graph-link" href="https://osgraph.com/graphs/os-interest/github/JohnNiang?repo-limit=5&amp;topic-limit=3" target="_blank" rel="noopener" data-i18n-zh="开源兴趣" data-i18n-en="Open Source Interests">开源兴趣</a>
+                        </span>
+                    </div>
                 </div>
             </div>
 
-            <div class="contribute mt-4 mt-sm-1">
-                <h3 id="主要贡献项目"><a href="#主要贡献项目" class="headerlink" title="主要贡献项目"></a>主要贡献项目</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/kubesphere/ks-devops">https://github.com/kubesphere/ks-devops</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/halo-dev/halo">https://github.com/halo-dev/halo</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/kubesphere/ks-installer">https://github.com/kubesphere/ks-installer</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/kubesphere/console">https://github.com/kubesphere/console</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/kubesphere/kubesphere">https://github.com/kubesphere/kubesphere</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/kubesphere/website">https://github.com/kubesphere/website</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/kubesphere/devops-agent">https://github.com/kubesphere/devops-agent</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/jenkins-zh/jenkins-client">https://github.com/jenkins-zh/jenkins-client</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/kubesphere-sigs/ks">https://github.com/kubesphere-sigs/ks</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/kubesphere-sigs/ks-devops-helm-chart">https://github.com/kubesphere-sigs/ks-devops-helm-chart</a></li>
-</ul>
+            <div class="detail-divider" aria-hidden="true">---</div>
 
+            <!-- GitHub Profile README：客户端拉取 <login>/<login> 仓库 README，失败整体隐藏 -->
+            <div class="detail-term detail-readme" id="detailReadme" data-login="JohnNiang" hidden>
+                <div class="detail-term-bar">
+                    <span class="detail-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="detail-term-title">~/profile/README.md</span>
+                </div>
+                <div class="detail-term-body">
+                    <div class="detail-term-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> cat ~/profile/README.md</div>
+                    <pre class="detail-readme-pre" id="detailReadmeContent"></pre>
+                    <div class="detail-readme-src">
+                        <span class="detail-term-out" aria-hidden="true">&gt;</span>
+                        <span data-i18n-zh="来源" data-i18n-en="source">来源</span>
+                        <span class="detail-term-sep" aria-hidden="true">::</span>
+                        <a href="https://github.com/JohnNiang/JohnNiang" target="_blank" rel="noopener">github.com/JohnNiang/JohnNiang</a>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="contribute">
                 
-<h4 data-i18n-zh="开发活动" data-i18n-en="Developer Activity">开发活动</h4>
-<iframe width="100%" height="500" src="https://osgraph.com/graphs/developer-activity/github/JohnNiang?user-limit=10" title="" frameborder="0"></iframe>
-
-<h4 data-i18n-zh="开源伙伴" data-i18n-en="Open Source Partners">开源伙伴</h4>
-<iframe width="100%" height="500" src="https://osgraph.com/graphs/os-partner/github/JohnNiang?user-limit=10" title="" frameborder="0"></iframe>
-
-<h4 data-i18n-zh="开源兴趣" data-i18n-en="Open Source Interests">开源兴趣</h4>
-<iframe width="100%" height="500" src="https://osgraph.com/graphs/os-interest/github/JohnNiang?repo-limit=5&topic-limit=3" title="" frameborder="0"></iframe>
-
-
+                    
+                    <h2 class="detail-section-title" data-i18n-zh="主要贡献项目" data-i18n-en="Top Contributions">主要贡献项目</h2>
+                    <div class="detail-term detail-repos">
+                        <div class="detail-term-bar">
+                            <span class="detail-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                            <span class="detail-term-title">~/contributions</span>
+                            <span class="detail-repos-count">10 <span data-i18n-zh="个仓库" data-i18n-en="repos">个仓库</span></span>
+                        </div>
+                        <div class="detail-term-body">
+                            <div class="detail-term-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> ls -la ~/contributions</div>
+                            <ul class="detail-repos-list">
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/kubesphere/ks-devops" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">kubesphere/ks-devops</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/halo-dev/halo" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">halo-dev/halo</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/kubesphere/ks-installer" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">kubesphere/ks-installer</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/kubesphere/console" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">kubesphere/console</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/kubesphere/kubesphere" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">kubesphere/kubesphere</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/kubesphere/website" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">kubesphere/website</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/kubesphere/devops-agent" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">kubesphere/devops-agent</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/jenkins-zh/jenkins-client" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">jenkins-zh/jenkins-client</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/kubesphere-sigs/ks" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">kubesphere-sigs/ks</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/kubesphere-sigs/ks-devops-helm-chart" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">kubesphere-sigs/ks-devops-helm-chart</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                
             </div>
         </div>
     </div>

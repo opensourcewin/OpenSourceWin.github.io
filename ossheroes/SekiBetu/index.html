@@ -61,6 +61,9 @@
     
 <script src="/ossheroes/js/i18n.js"></script>
 
+    
+<script src="/ossheroes/js/detail-readme.js"></script>
+
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 
@@ -127,8 +130,22 @@
  </nav>
 
 </div>
+
+<!-- 终端风页面头部：纯 HTML/CSS 装饰（grid 背景 + 辉光 + 扫描线），零图片素材 -->
+<div class="detail-hero">
+    <div class="detail-hero-scan" aria-hidden="true"></div>
+    <div class="detail-hero-inner container">
+        <div class="detail-hero-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> ./whois SekiBetu</div>
+        <div class="detail-hero-title" aria-hidden="true">&gt; DEVELOPER PROFILE<span class="detail-hero-cursor"></span></div>
+        <div class="detail-hero-meta">
+            <span class="hero-dot" aria-hidden="true"><span class="hero-dot-ping"></span><span class="hero-dot-core"></span></span>
+            <span data-i18n-zh="码力榜开发者档案" data-i18n-en="HeroRank Developer Profile">码力榜开发者档案</span>
+        </div>
+    </div>
+</div>
+
 <!-- 详情 -->
-<div class="container pt-5 detail-content">
+<div class="container detail-content">
     <div class="row justify-content-center">
         <div class="col-sm-12 col-md-8">
             <!-- 终端风 profile 卡片：$ ./whois <login> -->
@@ -176,34 +193,169 @@
                             
                         </div>
                     </div>
+                    <!-- osgraph 嵌入已失效（对方证书过期），改为外链访问 -->
+                    <div class="detail-term-graphs">
+                        <span class="detail-term-prompt" aria-hidden="true">$</span>
+                        <span class="detail-graphs-cmd">open ./graphs</span>
+                        <span class="detail-graphs-arrow" aria-hidden="true">-&gt;</span>
+                        <span class="detail-graphs-links">
+                            <a class="detail-graph-link" href="https://osgraph.com/graphs/developer-activity/github/SekiBetu?user-limit=10" target="_blank" rel="noopener" data-i18n-zh="开发活动" data-i18n-en="Developer Activity">开发活动</a>
+                            <a class="detail-graph-link" href="https://osgraph.com/graphs/os-partner/github/SekiBetu?user-limit=10" target="_blank" rel="noopener" data-i18n-zh="开源伙伴" data-i18n-en="Open Source Partners">开源伙伴</a>
+                            <a class="detail-graph-link" href="https://osgraph.com/graphs/os-interest/github/SekiBetu?repo-limit=5&amp;topic-limit=3" target="_blank" rel="noopener" data-i18n-zh="开源兴趣" data-i18n-en="Open Source Interests">开源兴趣</a>
+                        </span>
+                    </div>
                 </div>
             </div>
 
-            <div class="contribute mt-4 mt-sm-1">
-                <h3 id="主要贡献项目"><a href="#主要贡献项目" class="headerlink" title="主要贡献项目"></a>主要贡献项目</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/lovezzzxxx/liverecord">https://github.com/lovezzzxxx/liverecord</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/521xueweihan/HelloGitHub">https://github.com/521xueweihan/HelloGitHub</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/XTLS/Xray-core">https://github.com/XTLS/Xray-core</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/2dust/v2rayN">https://github.com/2dust/v2rayN</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/lkeme/BiliHelper-personal">https://github.com/lkeme/BiliHelper-personal</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/Colter23/bilibili-dynamic-mirai-plugin">https://github.com/Colter23/bilibili-dynamic-mirai-plugin</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/the1812/Bilibili-Evolved">https://github.com/the1812/Bilibili-Evolved</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/AlexSterk/TwitchDropGrabber">https://github.com/AlexSterk/TwitchDropGrabber</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/cssxsh/bilibili-helper">https://github.com/cssxsh/bilibili-helper</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/Qv2ray/qv2ray.github.io">https://github.com/Qv2ray/qv2ray.github.io</a></li>
-</ul>
+            <div class="detail-divider" aria-hidden="true">---</div>
 
+            <!-- GitHub Profile README：客户端拉取 <login>/<login> 仓库 README，失败整体隐藏 -->
+            <div class="detail-term detail-readme" id="detailReadme" data-login="SekiBetu" hidden>
+                <div class="detail-term-bar">
+                    <span class="detail-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="detail-term-title">~/profile/README.md</span>
+                </div>
+                <div class="detail-term-body">
+                    <div class="detail-term-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> cat ~/profile/README.md</div>
+                    <pre class="detail-readme-pre" id="detailReadmeContent"></pre>
+                    <div class="detail-readme-src">
+                        <span class="detail-term-out" aria-hidden="true">&gt;</span>
+                        <span data-i18n-zh="来源" data-i18n-en="source">来源</span>
+                        <span class="detail-term-sep" aria-hidden="true">::</span>
+                        <a href="https://github.com/SekiBetu/SekiBetu" target="_blank" rel="noopener">github.com/SekiBetu/SekiBetu</a>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="contribute">
                 
-<h4 data-i18n-zh="开发活动" data-i18n-en="Developer Activity">开发活动</h4>
-<iframe width="100%" height="500" src="https://osgraph.com/graphs/developer-activity/github/SekiBetu?user-limit=10" title="" frameborder="0"></iframe>
-
-<h4 data-i18n-zh="开源伙伴" data-i18n-en="Open Source Partners">开源伙伴</h4>
-<iframe width="100%" height="500" src="https://osgraph.com/graphs/os-partner/github/SekiBetu?user-limit=10" title="" frameborder="0"></iframe>
-
-<h4 data-i18n-zh="开源兴趣" data-i18n-en="Open Source Interests">开源兴趣</h4>
-<iframe width="100%" height="500" src="https://osgraph.com/graphs/os-interest/github/SekiBetu?repo-limit=5&topic-limit=3" title="" frameborder="0"></iframe>
-
-
+                    
+                    <h2 class="detail-section-title" data-i18n-zh="主要贡献项目" data-i18n-en="Top Contributions">主要贡献项目</h2>
+                    <div class="detail-term detail-repos">
+                        <div class="detail-term-bar">
+                            <span class="detail-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                            <span class="detail-term-title">~/contributions</span>
+                            <span class="detail-repos-count">10 <span data-i18n-zh="个仓库" data-i18n-en="repos">个仓库</span></span>
+                        </div>
+                        <div class="detail-term-body">
+                            <div class="detail-term-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> ls -la ~/contributions</div>
+                            <ul class="detail-repos-list">
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/lovezzzxxx/liverecord" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">lovezzzxxx/liverecord</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/521xueweihan/HelloGitHub" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">521xueweihan/HelloGitHub</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/XTLS/Xray-core" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">XTLS/Xray-core</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/2dust/v2rayN" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">2dust/v2rayN</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/lkeme/BiliHelper-personal" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">lkeme/BiliHelper-personal</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/Colter23/bilibili-dynamic-mirai-plugin" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">Colter23/bilibili-dynamic-mirai-plugin</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/the1812/Bilibili-Evolved" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">the1812/Bilibili-Evolved</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/AlexSterk/TwitchDropGrabber" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">AlexSterk/TwitchDropGrabber</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/cssxsh/bilibili-helper" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">cssxsh/bilibili-helper</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/Qv2ray/qv2ray.github.io" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">Qv2ray/qv2ray.github.io</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                
             </div>
         </div>
     </div>

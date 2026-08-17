@@ -61,6 +61,9 @@
     
 <script src="/ossheroes/js/i18n.js"></script>
 
+    
+<script src="/ossheroes/js/detail-readme.js"></script>
+
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 
@@ -127,8 +130,22 @@
  </nav>
 
 </div>
+
+<!-- 终端风页面头部：纯 HTML/CSS 装饰（grid 背景 + 辉光 + 扫描线），零图片素材 -->
+<div class="detail-hero">
+    <div class="detail-hero-scan" aria-hidden="true"></div>
+    <div class="detail-hero-inner container">
+        <div class="detail-hero-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> ./whois pahud</div>
+        <div class="detail-hero-title" aria-hidden="true">&gt; DEVELOPER PROFILE<span class="detail-hero-cursor"></span></div>
+        <div class="detail-hero-meta">
+            <span class="hero-dot" aria-hidden="true"><span class="hero-dot-ping"></span><span class="hero-dot-core"></span></span>
+            <span data-i18n-zh="码力榜开发者档案" data-i18n-en="HeroRank Developer Profile">码力榜开发者档案</span>
+        </div>
+    </div>
+</div>
+
 <!-- 详情 -->
-<div class="container pt-5 detail-content">
+<div class="container detail-content">
     <div class="row justify-content-center">
         <div class="col-sm-12 col-md-8">
             <!-- 终端风 profile 卡片：$ ./whois <login> -->
@@ -180,34 +197,169 @@
                             
                         </div>
                     </div>
+                    <!-- osgraph 嵌入已失效（对方证书过期），改为外链访问 -->
+                    <div class="detail-term-graphs">
+                        <span class="detail-term-prompt" aria-hidden="true">$</span>
+                        <span class="detail-graphs-cmd">open ./graphs</span>
+                        <span class="detail-graphs-arrow" aria-hidden="true">-&gt;</span>
+                        <span class="detail-graphs-links">
+                            <a class="detail-graph-link" href="https://osgraph.com/graphs/developer-activity/github/pahud?user-limit=10" target="_blank" rel="noopener" data-i18n-zh="开发活动" data-i18n-en="Developer Activity">开发活动</a>
+                            <a class="detail-graph-link" href="https://osgraph.com/graphs/os-partner/github/pahud?user-limit=10" target="_blank" rel="noopener" data-i18n-zh="开源伙伴" data-i18n-en="Open Source Partners">开源伙伴</a>
+                            <a class="detail-graph-link" href="https://osgraph.com/graphs/os-interest/github/pahud?repo-limit=5&amp;topic-limit=3" target="_blank" rel="noopener" data-i18n-zh="开源兴趣" data-i18n-en="Open Source Interests">开源兴趣</a>
+                        </span>
+                    </div>
                 </div>
             </div>
 
-            <div class="contribute mt-4 mt-sm-1">
-                <h3 id="主要贡献项目"><a href="#主要贡献项目" class="headerlink" title="主要贡献项目"></a>主要贡献项目</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/aws-samples/cdk-serverless-lamp">https://github.com/aws-samples/cdk-serverless-lamp</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/pahud/eks-cdk8s-refarch">https://github.com/pahud/eks-cdk8s-refarch</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/pahud/cdk-spot-one">https://github.com/pahud/cdk-spot-one</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/pahud/cdk-kubesphere">https://github.com/pahud/cdk-kubesphere</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/pahud/cdk-gitlab">https://github.com/pahud/cdk-gitlab</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/pahud/cdk-eks-spotblocks">https://github.com/pahud/cdk-eks-spotblocks</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/pahud/fargate-global">https://github.com/pahud/fargate-global</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/pahud/cdk-lambda-bash">https://github.com/pahud/cdk-lambda-bash</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/pahud/cdk-apisix">https://github.com/pahud/cdk-apisix</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/pahud/cdk-cloudfront-plus">https://github.com/pahud/cdk-cloudfront-plus</a></li>
-</ul>
+            <div class="detail-divider" aria-hidden="true">---</div>
 
+            <!-- GitHub Profile README：客户端拉取 <login>/<login> 仓库 README，失败整体隐藏 -->
+            <div class="detail-term detail-readme" id="detailReadme" data-login="pahud" hidden>
+                <div class="detail-term-bar">
+                    <span class="detail-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="detail-term-title">~/profile/README.md</span>
+                </div>
+                <div class="detail-term-body">
+                    <div class="detail-term-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> cat ~/profile/README.md</div>
+                    <pre class="detail-readme-pre" id="detailReadmeContent"></pre>
+                    <div class="detail-readme-src">
+                        <span class="detail-term-out" aria-hidden="true">&gt;</span>
+                        <span data-i18n-zh="来源" data-i18n-en="source">来源</span>
+                        <span class="detail-term-sep" aria-hidden="true">::</span>
+                        <a href="https://github.com/pahud/pahud" target="_blank" rel="noopener">github.com/pahud/pahud</a>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="contribute">
                 
-<h4 data-i18n-zh="开发活动" data-i18n-en="Developer Activity">开发活动</h4>
-<iframe width="100%" height="500" src="https://osgraph.com/graphs/developer-activity/github/pahud?user-limit=10" title="" frameborder="0"></iframe>
-
-<h4 data-i18n-zh="开源伙伴" data-i18n-en="Open Source Partners">开源伙伴</h4>
-<iframe width="100%" height="500" src="https://osgraph.com/graphs/os-partner/github/pahud?user-limit=10" title="" frameborder="0"></iframe>
-
-<h4 data-i18n-zh="开源兴趣" data-i18n-en="Open Source Interests">开源兴趣</h4>
-<iframe width="100%" height="500" src="https://osgraph.com/graphs/os-interest/github/pahud?repo-limit=5&topic-limit=3" title="" frameborder="0"></iframe>
-
-
+                    
+                    <h2 class="detail-section-title" data-i18n-zh="主要贡献项目" data-i18n-en="Top Contributions">主要贡献项目</h2>
+                    <div class="detail-term detail-repos">
+                        <div class="detail-term-bar">
+                            <span class="detail-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                            <span class="detail-term-title">~/contributions</span>
+                            <span class="detail-repos-count">10 <span data-i18n-zh="个仓库" data-i18n-en="repos">个仓库</span></span>
+                        </div>
+                        <div class="detail-term-body">
+                            <div class="detail-term-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> ls -la ~/contributions</div>
+                            <ul class="detail-repos-list">
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/aws-samples/cdk-serverless-lamp" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">aws-samples/cdk-serverless-lamp</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/pahud/eks-cdk8s-refarch" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">pahud/eks-cdk8s-refarch</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/pahud/cdk-spot-one" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">pahud/cdk-spot-one</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/pahud/cdk-kubesphere" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">pahud/cdk-kubesphere</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/pahud/cdk-gitlab" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">pahud/cdk-gitlab</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/pahud/cdk-eks-spotblocks" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">pahud/cdk-eks-spotblocks</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/pahud/fargate-global" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">pahud/fargate-global</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/pahud/cdk-lambda-bash" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">pahud/cdk-lambda-bash</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/pahud/cdk-apisix" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">pahud/cdk-apisix</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/pahud/cdk-cloudfront-plus" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">pahud/cdk-cloudfront-plus</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                
             </div>
         </div>
     </div>

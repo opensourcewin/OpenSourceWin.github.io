@@ -61,6 +61,9 @@
     
 <script src="/ossheroes/js/i18n.js"></script>
 
+    
+<script src="/ossheroes/js/detail-readme.js"></script>
+
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 
@@ -127,8 +130,22 @@
  </nav>
 
 </div>
+
+<!-- 终端风页面头部：纯 HTML/CSS 装饰（grid 背景 + 辉光 + 扫描线），零图片素材 -->
+<div class="detail-hero">
+    <div class="detail-hero-scan" aria-hidden="true"></div>
+    <div class="detail-hero-inner container">
+        <div class="detail-hero-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> ./whois guqing</div>
+        <div class="detail-hero-title" aria-hidden="true">&gt; DEVELOPER PROFILE<span class="detail-hero-cursor"></span></div>
+        <div class="detail-hero-meta">
+            <span class="hero-dot" aria-hidden="true"><span class="hero-dot-ping"></span><span class="hero-dot-core"></span></span>
+            <span data-i18n-zh="码力榜开发者档案" data-i18n-en="HeroRank Developer Profile">码力榜开发者档案</span>
+        </div>
+    </div>
+</div>
+
 <!-- 详情 -->
-<div class="container pt-5 detail-content">
+<div class="container detail-content">
     <div class="row justify-content-center">
         <div class="col-sm-12 col-md-8">
             <!-- 终端风 profile 卡片：$ ./whois <login> -->
@@ -168,36 +185,180 @@
                             
                         </div>
                     </div>
+                    <!-- osgraph 嵌入已失效（对方证书过期），改为外链访问 -->
+                    <div class="detail-term-graphs">
+                        <span class="detail-term-prompt" aria-hidden="true">$</span>
+                        <span class="detail-graphs-cmd">open ./graphs</span>
+                        <span class="detail-graphs-arrow" aria-hidden="true">-&gt;</span>
+                        <span class="detail-graphs-links">
+                            <a class="detail-graph-link" href="https://osgraph.com/graphs/developer-activity/github/guqing?user-limit=10" target="_blank" rel="noopener" data-i18n-zh="开发活动" data-i18n-en="Developer Activity">开发活动</a>
+                            <a class="detail-graph-link" href="https://osgraph.com/graphs/os-partner/github/guqing?user-limit=10" target="_blank" rel="noopener" data-i18n-zh="开源伙伴" data-i18n-en="Open Source Partners">开源伙伴</a>
+                            <a class="detail-graph-link" href="https://osgraph.com/graphs/os-interest/github/guqing?repo-limit=5&amp;topic-limit=3" target="_blank" rel="noopener" data-i18n-zh="开源兴趣" data-i18n-en="Open Source Interests">开源兴趣</a>
+                        </span>
+                    </div>
                 </div>
             </div>
 
-            <div class="contribute mt-4 mt-sm-1">
-                <p>guqing 是一位在开源领域非常活跃的开发者，他主要参与 Halo 开源项目的开发与维护。<br><a target="_blank" rel="noopener" href="https://github.com/halo-dev/halo">Halo</a> 是一个流行的开源建站框架，guqing 在该项目中扮演了关键角色，设计并开发了主题、插件、通知、索引、内容管理等核心功能模块，并负责新功能的开发、漏洞修复和性能优化。<br>他不仅专注于代码的质量和效率，还积极与社区成员互动，推动项目的持续发展。</p>
-<p>在他的开源旅程中，guqing 贡献了多个仓库，特别是在 Halo 项目的开发和维护上，此外，guqing 还积极参与了 <a target="_blank" rel="noopener" href="https://github.com/halo-sigs">Halo SIGs</a> 组织下的各类 Halo 生态系统项目的维护。<br>这些贡献帮助了许多开发者更好地使用和扩展 Halo 平台。<br>此外，他还热衷于分享自己的经验，鼓励更多人参与开源项目，通过他的努力，使更多人了解并参与开源文化。</p>
-<p>以下是他主要贡献的一些仓库：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/halo-dev/halo">https://github.com/halo-dev/halo</a> - 强大易用的开源建站框架，可以快速搭建一个博客、网站或者内容管理系统。具备可插拔架构、主题套用、富文本编辑器等多重特性，支持用户根据自己的喜好选择不同类型的插件及主题模板来定制化自己的站点功能及外观。让内容创作和发布更加便捷生动，截止 2024 年 6 月 Halo 已经在 Docker Hub 获得了超过  <strong>220 万</strong>  次下载，GitHub Star 数突破  <strong>32k</strong>，并拥有一百多名社区贡献者。</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/halo-sigs/halo-gradle-plugin">https://github.com/halo-sigs/halo-gradle-plugin</a> - 这是一个用于提升 Halo 插件开发体验的 Gradle 工具链，提供了插件运行、调试、代码生成等功能。</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/iluwatar/java-design-patterns">https://github.com/iluwatar/java-design-patterns</a> - 收集并展示了各种 Java 设计模式，旨在帮助开发人员学习和理解常见的设计模式，并提供具体的实现示例。</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/halo-sigs/plugin-moments">https://github.com/halo-sigs/plugin-moments</a> - 适用于 Halo 2.x 的瞬间插件，可以用来管理和发布杂记和心情。</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/halo-sigs/plugin-oauth2">https://github.com/halo-sigs/plugin-oauth2</a> - Halo 的 OAuth2 第三方登录插件。</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/halo-sigs/plugin-links">https://github.com/halo-sigs/plugin-links</a> - 一个 Halo 的链接管理插件，为网站提供友情链接管理和展示功能。</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/guqing/halo-theme-higan">https://github.com/guqing/halo-theme-higan</a> - 一款简洁而优雅的 Halo 博客主题。</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/halo-dev/plugin-sitemap">https://github.com/halo-dev/plugin-sitemap</a> - Halo 站点 Sitemap 生成插件，便于搜索引擎抓取网站数据，优化 SEO。</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/halo-dev/docs">https://github.com/halo-dev/docs</a> - Halo 的官方文档项目，提供用户使用文档以及主题、插件的开发文档。</li>
-</ul>
+            <div class="detail-divider" aria-hidden="true">---</div>
 
+            <!-- GitHub Profile README：客户端拉取 <login>/<login> 仓库 README，失败整体隐藏 -->
+            <div class="detail-term detail-readme" id="detailReadme" data-login="guqing" hidden>
+                <div class="detail-term-bar">
+                    <span class="detail-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="detail-term-title">~/profile/README.md</span>
+                </div>
+                <div class="detail-term-body">
+                    <div class="detail-term-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> cat ~/profile/README.md</div>
+                    <pre class="detail-readme-pre" id="detailReadmeContent"></pre>
+                    <div class="detail-readme-src">
+                        <span class="detail-term-out" aria-hidden="true">&gt;</span>
+                        <span data-i18n-zh="来源" data-i18n-en="source">来源</span>
+                        <span class="detail-term-sep" aria-hidden="true">::</span>
+                        <a href="https://github.com/guqing/guqing" target="_blank" rel="noopener">github.com/guqing/guqing</a>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="contribute">
                 
-<h4 data-i18n-zh="开发活动" data-i18n-en="Developer Activity">开发活动</h4>
-<iframe width="100%" height="500" src="https://osgraph.com/graphs/developer-activity/github/guqing?user-limit=10" title="" frameborder="0"></iframe>
-
-<h4 data-i18n-zh="开源伙伴" data-i18n-en="Open Source Partners">开源伙伴</h4>
-<iframe width="100%" height="500" src="https://osgraph.com/graphs/os-partner/github/guqing?user-limit=10" title="" frameborder="0"></iframe>
-
-<h4 data-i18n-zh="开源兴趣" data-i18n-en="Open Source Interests">开源兴趣</h4>
-<iframe width="100%" height="500" src="https://osgraph.com/graphs/os-interest/github/guqing?repo-limit=5&topic-limit=3" title="" frameborder="0"></iframe>
-
-
+                    
+                        <div class="contribute-prose"><p>guqing 是一位在开源领域非常活跃的开发者，他主要参与 Halo 开源项目的开发与维护。<br><a target="_blank" rel="noopener" href="https://github.com/halo-dev/halo">Halo</a> 是一个流行的开源建站框架，guqing 在该项目中扮演了关键角色，设计并开发了主题、插件、通知、索引、内容管理等核心功能模块，并负责新功能的开发、漏洞修复和性能优化。<br>他不仅专注于代码的质量和效率，还积极与社区成员互动，推动项目的持续发展。</p>
+<p>在他的开源旅程中，guqing 贡献了多个仓库，特别是在 Halo 项目的开发和维护上，此外，guqing 还积极参与了 <a target="_blank" rel="noopener" href="https://github.com/halo-sigs">Halo SIGs</a> 组织下的各类 Halo 生态系统项目的维护。<br>这些贡献帮助了许多开发者更好地使用和扩展 Halo 平台。<br>此外，他还热衷于分享自己的经验，鼓励更多人参与开源项目，通过他的努力，使更多人了解并参与开源文化。</p>
+<p>以下是他主要贡献的一些仓库：</p></div>
+                    
+                    <h2 class="detail-section-title" data-i18n-zh="主要贡献项目" data-i18n-en="Top Contributions">主要贡献项目</h2>
+                    <div class="detail-term detail-repos">
+                        <div class="detail-term-bar">
+                            <span class="detail-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                            <span class="detail-term-title">~/contributions</span>
+                            <span class="detail-repos-count">9 <span data-i18n-zh="个仓库" data-i18n-en="repos">个仓库</span></span>
+                        </div>
+                        <div class="detail-term-body">
+                            <div class="detail-term-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> ls -la ~/contributions</div>
+                            <ul class="detail-repos-list">
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/halo-dev/halo" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">halo-dev/halo</span>
+                                                
+                                                    <span class="detail-repos-desc">强大易用的开源建站框架，可以快速搭建一个博客、网站或者内容管理系统。具备可插拔架构、主题套用、富文本编辑器等多重特性，支持用户根据自己的喜好选择不同类型的插件及主题模板来定制化自己的站点功能及外观。让内容创作和发布更加便捷生动，截止 202 …</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/halo-sigs/halo-gradle-plugin" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">halo-sigs/halo-gradle-plugin</span>
+                                                
+                                                    <span class="detail-repos-desc">这是一个用于提升 Halo 插件开发体验的 Gradle 工具链，提供了插件运行、调试、代码生成等功能。</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/iluwatar/java-design-patterns" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">iluwatar/java-design-patterns</span>
+                                                
+                                                    <span class="detail-repos-desc">收集并展示了各种 Java 设计模式，旨在帮助开发人员学习和理解常见的设计模式，并提供具体的实现示例。</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/halo-sigs/plugin-moments" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">halo-sigs/plugin-moments</span>
+                                                
+                                                    <span class="detail-repos-desc">适用于 Halo 2.x 的瞬间插件，可以用来管理和发布杂记和心情。</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/halo-sigs/plugin-oauth2" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">halo-sigs/plugin-oauth2</span>
+                                                
+                                                    <span class="detail-repos-desc">Halo 的 OAuth2 第三方登录插件。</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/halo-sigs/plugin-links" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">halo-sigs/plugin-links</span>
+                                                
+                                                    <span class="detail-repos-desc">一个 Halo 的链接管理插件，为网站提供友情链接管理和展示功能。</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/guqing/halo-theme-higan" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">guqing/halo-theme-higan</span>
+                                                
+                                                    <span class="detail-repos-desc">一款简洁而优雅的 Halo 博客主题。</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/halo-dev/plugin-sitemap" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">halo-dev/plugin-sitemap</span>
+                                                
+                                                    <span class="detail-repos-desc">Halo 站点 Sitemap 生成插件，便于搜索引擎抓取网站数据，优化 SEO。</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="detail-repos-row">
+                                        <a href="https://github.com/halo-dev/docs" target="_blank" rel="noopener">
+                                            <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                                            <span class="detail-repos-main">
+                                                <span class="detail-repos-name">halo-dev/docs</span>
+                                                
+                                                    <span class="detail-repos-desc">Halo 的官方文档项目，提供用户使用文档以及主题、插件的开发文档。</span>
+                                                
+                                            </span>
+                                            <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                                        </a>
+                                    </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                
             </div>
         </div>
     </div>

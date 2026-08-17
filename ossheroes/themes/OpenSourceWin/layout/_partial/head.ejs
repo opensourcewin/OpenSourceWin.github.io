@@ -89,5 +89,10 @@
     <%- favicon_tag('img/favicon.ico') %>
     <%- css('css/index.v1.css') %>
     <%- js('js/i18n.js') %>
+    <%# 开发者详情页（page.ejs 且无 data_year）才渲染 README 模块：marked 与 DOMPurify 必须先于 detail-readme.js 加载 %>
+    <% if (is_page() && !page.data_year) { %>
+        <%- js('js/vendor/marked.min.js') %>
+        <%- js('js/vendor/purify.min.js') %>
+    <% } %>
     <%- js('js/detail-readme.js') %>
 </head>

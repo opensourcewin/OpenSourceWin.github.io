@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { manifestoContent } from '../data/manifesto';
 
 type Language = 'en' | 'zh';
 
@@ -28,6 +29,20 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
+
+    const { pageTitle, pageDescription } = manifestoContent.meta;
+    document.title = pageTitle[language];
+    const metaSelectors: Array<[string, string]> = [
+      ['meta[name="description"]', pageDescription[language]],
+      ['meta[property="og:title"]', pageTitle[language]],
+      ['meta[property="og:description"]', pageDescription[language]],
+      ['meta[name="twitter:title"]', pageTitle[language]],
+      ['meta[name="twitter:description"]', pageDescription[language]],
+    ];
+    for (const [selector, content] of metaSelectors) {
+      document.querySelector(selector)?.setAttribute('content', content);
+    }
+
     try {
       localStorage.setItem(STORAGE_KEY, language);
     } catch {

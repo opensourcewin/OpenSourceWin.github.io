@@ -3,6 +3,14 @@
 
 export const manifestoContent = {
   meta: {
+    pageTitle: {
+      en: "OpenSource.Win — For Our Shared Future",
+      zh: "OpenSource.Win 宣言 — 致我们共同的未来",
+    },
+    pageDescription: {
+      en: "The OpenSource.Win Manifesto: Believing in Openness to Build a Co-Evolving Human-AI Civilization. Open Source Will Win the Future.",
+      zh: "OpenSource.Win 宣言：相信开放的力量，构建人机共进的文明。开源必胜。",
+    },
     author: {
       en: "Sunny Gao",
       zh: "Sunny Gao (高阳)",

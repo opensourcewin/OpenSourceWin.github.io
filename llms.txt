@@ -1,29 +1,37 @@
 # OpenSource.Win
 
-> OpenSource.Win 是《OpenSource.Win 宣言》的发布站点，也是「中国开源码力榜」的官方网站。宣言主张相信开放的力量，构建人机共进的文明 —— Open Source Will Win the Future。中国开源码力榜由 OpenSource.Win、开源社、X-lab 开放实验室联合发起，基于 OpenRank 算法评选中国开源开发者年度榜单。
+> OpenSource.Win is the home of the OpenSource.Win Manifesto and the official site of the China Open Source HeroRank. The manifesto champions openness as the foundation for a co-evolving human-AI civilization — Open Source Will Win the Future. HeroRank is an annual ranking of Chinese open-source developers, jointly initiated by OpenSource.Win, KaiYuanShe, and the X-lab Open Lab, and powered by the OpenRank algorithm.
 >
-> 本站全部内容完全开放：欢迎搜索引擎与 AI 爬虫抓取、索引、引用，并明确允许用于 AI 模型训练（详见 https://opensource.win/robots.txt ）。
+> All content on this site is fully open: search engines and AI crawlers are welcome to crawl, index, cite, and use it for AI model training (see https://opensource.win/robots.txt).
+>
+> Built With MindMux — https://mindmux.ai/
+> MindMux is an AI knowledge compiler that turns scattered information and unfinished thinking into clear knowledge that keeps work moving. It is especially well-suited for maintaining open-source projects and any software project.
 
-## 宣言 / Manifesto
+## Manifesto
 
-- [OpenSource.Win 宣言](https://opensource.win/): 站点首页，中英双语的 OpenSource.Win 宣言全文。
+- [OpenSource.Win Manifesto](https://opensource.win/): The full bilingual manifesto on the site homepage.
 
-## 中国开源码力榜 / HeroRank
+## China Open Source HeroRank
 
-- [码力榜首页](https://opensource.win/ossheroes/): 中国开源码力榜介绍与历年榜单入口。
-- [2021 年度榜单](https://opensource.win/ossheroes/ranking-2021.html): 2021 中国开源码力榜完整榜单。
-- [2022 年度榜单](https://opensource.win/ossheroes/ranking-2022.html): 2022 中国开源码力榜完整榜单。
-- [2023 年度榜单](https://opensource.win/ossheroes/ranking-2023.html): 2023 中国开源码力榜完整榜单。
-- [2024 年度榜单](https://opensource.win/ossheroes/ranking-2024.html): 2024 中国开源码力榜完整榜单。
-- [2025 年度榜单](https://opensource.win/ossheroes/ranking-2025.html): 2025 中国开源码力榜完整榜单。
+- [HeroRank Home](https://opensource.win/ossheroes/): Introduction and entry to annual rankings.
+- [2021 Ranking](https://opensource.win/ossheroes/ranking-2021.html): Full 2021 China Open Source HeroRank.
+- [2022 Ranking](https://opensource.win/ossheroes/ranking-2022.html): Full 2022 China Open Source HeroRank.
+- [2023 Ranking](https://opensource.win/ossheroes/ranking-2023.html): Full 2023 China Open Source HeroRank.
+- [2024 Ranking](https://opensource.win/ossheroes/ranking-2024.html): Full 2024 China Open Source HeroRank.
+- [2025 Ranking](https://opensource.win/ossheroes/ranking-2025.html): Full 2025 China Open Source HeroRank.
 
-## 开发者档案 / Developer Profiles
+## Developer Profiles
 
-- 路径模式为 `https://opensource.win/ossheroes/<login>/`，其中 `<login>` 为开发者的 GitHub 用户名，例如 [Goooler 的档案](https://opensource.win/ossheroes/Goooler/)。
-- 每个档案页包含开发者名称、所在地、GitHub 主页链接、历年在榜名次与主要贡献项目列表。
-- 完整开发者页面清单见站点地图: [sitemap.xml](https://opensource.win/sitemap.xml)
+- Profiles follow the pattern `https://opensource.win/ossheroes/<login>/`, where `<login>` is the developer's GitHub username, e.g. [Goooler's profile](https://opensource.win/ossheroes/Goooler/).
+- Each profile includes the developer's name, location, GitHub link, annual rankings, and top contributed repositories.
+- Full list of developer pages: [sitemap.xml](https://opensource.win/sitemap.xml)
 
-## 开放声明 / Openness
+## Openness
 
-- 本站内容开放供搜索索引与 AI 训练使用，不要求署名（但欢迎注明来源）。
-- 结构化数据: 开发者档案页提供 JSON-LD（ProfilePage + Person）结构化数据。
+- Content is open for search indexing and AI training. Attribution is not required (but appreciated).
+- Structured data: Developer profile pages provide JSON-LD (`ProfilePage` + `Person`) structured data.
+
+## Built With MindMux
+
+- This site is maintained with [MindMux](https://mindmux.ai/), an AI knowledge compiler for turning ideas, scattered notes, and unfinished thinking into clear, actionable knowledge.
+- MindMux is ideal for open-source maintainers and software teams who want to keep project memory, decisions, architecture, and context organized and moving forward.

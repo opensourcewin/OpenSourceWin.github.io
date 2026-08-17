@@ -68,7 +68,7 @@
 
     <!-- Main Content -->
     
-  <!-- 头部 -->
+  <!-- 头部（banner 大图已移除，图片文件仍保留在 source/img/） -->
 <div class="header header-detail">
     <!-- 导航 -->
 <nav class="navbar navbar-expand-lg navbar-dark" id="navWrap">
@@ -126,51 +126,61 @@
 
  </nav>
 
-    <!-- 头部内容 -->
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-8">
-                <img src="/ossheroes/img/banner-detail-new.png" class="home-head" alt="logo">
-            </div>
-        </div>
-    </div>
 </div>
 <!-- 详情 -->
 <div class="container pt-5 detail-content">
     <div class="row justify-content-center">
         <div class="col-sm-12 col-md-8">
-            <div class="d-flex flex-column flex-md-row  justify-content-between">
-                <div class="d-flex">
+            <!-- 终端风 profile 卡片：$ ./whois <login> -->
+            <div class="detail-term">
+                <div class="detail-term-bar">
+                    <span class="detail-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="detail-term-title">opensource@win: ~</span>
+                </div>
+                <div class="detail-term-body">
+                    <div class="detail-term-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> ./whois pacoxu</div>
                     
+                    <div class="detail-term-result">
+                        
 
-    <img src="https://avatars.githubusercontent.com/u/2010320?v=4" loading="lazy" alt="Paco Xu" class="rounded detail-avatar me-4">
+    <img src="https://avatars.githubusercontent.com/u/2010320?v=4" loading="lazy" alt="Paco Xu" class="rounded detail-avatar">
 
 
-                    <div>
-                        <div class="detail-nick">
-                            Paco Xu
+                        <div class="detail-term-info">
+                            <div class="detail-term-line">
+                                <span class="detail-term-out" aria-hidden="true">&gt;</span>
+                                <span class="detail-term-key" data-i18n-zh="名称" data-i18n-en="name">名称</span>
+                                <span class="detail-term-sep" aria-hidden="true">::</span>
+                                <span class="detail-term-name">Paco Xu</span>
+                            </div>
+                            <div class="detail-term-line">
+                                <span class="detail-term-out" aria-hidden="true">&gt;</span>
+                                <span class="detail-term-key" data-i18n-zh="简介" data-i18n-en="bio">简介</span>
+                                <span class="detail-term-sep" aria-hidden="true">::</span>
+                                <span class="text-secondary">Shanghai, China</span>
+                            </div>
+                            <div class="detail-term-line">
+                                <span class="detail-term-out" aria-hidden="true">&gt;</span>
+                                <span class="detail-term-key">github</span>
+                                <span class="detail-term-sep" aria-hidden="true">::</span>
+                                <a href="https://github.com/pacoxu" title="@pacoxu" target="_blank" rel="noopener">@pacoxu</a>
+                            </div>
                             
+                                <div class="detail-ranks">
+                                    
+
+  <span class="rank-badge">[2026] <span data-i18n-zh="排名" data-i18n-en="RANK">排名</span> #33</span>
+
+  <span class="rank-badge">[2023] <span data-i18n-zh="排名" data-i18n-en="RANK">排名</span> #44</span>
+
+  <span class="rank-badge">[2022] <span data-i18n-zh="排名" data-i18n-en="RANK">排名</span> #54</span>
+
+
+                                </div>
                             
-                                <span class="fs-5 lh-sm">
-  <select class="text-secondary ranking">
-    
-      <option value="33">2026 #33</option>
-    
-      <option value="44">2023 #44</option>
-    
-      <option value="54">2022 #54</option>
-    
-  </select>
-</span>
-                            
-                        </div>
-                        <div class="text-secondary mt-2">Shanghai, China</div>
-                        <div class="mt-2">
-                            <a href="https://github.com/pacoxu" title="@pacoxu" target="_blank" rel="noopener">@pacoxu</a>
                         </div>
                     </div>
                 </div>
-                <img src="/ossheroes/img/award.png" class="mt-3 mt-sm-0 d-none d-lg-block" alt="Hacking Heros Logo" width="250" height="170">
             </div>
 
             <div class="contribute mt-4 mt-sm-1">
@@ -192,7 +202,10 @@
 </div>
 
 
-<div class="page-footer" data-i18n-zh="Copyright &#169; 2022 - 2026 OpenSource.Win" data-i18n-en="Copyright &#169; 2022 - 2026 OpenSource.Win">Copyright &#169; 2022 - 2026 OpenSource.Win</div>
+<div class="page-footer">
+    <div data-i18n-zh="Copyright &#169; 2022 - 2026 OpenSource.Win" data-i18n-en="Copyright &#169; 2022 - 2026 OpenSource.Win">Copyright &#169; 2022 - 2026 OpenSource.Win</div>
+    <div class="page-footer-credit">Built With <a href="https://mindmux.ai/" target="_blank" rel="noopener">MindMux</a></div>
+</div>
 
 
 
@@ -201,15 +214,18 @@
     <!-- <script>
 window.onload = function () {
     const navWrap = document.getElementById('navWrap');
+    // 使用主题变量，保持与暗黑导航一致（不再硬编码旧亮色体系色值）
+    const navBg = getComputedStyle(document.documentElement).getPropertyValue('--osw-card').trim() || 'var(--osw-card)';
     window.addEventListener('scroll', function() {
         if (window.scrollY > 100) {
-            navWrap.style.backgroundColor = '#212529';
+            navWrap.style.backgroundColor = navBg;
         } else {
             navWrap.style.backgroundColor = 'transparent';
         }
     })
 }
-</script> -->
+</script>
+ -->
 
 </body>
 

@@ -1808,7 +1808,10 @@
 </div>
 
   
-<div class="page-footer" data-i18n-zh="Copyright &#169; 2022 - 2026 OpenSource.Win" data-i18n-en="Copyright &#169; 2022 - 2026 OpenSource.Win">Copyright &#169; 2022 - 2026 OpenSource.Win</div>
+<div class="page-footer">
+    <div data-i18n-zh="Copyright &#169; 2022 - 2026 OpenSource.Win" data-i18n-en="Copyright &#169; 2022 - 2026 OpenSource.Win">Copyright &#169; 2022 - 2026 OpenSource.Win</div>
+    <div class="page-footer-credit">Built With <a href="https://mindmux.ai/" target="_blank" rel="noopener">MindMux</a></div>
+</div>
 
 </div>
 
@@ -1817,15 +1820,18 @@
     <!-- <script>
 window.onload = function () {
     const navWrap = document.getElementById('navWrap');
+    // 使用主题变量，保持与暗黑导航一致（不再硬编码旧亮色体系色值）
+    const navBg = getComputedStyle(document.documentElement).getPropertyValue('--osw-card').trim() || 'var(--osw-card)';
     window.addEventListener('scroll', function() {
         if (window.scrollY > 100) {
-            navWrap.style.backgroundColor = '#212529';
+            navWrap.style.backgroundColor = navBg;
         } else {
             navWrap.style.backgroundColor = 'transparent';
         }
     })
 }
-</script> -->
+</script>
+ -->
 
 </body>
 

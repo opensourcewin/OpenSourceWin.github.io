@@ -1,0 +1,158 @@
+---
+import { getCollection, render } from 'astro:content';
+import { marked } from 'marked';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import DetailHero from '../components/DetailHero.astro';
+import Avatar from '../components/Avatar.astro';
+import RankBadges from '../components/RankBadges.astro';
+import ReadmeSection from '../components/ReadmeSection.astro';
+import Footer from '../components/Footer.astro';
+import { buildDevSeo, normalizeMeta } from '../lib/meta';
+import { parseContributions } from '../lib/contributions';
+import { getRankHistory } from '../lib/ranking';
+
+export async function getStaticPaths() {
+  const heroes = await getCollection('heroes');
+  return heroes.map((entry) => ({
+    params: { login: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const login = String(entry.data.slug);
+const displayName = normalizeMeta(entry.data.name) || login;
+const location = normalizeMeta(entry.data.description);
+const body = entry.body ?? '';
+
+const seo = buildDevSeo({
+  slug: login,
+  name: entry.data.name,
+  description: entry.data.description,
+  github_avatar: entry.data.github_avatar,
+  body,
+});
+
+const years = getRankHistory(login);
+
+// 从正文提取 github.com/owner/repo 链接，重构为终端风列表；
+// 富内容页（图片 / 多级标题 / 表格等，如 huan）整体回退渲染原始正文
+const parsed = parseContributions(body);
+// 正文保留部分的 markdown 在构建期渲染（内容为本仓库可信数据，无需消毒）
+const proseHtml =
+  !parsed.rich && parsed.repos.length && parsed.prose
+    ? marked.parse(parsed.prose, { gfm: true, async: false })
+    : '';
+
+const { Content } = await render(entry);
+---
+
+<BaseLayout seo={seo}>
+  <!-- 头部（banner 大图已移除，图片文件仍保留在 static/img/） -->
+  <div class="header header-detail">
+    <Navbar />
+  </div>
+
+  <DetailHero login={login} />
+
+  <!-- 详情 -->
+  <div class="container detail-content">
+    <div class="flex justify-center">
+      <div class="w-full md:w-2/3">
+        <!-- 终端风 profile 卡片：$ ./whois <login> -->
+        <div class="detail-term">
+          <div class="detail-term-bar">
+            <span class="detail-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="detail-term-title">opensource@win: ~</span>
+          </div>
+          <div class="detail-term-body">
+            <div class="detail-term-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> ./whois {login}</div>
+            <div class="detail-term-result">
+              <Avatar login={login} size={160} className="detail-avatar" displayName={displayName} avatar={entry.data.avatar} githubAvatar={entry.data.github_avatar} />
+              <div class="detail-term-info">
+                <div class="detail-term-line">
+                  <span class="detail-term-out" aria-hidden="true">&gt;</span>
+                  <span class="detail-term-key" data-i18n-zh="名称" data-i18n-en="name">名称</span>
+                  <span class="detail-term-sep" aria-hidden="true">::</span>
+                  <span class="detail-term-name">{displayName}</span>
+                </div>
+                <div class="detail-term-line">
+                  <span class="detail-term-out" aria-hidden="true">&gt;</span>
+                  <span class="detail-term-key" data-i18n-zh="所在地" data-i18n-en="location">所在地</span>
+                  <span class="detail-term-sep" aria-hidden="true">::</span>
+                  <span class="text-secondary">{location}</span>
+                </div>
+                <div class="detail-term-line">
+                  <span class="detail-term-out" aria-hidden="true">&gt;</span>
+                  <span class="detail-term-key">github</span>
+                  <span class="detail-term-sep" aria-hidden="true">::</span>
+                  <a href={`https://github.com/${login}`} target="_blank" rel="noopener">@{login}</a>
+                </div>
+                {years.length > 0 && (
+                  <div class="detail-ranks">
+                    <RankBadges years={years} />
+                  </div>
+                )}
+              </div>
+            </div>
+            <!-- osgraph 嵌入已失效（对方证书过期），改为外链访问 -->
+            <div class="detail-term-graphs">
+              <span class="detail-term-prompt" aria-hidden="true">$</span>
+              <span class="detail-graphs-cmd">open ./graphs</span>
+              <span class="detail-graphs-arrow" aria-hidden="true">-&gt;</span>
+              <span class="detail-graphs-links">
+                <a class="detail-graph-link" href={`https://osgraph.com/graphs/developer-activity/github/${login}?user-limit=10`} target="_blank" rel="noopener" data-i18n-zh="开发活动" data-i18n-en="Developer Activity">开发活动</a>
+                <a class="detail-graph-link" href={`https://osgraph.com/graphs/os-partner/github/${login}?user-limit=10`} target="_blank" rel="noopener" data-i18n-zh="开源伙伴" data-i18n-en="Open Source Partners">开源伙伴</a>
+                <a class="detail-graph-link" href={`https://osgraph.com/graphs/os-interest/github/${login}?repo-limit=5&topic-limit=3`} target="_blank" rel="noopener" data-i18n-zh="开源兴趣" data-i18n-en="Open Source Interests">开源兴趣</a>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-divider" aria-hidden="true">---</div>
+
+        <ReadmeSection login={login} />
+
+        <div class="contribute">
+          {parsed.repos.length > 0 ? (
+            <>
+              {proseHtml && <div class="contribute-prose" set:html={proseHtml} />}
+              <h2 class="detail-section-title" data-i18n-zh="主要贡献项目" data-i18n-en="Top Contributions">主要贡献项目</h2>
+              <div class="detail-term detail-repos">
+                <div class="detail-term-bar">
+                  <span class="detail-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                  <span class="detail-term-title">~/contributions</span>
+                  <span class="detail-repos-count">{parsed.repos.length} <span data-i18n-zh="个仓库" data-i18n-en="repos">个仓库</span></span>
+                </div>
+                <div class="detail-term-body">
+                  <div class="detail-term-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> ls -la ~/contributions</div>
+                  <ul class="detail-repos-list">
+                    {parsed.repos.map(({ owner, name, desc }) => (
+                      <li class="detail-repos-row">
+                        <a href={`https://github.com/${owner}/${name}`} target="_blank" rel="noopener">
+                          <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                          <span class="detail-repos-main">
+                            <span class="detail-repos-name">{owner}/{name}</span>
+                            {desc && <span class="detail-repos-desc">{desc}</span>}
+                          </span>
+                          <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </>
+          ) : body.trim() ? (
+            <div class="contribute-richtext">
+              <Content />
+            </div>
+          ) : null}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

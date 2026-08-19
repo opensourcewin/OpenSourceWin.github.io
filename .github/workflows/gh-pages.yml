@@ -33,11 +33,11 @@ jobs:
         run: pnpm build
       - name: Stage ossheroes output
         run: |
-          if [ ! -d apps/ossheroes/public ]; then
-            echo "Error: apps/ossheroes/public directory not created"
+          if [ ! -d apps/ossheroes/dist/ossheroes ]; then
+            echo "Error: apps/ossheroes/dist/ossheroes directory not created"
             exit 1
           fi
-          cp -r apps/ossheroes/public apps/www/dist/ossheroes
+          cp -r apps/ossheroes/dist/ossheroes apps/www/dist/ossheroes
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:

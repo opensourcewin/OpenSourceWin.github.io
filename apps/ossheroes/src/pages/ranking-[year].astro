@@ -1,0 +1,74 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import Split from '../components/Split.astro';
+import Partners from '../components/Partners.astro';
+import Footer from '../components/Footer.astro';
+import HeroCard from '../components/HeroCard.astro';
+import { getYearsDesc, getRankingByYear } from '../lib/ranking';
+import { buildPageSeo } from '../lib/meta';
+import { BASE, SITE_DESCRIPTION_ZH } from '../lib/site';
+
+export function getStaticPaths() {
+  return getYearsDesc().map((item) => ({
+    params: { year: String(item.year) },
+    props: { year: item.year },
+  }));
+}
+
+const { year } = Astro.props;
+const ranking = getRankingByYear(year)!;
+
+const seo = buildPageSeo({
+  pageName: `榜单详情 ${year}`,
+  description: SITE_DESCRIPTION_ZH,
+  path: `${BASE}/ranking-${year}/`,
+});
+
+const heroes = await getCollection('heroes');
+const heroMap = new Map(heroes.map((entry) => [String(entry.data.slug), entry]));
+---
+
+<BaseLayout seo={seo}>
+  <!-- 头部 -->
+  <div class="header" id="head">
+    <Navbar />
+    <!-- 头部内容：与首页一致的终端风 hero，年份取当前榜单 -->
+    <Hero year={year} />
+  </div>
+
+  <div class="container">
+    <Split />
+
+    <div class="list" id="detail">
+      <div class="main-title"><span data-i18n-zh="榜单详情" data-i18n-en="Rankings">榜单详情</span>-{year}</div>
+
+      <div id={String(year)} class="mt-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-x-6 gap-y-4">
+          {ranking.annualRanking.map((user) => {
+            const login = String(user.login);
+            const entry = heroMap.get(login);
+            return (
+              <HeroCard
+                login={login}
+                name={entry?.data.name}
+                description={entry?.data.description}
+                avatar={entry?.data.avatar}
+                githubAvatar={entry?.data.github_avatar}
+                hasPage={!!entry}
+              />
+            );
+          })}
+        </div>
+      </div>
+    </div>
+
+    <Split />
+
+    <Partners extended2021={year === 2021} />
+  </div>
+
+  <Footer />
+</BaseLayout>

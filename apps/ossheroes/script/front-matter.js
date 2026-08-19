@@ -6,8 +6,8 @@
 const fs = require('fs').promises;
 const path = require('path');
 
-const DATA_FILE = path.join(__dirname, '../source/_data/rankingList.json');
-const SOURCE_DIR = path.join(__dirname, '../source');
+const DATA_FILE = path.join(__dirname, '../src/data/rankingList.json');
+const SOURCE_DIR = path.join(__dirname, '../src/content/heroes');
 
 // 读取 JSON 数据
 async function readRankingData(year) {

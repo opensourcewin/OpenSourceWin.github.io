@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import FooterCredit from "@opensource-win/ui/FooterCredit.astro";
 const SITE = "https://opensource.win/";
 ---
 
@@ -25,12 +26,7 @@ const SITE = "https://opensource.win/";
       <a href="/" class="inline-flex items-center justify-center bg-primary text-primary-foreground hover:bg-primary/90 text-base h-10 px-6 rounded-none border border-transparent transition-all font-medium">
         Go Home
       </a>
-      <div class="mt-16 text-center text-xs text-muted-foreground">
-        Built With{' '}
-        <a href="https://mindmux.ai/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">
-          MindMux
-        </a>
-      </div>
+      <FooterCredit class="mt-16 text-center text-xs text-muted-foreground" linkClass="text-primary hover:underline" />
     </div>
   </body>
 </html>

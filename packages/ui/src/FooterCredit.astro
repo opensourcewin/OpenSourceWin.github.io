@@ -1,0 +1,18 @@
+---
+/**
+ * 共享页脚署名 —— 「Built With MindMux」credit。
+ * apps/www（首页 / 404）与 apps/ossheroes 页脚复用，样式由各 app 通过 class / linkClass 传入，
+ * 保证「Built With MindMux」链接在两个站点一致、可统一维护。
+ */
+interface Props {
+  /** 包裹层 class（由各 app 提供布局 / 文字尺寸样式） */
+  class?: string;
+  /** MindMux 链接的 class（由各 app 提供配色 / 悬停样式） */
+  linkClass?: string;
+}
+const { class: wrapperClass = '', linkClass = '' } = Astro.props;
+---
+
+<div class:list={[wrapperClass]}>
+  Built With <a href="https://mindmux.ai/" target="_blank" rel="noopener noreferrer" class:list={[linkClass]}>MindMux</a>
+</div>

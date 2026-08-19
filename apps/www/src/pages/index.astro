@@ -1,6 +1,8 @@
 ---
 import { manifestoContent } from "../data/manifesto";
 import Typewriter from "../components/Typewriter.tsx";
+import SeoHead from "@opensource-win/ui/SeoHead.astro";
+import FooterCredit from "@opensource-win/ui/FooterCredit.astro";
 import "../styles/global.css";
 
 import heroImg from "../assets/hero_network.jpg";
@@ -52,7 +54,7 @@ const shareUrlEn = `https://twitter.com/intent/tweet?text=${encodeURIComponent(m
 const shareUrlZh = `https://twitter.com/intent/tweet?text=${encodeURIComponent(meta.shareText.zh)}${hashtags}`;
 
 const publishDate = "2026-01-01";
-const jsonLd = JSON.stringify({
+const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -97,7 +99,7 @@ const jsonLd = JSON.stringify({
       mainEntityOfPage: { "@type": "WebPage", "@id": SITE },
     },
   ],
-}).replace(/</g, "\\u003c");
+};
 ---
 
 <!doctype html>
@@ -111,34 +113,29 @@ const jsonLd = JSON.stringify({
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&display=swap" rel="stylesheet" />
 
-    <!-- Static SEO: title / description / OG / Twitter are baked into the HTML at build time. -->
-    <title data-i18n-en={meta.pageTitle.en} data-i18n-zh={meta.pageTitle.zh}>{meta.pageTitle.en}</title>
-    <meta name="description" content={meta.pageDescription.en} data-i18n-en={meta.pageDescription.en} data-i18n-zh={meta.pageDescription.zh} />
-    <meta name="keywords" content="Open Source, AI, Manifesto, Artificial Intelligence, Future, Human-AI Symbiosis, SegmentFault, Apache Answer" />
-    <meta name="author" content={meta.author.en} />
-
-    <meta property="og:title" content={meta.pageTitle.en} data-i18n-en={meta.pageTitle.en} data-i18n-zh={meta.pageTitle.zh} />
-    <meta property="og:description" content={meta.pageDescription.en} data-i18n-en={meta.pageDescription.en} data-i18n-zh={meta.pageDescription.zh} />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={SITE} />
-    <meta property="og:image" content={`${SITE}og-image.jpg`} />
-    <meta property="og:site_name" content="OpenSource.Win" />
-    <meta property="og:locale" content="en_US" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={meta.pageTitle.en} data-i18n-en={meta.pageTitle.en} data-i18n-zh={meta.pageTitle.zh} />
-    <meta name="twitter:description" content={meta.pageDescription.en} data-i18n-en={meta.pageDescription.en} data-i18n-zh={meta.pageDescription.zh} />
-    <meta name="twitter:image" content={`${SITE}og-image.jpg`} />
-
-    <meta name="theme-color" content="#0d0d0d" />
-    <link rel="canonical" href={SITE} />
+    <!-- Static SEO: title / description / OG / Twitter / canonical / JSON-LD baked at build via shared <SeoHead>. -->
+    <SeoHead
+      seo={{
+        title: meta.pageTitle.en,
+        description: meta.pageDescription.en,
+        keywords: "Open Source, AI, Manifesto, Artificial Intelligence, Future, Human-AI Symbiosis, SegmentFault, Apache Answer",
+        ogType: "website",
+        ogImage: `${SITE}og-image.jpg`,
+        canonical: SITE,
+        jsonLd,
+      }}
+      siteName="OpenSource.Win"
+      locale="en_US"
+      author={meta.author.en}
+      i18n={{
+        en: { title: meta.pageTitle.en, description: meta.pageDescription.en },
+        zh: { title: meta.pageTitle.zh, description: meta.pageDescription.zh },
+      }}
+    />
     <link rel="sitemap" href="/sitemap.xml" />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect width=%2264%22 height=%2264%22 fill=%22%230d0d0d%22/><text x=%2232%22 y=%2243%22 font-family=%22monospace%22 font-size=%2230%22 font-weight=%22700%22 fill=%22%234bf08e%22 text-anchor=%22middle%22>%26gt;_</text></svg>" />
-
-    <!-- Schema.org structured data: WebSite + Article -->
-    <script type="application/ld+json" is:inline set:html={jsonLd} />
 
     <!-- Bilingual switch: localStorage key `osw-language`, interoperable with ossheroes. -->
     <script is:inline>
@@ -444,12 +441,7 @@ const jsonLd = JSON.stringify({
             </div>
           </div>
         </div>
-        <div class="max-w-4xl mx-auto mt-12 text-center text-xs text-muted-foreground">
-          Built With{' '}
-          <a href="https://mindmux.ai/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">
-            MindMux
-          </a>
-        </div>
+        <FooterCredit class="max-w-4xl mx-auto mt-12 text-center text-xs text-muted-foreground" linkClass="text-primary hover:underline" />
       </footer>
     </div>
   </body>

@@ -1,0 +1,15 @@
+/* OpenSource.Win 共享设计 token —— 暗黑终端黑客风
+   作为 apps/www 与 apps/ossheroes 颜色 / 字体的单一事实源：
+   - apps/ossheroes 直接使用 --osw-* 变量；
+   - apps/www 在自己的 global.css 里把 shadcn 风格变量映射到这些 --osw-*。
+   两个 app 构建产物中的主色值（背景 / 前景 / 主色 / 弱化文字 / 边框）由此保持一致。 */
+:root {
+  --osw-background: oklch(0.10 0 0);
+  --osw-card: oklch(0.12 0 0);
+  --osw-primary: oklch(0.85 0.20 140);
+  --osw-foreground: oklch(0.90 0.15 140);
+  --osw-muted: oklch(0.60 0.05 140);
+  --osw-border: oklch(0.25 0.05 140);
+  --osw-font: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
+    "PingFang SC", "Microsoft YaHei", monospace, sans-serif;
+}

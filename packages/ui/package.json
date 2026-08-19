@@ -6,19 +6,21 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    }
+      "import": "./src/index.ts"
+    },
+    "./seo": {
+      "types": "./dist/seo.d.ts",
+      "import": "./src/seo.ts"
+    },
+    "./tokens.css": "./src/tokens.css",
+    "./SeoHead.astro": "./src/SeoHead.astro",
+    "./FooterCredit.astro": "./src/FooterCredit.astro"
   },
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch"
   },
   "devDependencies": {
-    "@types/react": "^19.2.5",
-    "react": "^19.2.0",
     "typescript": "~5.9.3"
-  },
-  "peerDependencies": {
-    "react": "^19.0.0"
   }
 }

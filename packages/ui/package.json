@@ -1,0 +1,26 @@
+{
+  "name": "@opensource-win/ui",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./src/index.ts"
+    },
+    "./seo": {
+      "types": "./dist/seo.d.ts",
+      "import": "./src/seo.ts"
+    },
+    "./tokens.css": "./src/tokens.css",
+    "./SeoHead.astro": "./src/SeoHead.astro",
+    "./FooterCredit.astro": "./src/FooterCredit.astro"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3"
+  }
+}

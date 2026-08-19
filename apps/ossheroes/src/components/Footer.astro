@@ -1,0 +1,9 @@
+---
+import FooterCredit from '@opensource-win/ui/FooterCredit.astro';
+const footerYear = new Date().getFullYear();
+---
+
+<footer class="page-footer">
+  <div data-i18n-zh={`Copyright © 2022 - ${footerYear} OpenSource.Win`} data-i18n-en={`Copyright © 2022 - ${footerYear} OpenSource.Win`}>Copyright © 2022 - {footerYear} OpenSource.Win</div>
+  <FooterCredit class="page-footer-credit" />
+</footer>

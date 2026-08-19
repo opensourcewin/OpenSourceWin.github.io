@@ -1,0 +1,1105 @@
+@import 'tailwindcss';
+@import '@opensource-win/ui/tokens.css';
+
+/* 设计 token（--osw-*）由 packages/ui 统一提供，下面所有组件样式引用这些变量。 */
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: var(--osw-font);
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-bottom: 80px;
+  background-color: var(--osw-background);
+  color: var(--osw-foreground);
+}
+
+/* 全局扫描线 overlay，与官网 body::after 一致（z-index 与官网对齐为 40） */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.1) 50%
+  );
+  background-size: 100% 4px;
+  z-index: 40;
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+::selection {
+  background: var(--osw-primary);
+  color: var(--osw-background);
+}
+
+img {
+  vertical-align: top;
+}
+
+a {
+  color: var(--osw-primary);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--osw-foreground);
+}
+
+/* 原 Bootstrap .text-secondary 在深色背景上的可读性修正 */
+.text-secondary {
+  color: var(--osw-muted);
+}
+
+/* 原 Bootstrap .container（固定 1140px 版） */
+.container {
+  width: 100%;
+  max-width: 1140px;
+  margin-inline: auto;
+  padding-inline: 0.75rem;
+}
+
+/* ===================== 导航栏（Bootstrap navbar 的自实现替代） ===================== */
+.header {
+  padding-top: 104px;
+  background-color: var(--osw-background);
+  border-bottom: 1px solid var(--osw-border);
+}
+.header-detail {
+  /* banner 已移除，头部仅保留导航占位 */
+  padding-bottom: 0;
+}
+
+.navbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  background-color: var(--osw-card);
+  border-bottom: 1px solid var(--osw-border);
+  z-index: 1030;
+}
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-block: 0.5rem;
+}
+.navbar-brand {
+  font-size: 16px;
+  padding-block: 0.3125rem;
+  color: var(--osw-primary);
+  white-space: nowrap;
+}
+.navbar-brand:hover {
+  color: var(--osw-foreground);
+}
+
+.navbar-toggler {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.75rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  background: transparent;
+  border: 1px solid var(--osw-border);
+  border-radius: 0;
+  color: var(--osw-muted);
+  cursor: pointer;
+}
+.navbar-toggler:hover,
+.navbar-toggler:focus {
+  color: var(--osw-primary);
+}
+.navbar-toggler svg {
+  width: 1.25em;
+  height: 1.25em;
+}
+
+.navbar-menu {
+  display: none;
+  flex-basis: 100%;
+  flex-grow: 1;
+}
+.navbar-menu.open {
+  display: block;
+}
+.navbar-nav {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+}
+.nav-item {
+  list-style: none;
+}
+.nav-link {
+  display: block;
+  padding: 0.5rem;
+  color: var(--osw-muted);
+  white-space: nowrap;
+}
+.nav-link:hover,
+.nav-link:focus {
+  color: var(--osw-primary);
+}
+
+/* 往年榜单下拉：移动端为静态展开块，桌面端为绝对定位浮层 */
+.nav-dropdown {
+  position: relative;
+}
+.dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+}
+.dropdown-toggle::after {
+  content: "";
+  display: inline-block;
+  border-top: 0.3em solid currentColor;
+  border-right: 0.3em solid transparent;
+  border-left: 0.3em solid transparent;
+  vertical-align: middle;
+}
+.dropdown-menu {
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+  background-color: var(--osw-card);
+  border: 1px solid var(--osw-border);
+  border-radius: 0;
+  min-width: 10rem;
+}
+.nav-dropdown.open .dropdown-menu {
+  display: block;
+}
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 0.25rem 1rem;
+  color: var(--osw-muted);
+}
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: transparent;
+  color: var(--osw-primary);
+}
+
+/* 桌面端（≥992px，对齐原 navbar-expand-lg）：横向排布 + 下拉浮层 */
+@media (min-width: 992px) {
+  .navbar-toggler {
+    display: none;
+  }
+  .navbar-menu {
+    display: flex;
+    flex-basis: auto;
+    flex-grow: 0;
+  }
+  .navbar-nav {
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+  }
+  .dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    z-index: 1000;
+  }
+}
+
+/* ===================== 标题与分区 ===================== */
+.main-title {
+  font-family: var(--osw-font);
+  font-weight: 600;
+  font-size: 40px;
+  color: var(--osw-primary);
+  text-align: center;
+  line-height: 48px;
+}
+.main-title::before {
+  content: "# ";
+  color: var(--osw-muted);
+}
+.list {
+  width: 100%;
+  padding-top: 50px;
+}
+.text {
+  line-height: 28px;
+}
+.text ol > li::marker {
+  color: var(--osw-primary);
+}
+
+/* ===================== 用户卡片 ===================== */
+.user-item {
+  width: 100%;
+  min-height: 160px;
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
+  box-sizing: border-box;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--osw-card);
+  border: 1px solid var(--osw-border);
+  border-radius: 0;
+  transition: border-color 0.15s ease-in-out;
+}
+a.user-item:hover {
+  border-color: var(--osw-primary);
+}
+.nickname {
+  font-weight: 500;
+  text-align: center;
+  color: var(--osw-foreground);
+  line-height: 28px;
+  word-break: break-word;
+}
+a.user-item:hover .nickname {
+  color: var(--osw-primary);
+}
+.description {
+  height: 42px;
+  font-size: 14px;
+  text-align: center;
+  color: var(--osw-muted);
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+.subtitle {
+  font-size: 28px;
+  font-weight: 500;
+  text-align: center;
+  color: var(--osw-foreground);
+}
+.subtitle::before {
+  content: "## ";
+  color: var(--osw-primary);
+}
+
+/* ===================== 合作伙伴 logo ===================== */
+.icons-wrap {
+  max-width: 1090px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 24px auto 0;
+}
+.icons, .icons2 {
+  width: auto;
+  height: 80px;
+  margin: 0 !important;
+}
+.icons-wrap > a {
+  display: inline-flex;
+}
+
+/* ===================== 页脚 ===================== */
+.page-footer {
+  color: var(--osw-muted);
+  text-align: center;
+  line-height: 24px;
+  padding: 4rem 0 2rem;
+  border-top: 1px solid var(--osw-border);
+  margin-top: 3rem;
+}
+.page-footer-credit {
+  margin-top: 0.25rem;
+  font-size: 13px;
+  color: var(--osw-muted);
+}
+
+/* ===================== 头像 ===================== */
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 0 !important;
+  border: 1px solid var(--osw-border);
+}
+
+/* detail css —— 终端风 profile 卡片 */
+.detail-avatar {
+  width: 160px;
+  height: 160px;
+  flex: none;
+  border-radius: 0 !important;
+  border: 1px solid var(--osw-primary);
+  box-shadow: 0 0 16px oklch(0.85 0.20 140 / 0.25);
+}
+
+.detail-term {
+  background: var(--osw-card);
+  border: 1px solid var(--osw-border);
+  border-radius: 0;
+  overflow: hidden;
+}
+.detail-term-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--osw-border);
+  color: var(--osw-muted);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+}
+.detail-term-dots {
+  display: inline-flex;
+  gap: 6px;
+}
+.detail-term-dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--osw-border);
+}
+.detail-term-dots i:nth-child(2) {
+  background: var(--osw-muted);
+}
+.detail-term-dots i:nth-child(3) {
+  background: var(--osw-primary);
+}
+.detail-term-body {
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+.detail-term-cmd {
+  color: var(--osw-foreground);
+  margin-bottom: 1rem;
+  word-break: break-all;
+}
+.detail-term-prompt {
+  color: var(--osw-primary);
+  margin-right: 0.25rem;
+}
+.detail-term-result {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.detail-term-info {
+  flex: 1;
+  min-width: 0;
+}
+.detail-term-line {
+  line-height: 1.8;
+  word-break: break-word;
+}
+.detail-term-out {
+  color: var(--osw-muted);
+  margin-right: 0.5rem;
+}
+.detail-term-key {
+  display: inline-block;
+  /* 等宽字体下按最长 key（github，6 字符）对齐 :: 分隔符 */
+  min-width: 6ch;
+  color: var(--osw-primary);
+}
+.detail-term-sep {
+  color: var(--osw-muted);
+  margin: 0 0.5rem;
+}
+.detail-term-name {
+  font-weight: 600;
+  color: var(--osw-foreground);
+}
+
+/* 历年排名徽章：[2026] RANK #12 —— 直角 + 暗绿边框 + 霓虹绿文字 */
+.detail-ranks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+.rank-badge {
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--osw-border);
+  border-radius: 0;
+  background: oklch(0.85 0.20 140 / 0.06);
+  color: var(--osw-primary);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.detail-list > li {
+  list-style: none;
+}
+
+.contribute img {
+  max-width: 100%;
+  height: auto;
+}
+.contribute br {
+  display: none;
+}
+.contribute a > img {
+  margin-right: 3px;
+}
+
+/* 富文本正文（AlexV525 / huan 等整页回退渲染）排版 */
+.contribute-richtext {
+  line-height: 1.9;
+}
+.contribute-richtext h1,
+.contribute-richtext h2,
+.contribute-richtext h3,
+.contribute-richtext h4 {
+  color: var(--osw-foreground);
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 1.5em 0 0.6em;
+}
+.contribute-richtext h1 { font-size: 1.6rem; }
+.contribute-richtext h2 { font-size: 1.35rem; }
+.contribute-richtext h3 { font-size: 1.15rem; }
+.contribute-richtext p,
+.contribute-richtext ul,
+.contribute-richtext ol,
+.contribute-richtext table,
+.contribute-richtext blockquote,
+.contribute-richtext pre {
+  margin: 0 0 1em;
+}
+.contribute-richtext ul,
+.contribute-richtext ol {
+  padding-left: 1.5em;
+}
+.contribute-richtext ul {
+  list-style: disc;
+}
+.contribute-richtext ol {
+  list-style: decimal;
+}
+.contribute-richtext li + li {
+  margin-top: 0.25em;
+}
+.contribute-richtext blockquote {
+  border-left: 3px solid var(--osw-primary);
+  padding: 0.25em 0 0.25em 1em;
+  color: var(--osw-muted);
+}
+.contribute-richtext code {
+  background: var(--osw-card);
+  border: 1px solid var(--osw-border);
+  padding: 0.1em 0.4em;
+  color: var(--osw-primary);
+  font-size: 0.92em;
+}
+.contribute-richtext pre {
+  background: var(--osw-card);
+  border: 1px solid var(--osw-border);
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+}
+.contribute-richtext pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--osw-foreground);
+}
+.contribute-richtext table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.contribute-richtext th,
+.contribute-richtext td {
+  border: 1px solid var(--osw-border);
+  padding: 0.4em 0.75em;
+}
+.contribute-richtext th {
+  color: var(--osw-primary);
+  background: var(--osw-card);
+}
+.contribute-richtext hr {
+  border: none;
+  border-top: 1px solid var(--osw-border);
+  margin: 1.5em 0;
+}
+
+/* 终端风 hero：纯 HTML/CSS（grid 背景 + 径向辉光），对齐官网首页 Hero */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 0 5rem;
+  text-align: center;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(var(--osw-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--osw-border) 1px, transparent 1px);
+  background-size: 44px 44px;
+  opacity: 0.18;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 60% 50% at 50% 35%,
+    oklch(0.85 0.20 140 / 0.08),
+    transparent 70%
+  );
+}
+.hero-inner {
+  position: relative;
+  z-index: 1;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--osw-border);
+  background: var(--osw-card);
+  color: var(--osw-primary);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.hero-dot {
+  position: relative;
+  display: inline-flex;
+  width: 8px;
+  height: 8px;
+}
+.hero-dot-core {
+  width: 8px;
+  height: 8px;
+  background: var(--osw-primary);
+}
+.hero-dot-ping {
+  position: absolute;
+  inset: 0;
+  background: var(--osw-primary);
+  opacity: 0.75;
+  animation: hero-ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes hero-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  75%,
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+.hero-title {
+  margin: 2rem 0 0;
+  font-weight: 700;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--osw-foreground);
+}
+.hero-cmd {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--osw-primary);
+  opacity: 0.8;
+}
+.hero-hash {
+  color: var(--osw-primary);
+}
+.hero-subtitle {
+  margin: 1.5rem auto 0;
+  max-width: 640px;
+  color: var(--osw-muted);
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+
+/* 导航语言切换：中 / EN */
+.lang-switch {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  gap: 2px;
+}
+.lang-btn {
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 0;
+  color: var(--osw-muted);
+  font-family: var(--osw-font);
+  font-size: 14px;
+  padding: 0 4px;
+  cursor: pointer;
+}
+.lang-btn:hover,
+.lang-btn:focus {
+  color: var(--osw-primary);
+}
+.lang-btn.active {
+  color: var(--osw-primary);
+  border-color: var(--osw-border);
+}
+.lang-sep {
+  color: var(--osw-border);
+}
+
+/* 详情页顶部终端风页面头部：grid 背景 + 径向辉光 + 扫描线 + 描边大字，零图片素材 */
+.detail-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 3.5rem 0 3rem;
+  text-align: center;
+  border-bottom: 1px solid var(--osw-border);
+  margin-bottom: 2.5rem;
+}
+.detail-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(var(--osw-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--osw-border) 1px, transparent 1px);
+  background-size: 44px 44px;
+  opacity: 0.18;
+}
+.detail-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 60% 55% at 50% 40%,
+    oklch(0.85 0.20 140 / 0.10),
+    transparent 70%
+  );
+}
+.detail-hero-scan {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    oklch(0.85 0.20 140 / 0.5),
+    transparent
+  );
+  animation: detail-hero-scan 4s linear infinite;
+}
+@keyframes detail-hero-scan {
+  0% {
+    top: -2px;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+.detail-hero-inner {
+  position: relative;
+  z-index: 1;
+}
+.detail-hero-cmd {
+  color: var(--osw-primary);
+  font-size: clamp(1rem, 2.5vw, 1.375rem);
+  opacity: 0.85;
+  word-break: break-all;
+}
+.detail-hero-title {
+  margin-top: 0.75rem;
+  font-weight: 700;
+  font-size: clamp(1.6rem, 6vw, 3.5rem);
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  color: oklch(0.85 0.20 140 / 0.07);
+  -webkit-text-stroke: 1px oklch(0.85 0.20 140 / 0.4);
+  text-stroke: 1px oklch(0.85 0.20 140 / 0.4);
+}
+.detail-hero-cursor {
+  display: inline-block;
+  width: 0.45em;
+  height: 0.9em;
+  margin-left: 0.15em;
+  vertical-align: -0.08em;
+  background: var(--osw-primary);
+  -webkit-text-stroke: 0;
+  animation: detail-hero-blink 1.1s steps(1) infinite;
+}
+@keyframes detail-hero-blink {
+  50% {
+    opacity: 0;
+  }
+}
+.detail-hero-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--osw-border);
+  background: var(--osw-card);
+  color: var(--osw-primary);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* 终端卡片内 osgraph 外链行：$ open ./graphs -> [开发活动] [开源伙伴] [开源兴趣] */
+.detail-term-graphs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--osw-border);
+  color: var(--osw-foreground);
+  font-size: 14px;
+}
+.detail-graphs-cmd {
+  word-break: break-all;
+}
+.detail-graphs-arrow {
+  color: var(--osw-muted);
+}
+.detail-graphs-links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.75rem;
+}
+.detail-graph-link {
+  color: var(--osw-primary);
+  white-space: nowrap;
+}
+.detail-graph-link::before {
+  content: "[";
+  color: var(--osw-muted);
+}
+.detail-graph-link::after {
+  content: "]";
+  color: var(--osw-muted);
+}
+.detail-graph-link:hover {
+  color: var(--osw-foreground);
+  text-shadow: 0 0 8px oklch(0.85 0.20 140 / 0.6);
+}
+
+/* 装饰分隔线：$ --- */
+.detail-divider {
+  margin: 2rem 0;
+  color: var(--osw-muted);
+  opacity: 0.7;
+  user-select: none;
+  letter-spacing: 0.2em;
+}
+.detail-divider::before {
+  content: "$ ";
+  color: var(--osw-primary);
+  letter-spacing: 0;
+}
+
+/* 板块标题：# 前缀装饰，对齐官网标题语言 */
+.detail-section-title {
+  margin: 2rem 0 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--osw-foreground);
+}
+.detail-section-title::before {
+  content: "# ";
+  color: var(--osw-primary);
+}
+
+/* 「主要贡献项目」终端风仓库列表 */
+.detail-repos-count {
+  margin-left: auto;
+  color: var(--osw-muted);
+}
+.detail-repos-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.detail-repos-row + .detail-repos-row {
+  border-top: 1px solid var(--osw-border);
+}
+.detail-repos-row > a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.25rem;
+  color: var(--osw-foreground);
+  transition: background-color 0.15s ease-in-out;
+}
+.detail-repos-row > a:hover {
+  background: oklch(0.85 0.20 140 / 0.06);
+}
+.detail-repos-perm {
+  flex: none;
+  color: var(--osw-muted);
+  font-size: 12px;
+}
+.detail-repos-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.detail-repos-name {
+  word-break: break-all;
+}
+.detail-repos-desc {
+  color: var(--osw-muted);
+  font-size: 12px;
+  line-height: 1.6;
+  word-break: break-word;
+}
+.detail-repos-row > a:hover .detail-repos-name {
+  color: var(--osw-primary);
+  text-shadow: 0 0 10px oklch(0.85 0.20 140 / 0.5);
+}
+.detail-repos-arrow {
+  flex: none;
+  color: var(--osw-muted);
+  transition: transform 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+.detail-repos-row > a:hover .detail-repos-arrow {
+  transform: translateX(4px);
+  color: var(--osw-primary);
+}
+
+/* GitHub Profile README 模块 */
+.detail-readme[hidden] {
+  display: none;
+}
+.detail-readme-body {
+  margin: 0;
+  max-height: 480px;
+  overflow: auto;
+  word-break: break-word;
+  background: var(--osw-background);
+  border: 1px solid var(--osw-border);
+  border-radius: 0;
+  padding: 1rem;
+  color: var(--osw-foreground);
+  font-family: var(--osw-font);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.detail-readme-body h1,
+.detail-readme-body h2,
+.detail-readme-body h3,
+.detail-readme-body h4,
+.detail-readme-body h5,
+.detail-readme-body h6 {
+  color: var(--osw-primary);
+  font-family: var(--osw-font);
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 1.25em 0 0.5em;
+}
+.detail-readme-body h1:first-child,
+.detail-readme-body h2:first-child,
+.detail-readme-body h3:first-child,
+.detail-readme-body p:first-child,
+.detail-readme-body ul:first-child,
+.detail-readme-body ol:first-child {
+  margin-top: 0;
+}
+.detail-readme-body h1 { font-size: 1.5em; }
+.detail-readme-body h2 { font-size: 1.3em; }
+.detail-readme-body h3 { font-size: 1.15em; }
+.detail-readme-body h4,
+.detail-readme-body h5,
+.detail-readme-body h6 { font-size: 1em; }
+.detail-readme-body p,
+.detail-readme-body ul,
+.detail-readme-body ol,
+.detail-readme-body blockquote,
+.detail-readme-body pre,
+.detail-readme-body table {
+  margin: 0 0 1em;
+}
+.detail-readme-body ul,
+.detail-readme-body ol {
+  padding-left: 1.5em;
+}
+.detail-readme-body li + li {
+  margin-top: 0.25em;
+}
+.detail-readme-body a {
+  color: var(--osw-primary);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--osw-border);
+}
+.detail-readme-body a:hover {
+  border-bottom-color: var(--osw-primary);
+}
+.detail-readme-body strong {
+  color: var(--osw-primary);
+  font-weight: 700;
+}
+.detail-readme-body code {
+  background: var(--osw-card);
+  border: 1px solid var(--osw-border);
+  border-radius: 0;
+  padding: 0.1em 0.4em;
+  color: var(--osw-primary);
+  font-family: var(--osw-font);
+  font-size: 0.92em;
+}
+.detail-readme-body pre {
+  background: var(--osw-card);
+  border: 1px solid var(--osw-border);
+  border-radius: 0;
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+}
+.detail-readme-body pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--osw-foreground);
+}
+.detail-readme-body blockquote {
+  border-left: 3px solid var(--osw-primary);
+  padding: 0.25em 0 0.25em 1em;
+  color: var(--osw-muted);
+}
+.detail-readme-body img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+.detail-readme-body hr {
+  border: none;
+  border-top: 1px solid var(--osw-border);
+  margin: 1.5em 0;
+}
+.detail-readme-body table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.detail-readme-body th,
+.detail-readme-body td {
+  border: 1px solid var(--osw-border);
+  padding: 0.4em 0.75em;
+}
+.detail-readme-body th {
+  color: var(--osw-primary);
+  background: var(--osw-card);
+}
+.detail-readme-body > :last-child {
+  margin-bottom: 0;
+}
+.detail-readme-src {
+  margin-top: 0.75rem;
+  font-size: 13px;
+  color: var(--osw-muted);
+}
+
+/* 贡献区保留的正文（如 guqing 的开发者简介段落） */
+.contribute-prose {
+  color: var(--osw-foreground);
+  line-height: 1.9;
+  margin-bottom: 0.5rem;
+}
+.contribute-prose p {
+  margin-bottom: 1rem;
+}
+
+/* README 与贡献区间的节奏 */
+.detail-readme,
+.contribute {
+  margin-top: 2rem;
+}
+
+/* 移动端适配 */
+@media (max-width: 540px)  {
+  .sm-scroll {
+    overflow-x: scroll;
+    padding-left: 17em;
+  }
+  .main-title {
+    font-size: 28px;
+  }
+  .subtitle {
+    font-size: 18px;
+  }
+  .text2 {
+    padding: 0 0 0 15px;
+  }
+  .icons {
+    height: 48px;
+  }
+  .icons2 {
+    height: 48px;
+  }
+  .icons-wrap {
+    gap: 0.5rem;
+  }
+  .detail-term-result {
+    flex-direction: column;
+  }
+  .detail-term-body {
+    padding: 1rem;
+  }
+  .detail-avatar {
+    width: 96px;
+    height: 96px;
+  }
+  .contribute li > a {
+    word-wrap: break-word;
+  }
+  .detail-hero {
+    padding: 2.5rem 0 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .detail-hero-title {
+    letter-spacing: 0.02em;
+  }
+  .detail-repos-perm {
+    display: none;
+  }
+}
+
+/* 动效可访问性：与官网一致，reduced-motion 时关闭脉冲动画 */
+@media (prefers-reduced-motion: reduce) {
+  .hero-dot-ping {
+    animation: none;
+  }
+  .detail-hero-scan,
+  .detail-hero-cursor {
+    animation: none;
+  }
+}

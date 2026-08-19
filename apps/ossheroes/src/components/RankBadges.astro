@@ -1,0 +1,13 @@
+---
+interface Props {
+  /** 历年在榜名次（按年份降序）：[{ year, ranking }] */
+  years: { year: number; ranking: number }[];
+}
+
+const { years } = Astro.props;
+---
+
+{/* 历年排名徽章：[2026] RANK #12 —— 终端风 pill，直角 + 暗绿边框 + 霓虹绿文字 */}
+{years.map((item) => (
+  <span class="rank-badge">[{item.year}] <span data-i18n-zh="排名" data-i18n-en="RANK">排名</span> #{item.ranking}</span>
+))}

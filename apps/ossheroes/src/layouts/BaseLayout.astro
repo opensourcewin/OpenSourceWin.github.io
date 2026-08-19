@@ -1,0 +1,73 @@
+---
+import '../styles/global.css';
+import { BASE, SITE_AUTHOR, SITE_KEYWORDS, SITE_TITLE_ZH } from '../lib/site';
+import type { PageSeo } from '../lib/meta';
+
+interface Props {
+  seo: PageSeo;
+}
+
+const { seo } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Title -->
+  <title>{seo.title}</title>
+
+  <!-- Description / Keywords / Author -->
+  {seo.description && <meta name="description" content={seo.description} />}
+  <meta name="keywords" content={seo.keywords ?? SITE_KEYWORDS} />
+  <meta name="author" content={SITE_AUTHOR} />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={seo.title} />
+  {seo.description && <meta property="og:description" content={seo.description} />}
+  <meta property="og:site_name" content={SITE_TITLE_ZH} />
+  <meta property="og:url" content={seo.canonical} />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:image" content={seo.ogImage} />
+  <meta property="og:type" content={seo.ogType} />
+
+  <!-- Twitter -->
+  <meta name="twitter:site" content={SITE_TITLE_ZH} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={seo.title} />
+  {seo.description && <meta name="twitter:description" content={seo.description} />}
+  <meta name="twitter:image" content={seo.ogImage} />
+
+  <!-- Canonical / Theme Color -->
+  <link rel="canonical" href={seo.canonical} />
+  <meta name="theme-color" content="#0d0d0d" />
+
+  {/* 开发者详情页 JSON-LD 结构化数据：ProfilePage + Person（`<` 转义防止标签提前闭合） */}
+  {seo.jsonLd && (
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(seo.jsonLd).replace(/</g, '\\u003c')}
+    />
+  )}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="icon" type="image/svg+xml" href={`${BASE}/img/favicon.svg`} />
+  <link rel="icon" type="image/x-icon" href={`${BASE}/img/favicon.ico`} />
+</head>
+<body>
+  <slot />
+  <script>
+    import '../scripts/i18n';
+    import '../scripts/nav';
+  </script>
+</body>
+</html>

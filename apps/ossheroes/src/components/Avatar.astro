@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets';
+import { BASE } from '../lib/site';
+import { normalizeMeta } from '../lib/meta';
+
+interface Props {
+  login: string;
+  /** 卡片 64px / 详情 160px */
+  size: 64 | 160;
+  className: 'avatar' | 'detail-avatar';
+  displayName: string;
+  avatar?: ImageMetadata | null;
+  githubAvatar?: string | null;
+}
+
+const { login, size, className, displayName, avatar, githubAvatar } = Astro.props;
+const remoteAvatar = normalizeMeta(githubAvatar);
+const hasRemote = /^https?:\/\//.test(remoteAvatar);
+---
+
+{avatar ? (
+  <Image
+    src={avatar}
+    alt={displayName}
+    width={size}
+    height={size}
+    densities={[1, 2]}
+    format="webp"
+    loading="lazy"
+    class={className}
+  />
+) : hasRemote ? (
+  <img src={remoteAvatar} alt={displayName} width={size} height={size} loading="lazy" class={className} />
+) : (
+  <img src={`${BASE}/img/default-avatar.png`} alt={displayName || login} width={size} height={size} loading="lazy" class={className} />
+)}

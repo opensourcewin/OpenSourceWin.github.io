@@ -12,5 +12,10 @@
     "clean": "pnpm -r exec rm -rf dist node_modules/.cache .astro",
     "lint": "pnpm --filter www lint"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "pnpm": {
+    "overrides": {
+      "vite": "^7.3.6"
+    }
+  }
 }

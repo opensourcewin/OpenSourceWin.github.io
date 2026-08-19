@@ -7,7 +7,7 @@ const fs = require('fs').promises;
 const path = require('path');
 
 // fetch 请求接口：https://oss.x-lab.info/open_leaderboard/open_rank/actor/chinese/2024.json
-// 然后将数据写入到 source/_data/rankingList.json 中
+// 然后将数据写入到 src/data/rankingList.json 中
 async function fetchXlab(year) {
   const response = await fetch(`https://oss.x-lab.info/open_leaderboard/open_rank/actor/chinese/${year}.json`);
   const data = await response.json();
@@ -28,14 +28,14 @@ async function fetchXlab(year) {
 
 // 读取 JSON 数据
 async function readRankingData() {
-  const filePath = path.join(__dirname, '../source/_data/rankingList.json');
+  const filePath = path.join(__dirname, '../src/data/rankingList.json');
   const data = await fs.readFile(filePath, 'utf-8');
   return JSON.parse(data);
 }
 
 // 写入 JSON 数据
 async function writeRankingData(data) {
-  const filePath = path.join(__dirname, '../source/_data/rankingList.json');
+  const filePath = path.join(__dirname, '../src/data/rankingList.json');
   await fs.writeFile(filePath, JSON.stringify(data, null, 2));
 }
 

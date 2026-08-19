@@ -1,0 +1,64 @@
+---
+import { BASE } from '../lib/site';
+
+interface Props {
+  /** 2021 年榜单页展示完整的官方支持 / 合作社区 logo 墙 */
+  extended2021?: boolean;
+}
+
+const { extended2021 = false } = Astro.props;
+---
+
+<div class="list" id="partner">
+  <div class="main-title" data-i18n-zh="合作伙伴" data-i18n-en="Partners">合作伙伴</div>
+
+  <div class="subtitle mt-6" data-i18n-zh="联合发起方" data-i18n-en="Co-founders">联合发起方</div>
+  <div class="icons-wrap">
+    <img src={`${BASE}/img/logo-opensourcewin.svg`} class="icons" alt="OpenSource.Win" loading="lazy" />
+    <img src={`${BASE}/img/logo-kys.png`} class="icons" alt="开源社" loading="lazy" />
+    {extended2021 && <img src={`${BASE}/img/logo-tyh.png`} class="icons" alt="腾源会" loading="lazy" />}
+    <img src={`${BASE}/img/logo-xlab.png`} class="icons" alt="x-lab" loading="lazy" />
+  </div>
+
+  {extended2021 && (
+    <>
+      <div class="subtitle mt-6" data-i18n-zh="官方支持" data-i18n-en="Official Support">官方支持</div>
+      <div class="icons-wrap">
+        <a href="https://github.com" title="GitHub" target="_blank"><img src={`${BASE}/img/logo-github.png`} class="icons" alt="GitHub" loading="lazy" /></a>
+      </div>
+      <div class="subtitle mt-6" data-i18n-zh="合作社区" data-i18n-en="Community Partners">合作社区</div>
+      <div class="icons-wrap">
+        <img src={`${BASE}/img/logo-kyuubi.png`} class="icons2" alt="Kyuubi" loading="lazy" />
+        <img src={`${BASE}/img/logo-gitops.png`} class="icons2" alt="GITOPS" loading="lazy" />
+        <img src={`${BASE}/img/logo-dolphin.png`} class="icons2" alt="Dolphin" loading="lazy" />
+        <img src={`${BASE}/img/logo-linkis.png`} class="icons2" alt="Linki" loading="lazy" />
+        <img src={`${BASE}/img/logo-magichub.png`} class="icons2" alt="MagicHub" loading="lazy" />
+        <img src={`${BASE}/img/logo-galaxyfuture.png`} class="icons2" alt="Galaxy-Future" loading="lazy" />
+        <img src={`${BASE}/img/logo-doris.png`} class="icons2" alt="DORIS" loading="lazy" />
+        <img src={`${BASE}/img/logo-seatunnel.png`} class="icons2" alt="SeaTunnel" loading="lazy" />
+        <img src={`${BASE}/img/logo-serverless.png`} class="icons2" alt="ServerLess Dev" loading="lazy" />
+        <img src={`${BASE}/img/logo-casbin.png`} class="icons2" alt="Casbin" loading="lazy" />
+        <img src={`${BASE}/img/logo-kubesphere.png`} class="icons2" alt="kubesphere" loading="lazy" />
+        <img src={`${BASE}/img/logo-coding.png`} class="icons2" alt="coding" loading="lazy" />
+        <img src={`${BASE}/img/logo-apacheshenyu.png`} class="icons2" alt="pacheshenyu" loading="lazy" />
+        <img src={`${BASE}/img/logo-dromara.png`} class="icons2" alt="dromara" loading="lazy" />
+        <img src={`${BASE}/img/logo-graphscope.png`} class="icons2" alt="graphscope" loading="lazy" />
+        <img src={`${BASE}/img/logo-graviti.png`} class="icons2" alt="graviti" loading="lazy" />
+        <img src={`${BASE}/img/logo-openppl.png`} class="icons2" alt="openppl" loading="lazy" />
+        <img src={`${BASE}/img/logo-apisix.png`} class="icons2" alt="apisix" loading="lazy" />
+        <a href="https://wechaty.js.org" title="Conversational RPA SDK for WhatsApp/WeChat" target="_blank"><img src={`${BASE}/img/logo-wechaty.png`} class="icons2" alt="wechaty" loading="lazy" /></a>
+        <img src={`${BASE}/img/logo-eventmesh.png`} class="icons2" alt="eventmesh" loading="lazy" />
+        <img src={`${BASE}/img/logo-azure.png`} class="icons2" alt="azure" loading="lazy" />
+        <img src={`${BASE}/img/logo-apachshenzhen.png`} class="icons2" alt="apachshenzhen" loading="lazy" />
+        <img src={`${BASE}/img/logo-deepin.png`} class="icons2" alt="deepin" loading="lazy" />
+        <img src={`${BASE}/img/logo-ybsq.png`} class="icons2" alt="ybsq" loading="lazy" />
+        <img src={`${BASE}/img/logo-opentekr.png`} class="icons2" alt="opentekr" loading="lazy" />
+        <img src={`${BASE}/img/logo-skywalking.png`} class="icons2" alt="skywalking" loading="lazy" />
+        <img src={`${BASE}/img/logo-sharedingsphere.png`} class="icons2" alt="sharedingsphere" loading="lazy" />
+        <img src={`${BASE}/img/logo-wasmedgeruntim.png`} class="icons2" alt="wasmedgeruntim" loading="lazy" />
+        <img src={`${BASE}/img/logo-shishuo.png`} class="icons2" alt="shishuo" loading="lazy" />
+        <img src={`${BASE}/img/logo-apacheinlong.png`} class="icons2" alt="apacheinlong" loading="lazy" />
+      </div>
+    </>
+  )}
+</div>

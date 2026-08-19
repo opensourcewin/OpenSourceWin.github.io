@@ -16,14 +16,14 @@ const TIME_DELAY = 800;
 
 // 读取 JSON 数据
 async function readRankingData() {
-    const filePath = path.join(__dirname, '../source/_data/rankingList.json');
+    const filePath = path.join(__dirname, '../src/data/rankingList.json');
     const data = await fs.readFile(filePath, 'utf-8');
     return JSON.parse(data);
 }
 
 // 写入 JSON 数据
 async function writeRankingData(data) {
-    const filePath = path.join(__dirname, '../source/_data/rankingList.json');
+    const filePath = path.join(__dirname, '../src/data/rankingList.json');
     await fs.writeFile(filePath, JSON.stringify(data, null, 2));
 }
 

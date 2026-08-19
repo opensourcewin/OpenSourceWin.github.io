@@ -27,9 +27,14 @@ export default function Typewriter({
   startDelay = 0,
   className = "",
 }: TypewriterProps) {
-  const [language, setLanguage] = useState<Language>(detectLanguage);
+  // Use a deterministic SSR value, then read browser preferences after hydration.
+  const [language, setLanguage] = useState<Language>("en");
   const [displayed, setDisplayed] = useState("");
   const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    setLanguage(detectLanguage());
+  }, []);
 
   // Respect prefers-reduced-motion.
   useEffect(() => {

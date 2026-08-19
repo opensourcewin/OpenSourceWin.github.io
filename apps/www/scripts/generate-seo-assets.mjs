@@ -12,10 +12,10 @@ import { readdirSync, readFileSync, existsSync, mkdirSync, writeFileSync } from 
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const SOURCE_DIR = join(ROOT, 'ossheroes', 'source');
 const RANKING_DIR = join(SOURCE_DIR, 'opensource-ranking');
-const DIST_DIR = join(ROOT, 'dist');
+const DIST_DIR = join(ROOT, 'www', 'dist');
 const SITE = 'https://opensource.win';
 
 /** 开发者目录判定：目录内含 index.md 且 front-matter 带 slug 字段。

@@ -1,65 +1,83 @@
-import { useState, useEffect } from "react";
-import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
+
+type Language = "en" | "zh";
 
 interface TypewriterProps {
-  text: string;
+  /** Bilingual copy; re-types when the active language changes. */
+  texts: Record<Language, string>;
   speed?: number;
-  className?: string;
-  onComplete?: () => void;
   startDelay?: number;
+  className?: string;
 }
 
-export function Typewriter({ text, speed = 30, className, onComplete, startDelay = 0 }: TypewriterProps) {
-  const [displayedText, setDisplayedText] = useState("");
-  const [isStarted, setIsStarted] = useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+/** Reads the persisted language, mirroring the `osw-language` key shared with ossheroes. */
+function detectLanguage(): Language {
+  try {
+    const stored = window.localStorage.getItem("osw-language");
+    if (stored === "zh" || stored === "en") return stored;
+  } catch {
+    // localStorage unavailable (private mode) — fall through to navigator.
+  }
+  return (navigator.language || "en").toLowerCase().startsWith("zh") ? "zh" : "en";
+}
 
+export default function Typewriter({
+  texts,
+  speed = 30,
+  startDelay = 0,
+  className = "",
+}: TypewriterProps) {
+  const [language, setLanguage] = useState<Language>(detectLanguage);
+  const [displayed, setDisplayed] = useState("");
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  // Respect prefers-reduced-motion.
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setPrefersReducedMotion(mediaQuery.matches);
-    const handleChange = (event: MediaQueryListEvent) => setPrefersReducedMotion(event.matches);
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const onChange = () => setReducedMotion(mq.matches);
+    setReducedMotion(mq.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
   }, []);
 
+  // React to the language toggle dispatched by the page's i18n script.
   useEffect(() => {
-    if (prefersReducedMotion) {
-      setDisplayedText(text);
-      onComplete?.();
+    const onChange = (event: Event) => {
+      const lang = (event as CustomEvent<{ language?: string }>).detail?.language;
+      if (lang === "en" || lang === "zh") setLanguage(lang);
+    };
+    window.addEventListener("osw:languagechange", onChange as EventListener);
+    return () => window.removeEventListener("osw:languagechange", onChange as EventListener);
+  }, []);
+
+  const text = texts[language];
+
+  useEffect(() => {
+    if (reducedMotion) {
+      setDisplayed(text);
       return;
     }
 
-    const startTimeout = setTimeout(() => {
-      setIsStarted(true);
+    setDisplayed("");
+    let interval: number | undefined;
+    const timeout = window.setTimeout(() => {
+      let i = 0;
+      interval = window.setInterval(() => {
+        i += 1;
+        setDisplayed(text.slice(0, i));
+        if (i >= text.length && interval !== undefined) window.clearInterval(interval);
+      }, speed);
     }, startDelay);
-    return () => clearTimeout(startTimeout);
-  }, [startDelay, prefersReducedMotion, text, onComplete]);
 
-  useEffect(() => {
-    if (!isStarted || prefersReducedMotion) return;
-
-    let i = 0;
-    setDisplayedText(""); // Reset when text changes
-    
-    const intervalId = setInterval(() => {
-      setDisplayedText((prev) => {
-        if (i >= text.length) {
-          clearInterval(intervalId);
-          onComplete?.();
-          return text;
-        }
-        const nextChar = text.charAt(i);
-        i++;
-        return prev + nextChar;
-      });
-    }, speed);
-
-    return () => clearInterval(intervalId);
-  }, [text, speed, isStarted, prefersReducedMotion, onComplete]);
+    return () => {
+      window.clearTimeout(timeout);
+      if (interval !== undefined) window.clearInterval(interval);
+    };
+  }, [text, speed, startDelay, reducedMotion]);
 
   return (
-    <span className={cn("font-mono", className)}>
-      {displayedText}
+    <span className={`font-mono ${className}`}>
+      {displayed}
       <span className="animate-cursor-blink inline-block w-[0.6ch] h-[1.2em] bg-primary align-middle ml-1" />
     </span>
   );

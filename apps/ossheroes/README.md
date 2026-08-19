@@ -11,27 +11,28 @@
 
 ## 如何提供你的资料？ 
 
-如你所见我们的官方网站也是完全开源的，它基于[Hexo](https://hexo.io)静态网站生成器搭建，我们利用 GitHub Actions 提供的持续集成功能来实时发布我们的内容。[OpenSource.win](https://opensource.win)里的所有入榜用户个人资料的维护亦采用开源的方式，由用户自己完善后向我们提交 PR，经审核完成后合并入主站并实时发布。
+如你所见我们的官方网站也是完全开源的，它基于 [Astro](https://astro.build) 静态网站生成器搭建，我们利用 GitHub Actions 提供的持续集成功能来实时发布我们的内容。[OpenSource.win](https://opensource.win)里的所有入榜用户个人资料的维护亦采用开源的方式，由用户自己完善后向我们提交 PR，经审核完成后合并入主站并实时发布。
 
 ### 如何开始？
 
 点击本页面右上角的 `Fork` 按钮，将代码添加至你自己的主仓库。然后用你喜欢的 `Git` 工具将代码 `Clone` 到本地。
 
-进入代码目录，安装 `Hexo` 的必要依赖。
+进入代码目录，安装依赖（本仓库是 pnpm monorepo，请在仓库根目录执行）。
 
 ```bash
-cd OpenSourceWin
-npm i
+cd OpenSourceWin.github.io
+pnpm install
 ```
-如果用户名目录已经存在，你只需要去目录下面的 `index.md` 完善更新自己的信息即可。
+如果用户名目录已经存在，你只需要去 `apps/ossheroes/src/content/heroes` 目录下面找到对应的 `index.md` 完善更新自己的信息即可。
 
-不存在你就需要创建自己的个人介绍页了，**注意：页面的名称请使用你的 GitHub 用户名。**
+不存在你就需要创建自己的个人介绍页了，**注意：页面的目录名请使用你的 GitHub 用户名。**
 
 ```bash
-npx hexo new page <你的用户名>
+mkdir -p apps/ossheroes/src/content/heroes/<你的用户名>
+touch apps/ossheroes/src/content/heroes/<你的用户名>/index.md
 ```
 
-假设你的用户名是 `foo`，现在你会发现在 `source` 目录下面出现了一个新的 `foo` 目录。里面有 `index.md` 这个文件，这里既是你用来撰写个人简介的地方，如它的后缀所示，个人简介由 `Markdown` 格式书写。打开这个文件，修改并添加以下内容(注意：尖括号`<>`以及以内的内容仅代表对当前项目的解释，在正式使用时请依照此修改为你的内容)：
+假设你的用户名是 `foo`，现在你会发现在 `apps/ossheroes/src/content/heroes` 目录下面出现了一个新的 `foo` 目录。里面有 `index.md` 这个文件，这里既是你用来撰写个人简介的地方，如它的后缀所示，个人简介由 `Markdown` 格式书写。打开这个文件，修改并添加以下内容(注意：尖括号`<>`以及以内的内容仅代表对当前项目的解释，在正式使用时请依照此修改为你的内容)：
 
 ```markdown
 ---
@@ -48,7 +49,7 @@ github_avatar: <Github 头像地址>
 
 上面提到的个人头像文件，我们建议每个用户都要提交一个个人头像，以便我们标示你。这个图片可以是 `jpg,png,gif` 格式，应该是一个正方形分辨率至少超过 `256x256` 的文件。
 
-将此文件放置在个人简介的同级目录下，比如这个文件叫 `avatar.png`，它应该放置到 `source/foo` 目录下，然后上列的 `avatar` 项目应该填写 `avatar.png`，如果改头像存在会优先展示该头像，不存在会降级使用 github_avatar 的值。
+将此文件放置在个人简介的同级目录下，比如这个文件叫 `avatar.png`，它应该放置到 `apps/ossheroes/src/content/heroes/foo` 目录下，然后上列的 `avatar` 项目应该填写 `avatar.png`，如果改头像存在会优先展示该头像，不存在会降级使用 github_avatar 的值。
 
 如果头像不存在，我们会通过脚本从 GitHub 上获取头像也就是上面的 github_avatar 的值。
 

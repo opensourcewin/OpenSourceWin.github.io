@@ -1,0 +1,33 @@
+---
+import Avatar from './Avatar.astro';
+import { BASE } from '../lib/site';
+import { normalizeMeta } from '../lib/meta';
+
+interface Props {
+  login: string;
+  name?: string | null;
+  description?: string | null;
+  avatar?: ImageMetadata | null;
+  githubAvatar?: string | null;
+  /** 有详情页（内容集合条目）的渲染为链接，否则为静态卡片 */
+  hasPage: boolean;
+}
+
+const { login, name, description, avatar, githubAvatar, hasPage } = Astro.props;
+const displayName = normalizeMeta(name) || login;
+const desc = normalizeMeta(description);
+---
+
+{hasPage ? (
+  <a class="user-item" href={`${BASE}/${login}/`}>
+    <Avatar login={login} size={64} className="avatar" displayName={displayName} avatar={avatar} githubAvatar={githubAvatar} />
+    <div class="nickname mt-2">{displayName}</div>
+    <div class="description mt-1">{desc}</div>
+  </a>
+) : (
+  <div class="user-item">
+    <Avatar login={login} size={64} className="avatar" displayName={displayName} avatar={avatar} githubAvatar={githubAvatar} />
+    <div class="nickname mt-2">{displayName}</div>
+    <div class="description mt-1">{desc}</div>
+  </div>
+)}

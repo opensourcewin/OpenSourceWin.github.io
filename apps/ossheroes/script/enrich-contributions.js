@@ -1,6 +1,6 @@
 /**
  * @description 通过 GitHub REST API 为开发者页面补全「主要贡献项目」列表。
- *   - 扫描 source/ 下正文为空（或正文无实质内容且无仓库链接）的开发者页面；
+ *   - 扫描 src/content/heroes/ 下正文为空（或正文无实质内容且无仓库链接）的开发者页面；
  *   - 合并「本人非 fork 仓库」与「公开事件（Push/PullRequest）涉及的他人仓库」两类候选，
  *     按 stargazers_count 排序取前 10（star 相同按名称字典序）；
  *   - 对 NEW_LOGINS 中尚未建页的组织成员，先创建 front-matter 再补全正文。
@@ -26,7 +26,7 @@ const NEW_LOGINS = ['joyqi', 'shuashuai', 'sunshineg'];
 // 非开发者目录，扫描时排除
 const EXCLUDE_DIRS = new Set(['_data', '_posts', 'opensource-ranking']);
 
-const SOURCE_DIR = path.join(__dirname, '../source');
+const SOURCE_DIR = path.join(__dirname, '../src/content/heroes');
 const API_BASE = 'https://api.github.com';
 
 if (!GITHUB_TOKEN) {

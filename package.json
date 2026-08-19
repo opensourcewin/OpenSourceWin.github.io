@@ -11,5 +11,10 @@
     "build:ossheroes": "pnpm --filter ossheroes build",
     "clean": "pnpm -r exec rm -rf dist node_modules/.cache .astro"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "pnpm": {
+    "overrides": {
+      "vite": "^7.3.6"
+    }
+  }
 }

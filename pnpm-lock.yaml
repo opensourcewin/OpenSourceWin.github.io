@@ -37,6 +37,9 @@ importers:
       react-dom:
         specifier: ^19.2.0
         version: 19.2.8(react@19.2.8)
+      sharp:
+        specifier: ^0.34.5
+        version: 0.34.5
     devDependencies:
       '@astrojs/check':
         specifier: ^0.9.10

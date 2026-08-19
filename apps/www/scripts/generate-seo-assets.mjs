@@ -4,7 +4,7 @@
  *    为每个开发者生成 dist/<login>/index.html（canonical + meta refresh + JS replace 三重跳转）。
  * 2. dist/sitemap.xml —— 覆盖首页、码力榜首页、年度榜单页与全部开发者页。
  *
- * 在根 `pnpm build`（vite build 之后）运行；CI 中 ossheroes/dist/ossheroes 随后才拷入 dist/ossheroes，
+ * 在 `pnpm --filter www build`（Astro build 之后）运行；CI 中 apps/ossheroes/dist/ossheroes 随后才合并到 dist/ossheroes，
  * 因此这里只写 dist 根级内容，不依赖 ossheroes 的构建产物。
  */
 

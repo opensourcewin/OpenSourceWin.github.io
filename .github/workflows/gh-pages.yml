@@ -26,29 +26,20 @@ jobs:
         with:
           node-version: '20'
           cache: 'pnpm'
-          cache-dependency-path: |
-            pnpm-lock.yaml
-            ossheroes/pnpm-lock.yaml
-      - name: Build main site
+          cache-dependency-path: pnpm-lock.yaml
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Build sites
+        run: pnpm build
+      - name: Stage ossheroes output
         run: |
-          pnpm install --frozen-lockfile
-          pnpm run build
-      - name: Build ossheroes site
-        run: |
-          if [ ! -d ossheroes ]; then
-            echo "Error: ossheroes directory not found"
+          if [ ! -d apps/ossheroes/public ]; then
+            echo "Error: apps/ossheroes/public directory not created"
             exit 1
           fi
-          cd ossheroes
-          pnpm install --frozen-lockfile
-          pnpm run build
-          if [ ! -d public ]; then
-            echo "Error: ossheroes/public directory not created"
-            exit 1
-          fi
-          cp -r public ../dist/ossheroes
+          cp -r apps/ossheroes/public apps/www/dist/ossheroes
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: dist
+          folder: apps/www/dist

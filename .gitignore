@@ -3,9 +3,38 @@ node_modules/
 
 # Build outputs
 dist/
+apps/*/dist/
+apps/*/.astro/
+apps/ossheroes/public/
+packages/*/dist/
 
-# Lock files
+# Lock files (only root pnpm-lock.yaml should be tracked)
 package-lock.json
+yarn.lock
+apps/*/pnpm-lock.yaml
+packages/*/pnpm-lock.yaml
+
+# Logs
+*.log
+logs/
 
 # macOS
 .DS_Store
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Hexo cache
+db.json
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Temporary files
+*.tmp
+.cache/

@@ -19,6 +19,9 @@ importers:
       '@astrojs/sitemap':
         specifier: ^3.7.3
         version: 3.7.3
+      '@opensource-win/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       astro:
         specifier: ^5.18.2
         version: 5.18.2(@types/node@24.13.3)(jiti@2.7.0)(lightningcss@1.32.0)(rollup@4.62.4)(typescript@5.9.3)(yaml@2.9.0)
@@ -59,6 +62,9 @@ importers:
       '@astrojs/react':
         specifier: ^4.4.0
         version: 4.4.2(@types/node@24.13.3)(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(jiti@2.7.0)(lightningcss@1.32.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(yaml@2.9.0)
+      '@opensource-win/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       astro:
         specifier: ^5.18.0
         version: 5.18.2(@types/node@24.13.3)(jiti@2.7.0)(lightningcss@1.32.0)(rollup@4.62.4)(typescript@5.9.3)(yaml@2.9.0)
@@ -90,12 +96,6 @@ importers:
 
   packages/ui:
     devDependencies:
-      '@types/react':
-        specifier: ^19.2.5
-        version: 19.2.18
-      react:
-        specifier: ^19.2.0
-        version: 19.2.8
       typescript:
         specifier: ~5.9.3
         version: 5.9.3

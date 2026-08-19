@@ -1,9 +1,14 @@
 /**
  * 开发者详情页 SEO 元数据构建 —— 移植自 Hexo 主题 head.ejs：
  * title / description / keywords / OG / JSON-LD 的组合逻辑保持一致。
+ * PageSeo 契约与 <SeoHead> 渲染器由共享包 @opensource-win/ui 提供。
  */
+import type { PageSeo } from '@opensource-win/ui';
 import { SITE_URL, BASE, DEFAULT_OG_IMAGE } from './site';
 import { topRepoNames } from './contributions';
+
+/** 对外再导出共享契约，保持本模块既有公开面（BaseLayout 等可直接从包导入）。 */
+export type { PageSeo } from '@opensource-win/ui';
 
 /** 历史数据里存在 "null" / "undefined" 之类的占位字符串，统一归一化为空 */
 export function normalizeMeta(val: unknown): string {
@@ -20,16 +25,6 @@ export interface DevSeoInput {
   github_avatar?: string | null;
   /** markdown 正文（用于提取主要贡献项目） */
   body: string;
-}
-
-export interface PageSeo {
-  title: string;
-  description: string;
-  keywords?: string;
-  ogType: 'website' | 'article';
-  ogImage: string;
-  canonical: string;
-  jsonLd?: Record<string, unknown>;
 }
 
 export function buildDevSeo(input: DevSeoInput): PageSeo {

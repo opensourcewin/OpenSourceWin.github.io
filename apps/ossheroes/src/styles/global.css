@@ -1,16 +1,7 @@
 @import 'tailwindcss';
+@import '@opensource-win/ui/tokens.css';
 
-/* OpenSource.Win 设计 token —— 与官网 src/index.css 对齐（暗黑终端黑客风） */
-:root {
-  --osw-background: oklch(0.10 0 0);
-  --osw-card: oklch(0.12 0 0);
-  --osw-primary: oklch(0.85 0.20 140);
-  --osw-foreground: oklch(0.90 0.15 140);
-  --osw-muted: oklch(0.60 0.05 140);
-  --osw-border: oklch(0.25 0.05 140);
-  --osw-font: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
-    "PingFang SC", "Microsoft YaHei", monospace, sans-serif;
-}
+/* 设计 token（--osw-*）由 packages/ui 统一提供，下面所有组件样式引用这些变量。 */
 
 body {
   padding: 0;

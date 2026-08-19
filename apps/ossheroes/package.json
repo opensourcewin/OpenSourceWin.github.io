@@ -12,6 +12,7 @@
   "dependencies": {
     "@astrojs/react": "^4.4.2",
     "@astrojs/sitemap": "^3.7.3",
+    "@opensource-win/ui": "workspace:*",
     "astro": "^5.18.2",
     "dompurify": "^3.4.14",
     "marked": "^18.0.10",

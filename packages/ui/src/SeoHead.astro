@@ -1,0 +1,81 @@
+---
+/**
+ * 共享 SEO <head> 渲染器 —— apps/www 与 apps/ossheroes 复用同一套标准 meta：
+ * title / description / keywords / author / OG / Twitter / canonical / theme-color / JSON-LD。
+ *
+ * - 站点级信息（siteName / locale / author / themeColor / twitterSite / keywordsFallback / robots）
+ *   由各 app 按自身情况传入；
+ * - 传入 i18n 时，title / description 系列标签会额外输出 data-i18n-en / data-i18n-zh 属性，
+ *   与两个 app 共用的客户端语言切换脚本（localStorage key = osw-language）协同；
+ * - 各 app 专属的 <meta name="generator"> / sitemap / favicon / 字体预连接仍留在各自页面。
+ */
+import type { PageSeo, SeoI18n } from './seo';
+import { stringifyJsonLd } from './seo';
+
+interface Props {
+  seo: PageSeo;
+  siteName?: string;
+  locale?: string;
+  author?: string;
+  themeColor?: string;
+  twitterSite?: string;
+  keywordsFallback?: string;
+  robots?: string;
+  i18n?: SeoI18n;
+}
+
+const {
+  seo,
+  siteName,
+  locale,
+  author,
+  themeColor = '#0d0d0d',
+  twitterSite,
+  keywordsFallback,
+  robots,
+  i18n,
+} = Astro.props;
+
+const titleEn = i18n?.en?.title;
+const titleZh = i18n?.zh?.title;
+const descEn = i18n?.en?.description;
+const descZh = i18n?.zh?.description;
+const keywords = seo.keywords ?? keywordsFallback;
+---
+
+{robots && <meta name="robots" content={robots} />}
+<title data-i18n-en={titleEn} data-i18n-zh={titleZh}>{seo.title}</title>
+{seo.description && (
+  <meta name="description" content={seo.description} data-i18n-en={descEn} data-i18n-zh={descZh} />
+)}
+{keywords && <meta name="keywords" content={keywords} />}
+{author && <meta name="author" content={author} />}
+
+<!-- Open Graph -->
+<meta property="og:title" content={seo.title} data-i18n-en={titleEn} data-i18n-zh={titleZh} />
+{seo.description && (
+  <meta property="og:description" content={seo.description} data-i18n-en={descEn} data-i18n-zh={descZh} />
+)}
+<meta property="og:type" content={seo.ogType} />
+<meta property="og:url" content={seo.canonical} />
+<meta property="og:image" content={seo.ogImage} />
+{siteName && <meta property="og:site_name" content={siteName} />}
+{locale && <meta property="og:locale" content={locale} />}
+
+<!-- Twitter -->
+{twitterSite && <meta name="twitter:site" content={twitterSite} />}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={seo.title} data-i18n-en={titleEn} data-i18n-zh={titleZh} />
+{seo.description && (
+  <meta name="twitter:description" content={seo.description} data-i18n-en={descEn} data-i18n-zh={descZh} />
+)}
+<meta name="twitter:image" content={seo.ogImage} />
+
+<!-- Canonical / Theme -->
+<link rel="canonical" href={seo.canonical} />
+<meta name="theme-color" content={themeColor} />
+
+<!-- 结构化数据：转义 `<` 防止标签提前闭合 -->
+{seo.jsonLd && (
+  <script type="application/ld+json" is:inline set:html={stringifyJsonLd(seo.jsonLd)} />
+)}

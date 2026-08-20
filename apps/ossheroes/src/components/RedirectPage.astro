@@ -1,0 +1,30 @@
+---
+import { SITE_URL } from '../lib/site';
+
+interface Props {
+  title: string;
+  targetPath: string;
+  kind: string;
+}
+
+const { title, targetPath, kind } = Astro.props;
+const targetUrl = `${SITE_URL}${targetPath}`;
+const redirectScript = `location.replace(${JSON.stringify(targetPath)} + location.search + location.hash);`;
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title} has moved — OpenSource.Win</title>
+  <meta name="robots" content="noindex,follow" />
+  <link rel="canonical" href={targetUrl} />
+  <meta http-equiv="refresh" content={`0;url=${targetPath}`} />
+  <script is:inline set:html={redirectScript} />
+</head>
+<body>
+  <p>This {kind} has moved to <a href={targetPath}>{targetUrl}</a>.</p>
+  <p>此页面已迁移至 <a href={targetPath}>{targetUrl}</a>。</p>
+</body>
+</html>

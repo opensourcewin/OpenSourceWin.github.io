@@ -1,0 +1,16 @@
+---
+import RedirectPage from '../../components/RedirectPage.astro';
+import { getYearsDesc } from '../../lib/ranking';
+import { HEROES_BASE } from '../../lib/site';
+
+export function getStaticPaths() {
+  return getYearsDesc().map((item) => ({
+    params: { year: String(item.year) },
+    props: { year: String(item.year) },
+  }));
+}
+
+const { year } = Astro.props;
+---
+
+<RedirectPage title={`ranking-${year}`} targetPath={`${HEROES_BASE}/ranking-${year}/`} kind="ranking page" />

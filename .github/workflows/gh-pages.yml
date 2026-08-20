@@ -37,12 +37,16 @@ jobs:
       - name: Build ossheroes site
         run: pnpm --filter ossheroes build
 
+      - name: Verify ossheroes URLs and SEO
+        run: |
+          pnpm --filter ossheroes verify:urls
+          pnpm --filter ossheroes verify:seo
+
       - name: Merge outputs for GitHub Pages
         run: |
           rm -rf dist
-          mkdir -p dist/ossheroes
           cp -r apps/www/dist/. dist/
-          cp -r apps/ossheroes/dist/ossheroes/. dist/ossheroes/
+          cp -r apps/ossheroes/dist/. dist/
 
           # sanity checks
           for f in index.html sitemap.xml robots.txt llms.txt; do
@@ -51,8 +55,14 @@ jobs:
               exit 1
             fi
           done
-          if [ ! -f dist/ossheroes/index.html ]; then
-            echo "Error: dist/ossheroes/index.html not found"
+          for f in heroes/index.html ossheroes/index.html; do
+            if [ ! -f "dist/${f}" ]; then
+              echo "Error: dist/${f} not found"
+              exit 1
+            fi
+          done
+          if ! find dist/hero -mindepth 2 -maxdepth 2 -name index.html -print -quit | grep -q .; then
+            echo "Error: no developer profile was built under dist/hero"
             exit 1
           fi
 

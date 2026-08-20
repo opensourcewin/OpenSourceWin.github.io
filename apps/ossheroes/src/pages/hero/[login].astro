@@ -1,21 +1,21 @@
 ---
 import { getCollection, render } from 'astro:content';
 import { marked } from 'marked';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Navbar from '../components/Navbar.astro';
-import DetailHero from '../components/DetailHero.astro';
-import Avatar from '../components/Avatar.astro';
-import RankBadges from '../components/RankBadges.astro';
-import ReadmeSection from '../components/ReadmeSection.astro';
-import Footer from '../components/Footer.astro';
-import { buildDevSeo, normalizeMeta } from '../lib/meta';
-import { parseContributions } from '../lib/contributions';
-import { getRankHistory } from '../lib/ranking';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import DetailHero from '../../components/DetailHero.astro';
+import Avatar from '../../components/Avatar.astro';
+import RankBadges from '../../components/RankBadges.astro';
+import ReadmeSection from '../../components/ReadmeSection.astro';
+import Footer from '../../components/Footer.astro';
+import { buildDevSeo, normalizeMeta } from '../../lib/meta';
+import { parseContributions } from '../../lib/contributions';
+import { getRankHistory } from '../../lib/ranking';
 
 export async function getStaticPaths() {
   const heroes = await getCollection('heroes');
   return heroes.map((entry) => ({
-    params: { login: entry.id },
+    params: { login: String(entry.data.slug) },
     props: { entry },
   }));
 }
@@ -49,7 +49,7 @@ const { Content } = await render(entry);
 ---
 
 <BaseLayout seo={seo}>
-  <!-- 头部（banner 大图已移除，图片文件仍保留在 static/img/） -->
+  <!-- 头部（banner 大图已移除，图片文件仍保留在 static/heroes/img/） -->
   <div class="header header-detail">
     <Navbar />
   </div>

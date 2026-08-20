@@ -4,7 +4,7 @@
  * PageSeo 契约与 <SeoHead> 渲染器由共享包 @opensource-win/ui 提供。
  */
 import type { PageSeo } from '@opensource-win/ui';
-import { SITE_URL, BASE, DEFAULT_OG_IMAGE } from './site';
+import { SITE_URL, HERO_BASE, DEFAULT_OG_IMAGE } from './site';
 import { topRepoNames } from './contributions';
 
 /** 对外再导出共享契约，保持本模块既有公开面（BaseLayout 等可直接从包导入）。 */
@@ -65,10 +65,11 @@ export function buildDevSeo(input: DevSeoInput): PageSeo {
     .filter((kw, i, arr) => kw && arr.indexOf(kw) === i)
     .join(',');
 
-  const url = `${SITE_URL}${BASE}/${devLogin}/`;
+  const url = `${SITE_URL}${HERO_BASE}/${devLogin}/`;
 
   const person: Record<string, unknown> = {
     '@type': 'Person',
+    '@id': `${url}#person`,
     name: devName,
     alternateName: devLogin,
     url,
@@ -82,6 +83,7 @@ export function buildDevSeo(input: DevSeoInput): PageSeo {
   const jsonLd: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'ProfilePage',
+    '@id': url,
     name: title,
     url,
     mainEntity: person,

@@ -13,16 +13,16 @@
 
 ## China Open Source HeroRank
 
-- [HeroRank Home](https://opensource.win/ossheroes/): Introduction and entry to annual rankings.
-- [2021 Ranking](https://opensource.win/ossheroes/ranking-2021.html): Full 2021 China Open Source HeroRank.
-- [2022 Ranking](https://opensource.win/ossheroes/ranking-2022.html): Full 2022 China Open Source HeroRank.
-- [2023 Ranking](https://opensource.win/ossheroes/ranking-2023.html): Full 2023 China Open Source HeroRank.
-- [2024 Ranking](https://opensource.win/ossheroes/ranking-2024.html): Full 2024 China Open Source HeroRank.
-- [2025 Ranking](https://opensource.win/ossheroes/ranking-2025.html): Full 2025 China Open Source HeroRank.
+- [HeroRank Home](https://opensource.win/heroes/): Introduction and entry to annual rankings.
+- [2021 Ranking](https://opensource.win/heroes/ranking-2021/): Full 2021 China Open Source HeroRank.
+- [2022 Ranking](https://opensource.win/heroes/ranking-2022/): Full 2022 China Open Source HeroRank.
+- [2023 Ranking](https://opensource.win/heroes/ranking-2023/): Full 2023 China Open Source HeroRank.
+- [2024 Ranking](https://opensource.win/heroes/ranking-2024/): Full 2024 China Open Source HeroRank.
+- [2025 Ranking](https://opensource.win/heroes/ranking-2025/): Full 2025 China Open Source HeroRank.
 
 ## Developer Profiles
 
-- Profiles follow the pattern `https://opensource.win/ossheroes/<login>/`, where `<login>` is the developer's GitHub username, e.g. [Goooler's profile](https://opensource.win/ossheroes/Goooler/).
+- Profiles follow the pattern `https://opensource.win/hero/<login>/`, where `<login>` is the developer's GitHub username, e.g. [Goooler's profile](https://opensource.win/hero/Goooler/).
 - Each profile includes the developer's name, location, GitHub link, annual rankings, and top contributed repositories.
 - Full list of developer pages: [sitemap.xml](https://opensource.win/sitemap.xml)
 

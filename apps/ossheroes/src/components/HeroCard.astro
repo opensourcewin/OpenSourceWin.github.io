@@ -1,6 +1,6 @@
 ---
 import Avatar from './Avatar.astro';
-import { BASE } from '../lib/site';
+import { HERO_BASE } from '../lib/site';
 import { normalizeMeta } from '../lib/meta';
 
 interface Props {
@@ -19,7 +19,7 @@ const desc = normalizeMeta(description);
 ---
 
 {hasPage ? (
-  <a class="user-item" href={`${BASE}/${login}/`}>
+  <a class="user-item" href={`${HERO_BASE}/${login}/`}>
     <Avatar login={login} size={64} className="avatar" displayName={displayName} avatar={avatar} githubAvatar={githubAvatar} />
     <div class="nickname mt-2">{displayName}</div>
     <div class="description mt-1">{desc}</div>

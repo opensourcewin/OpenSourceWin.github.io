@@ -1,15 +1,15 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
-import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://opensource.win',
-  base: '/ossheroes',
-  // 产物输出至 dist/ossheroes；CI (gh-pages.yml) 会把该目录拷入 apps/www/dist/ossheroes。
-  outDir: './dist/ossheroes',
+  // 站点同时输出 /heroes/、/hero/<login>/ 与旧 /ossheroes/ 跳转页，不能再使用单一 base。
+  base: '/',
+  // CI 会把该目录的各个路由目录合并至 GitHub Pages 根目录。
+  outDir: './dist',
   // 静态资源源目录用 static（assets 配置见下），与 outDir 分离避免混淆。
   publicDir: './static',
   build: {
@@ -19,8 +19,6 @@ export default defineConfig({
   },
   integrations: [
     react(),
-    // 旧 .html 跳转页不进 sitemap
-    sitemap({ filter: (page) => !page.includes('.html') }),
   ],
   vite: {
     plugins: [tailwindcss()],

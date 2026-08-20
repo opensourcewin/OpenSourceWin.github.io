@@ -1,0 +1,17 @@
+---
+import { getCollection } from 'astro:content';
+import RedirectPage from '../../components/RedirectPage.astro';
+import { HERO_BASE } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const heroes = await getCollection('heroes');
+  return heroes.map((entry) => ({
+    params: { login: String(entry.data.slug) },
+    props: { login: String(entry.data.slug) },
+  }));
+}
+
+const { login } = Astro.props;
+---
+
+<RedirectPage title={login} targetPath={`${HERO_BASE}/${login}/`} kind="developer profile" />

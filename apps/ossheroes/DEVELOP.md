@@ -1,7 +1,7 @@
 ### 项目开发
 
 本站基于 Astro 构建：开发者档案为 Content Collection（`src/content/heroes/<login>/index.md`），
-年度榜单由动态路由 `src/pages/ranking-[year].astro` 根据 `src/data/rankingList.json` 自动生成。
+年度榜单由动态路由 `src/pages/heroes/ranking-[year].astro` 根据 `src/data/rankingList.json` 自动生成。
 
 > 兼容说明：仓库根的 `source` 是指向 `src/content/heroes` 的符号链接，仅供
 > apps/www 的 SEO 脚本（generate-seo-assets.mjs）按旧路径读取开发者列表，请保留。
@@ -68,7 +68,7 @@
 ### 往年榜单
 
 榜单页由 Astro 动态路由 `src/pages/ranking-[year].astro` 根据 `src/data/rankingList.json`
-中存在的年份自动生成（`/ossheroes/ranking-<year>/`），无需手动创建页面文件。
+中存在的年份自动生成（`/heroes/ranking-<year>/`），无需手动创建页面文件。
 
 `src/content/heroes/opensource-ranking/` 下的 `<year>.md` 是兼容占位文件：apps/www 的
 SEO 脚本通过它们枚举榜单年份生成根 sitemap。sync_xlab.js 将新年份写入 rankingList.json 后，

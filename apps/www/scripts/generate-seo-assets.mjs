@@ -1,11 +1,11 @@
 /**
  * 构建期 SEO/GEO 资产生成：
- * 1. 旧开发者 URL 静态跳转页 —— 开发者详情页已从 /<login>/ 迁到 /ossheroes/<login>/，
+ * 1. 旧开发者 URL 静态跳转页 —— 开发者详情页已迁到 /hero/<login>/，
  *    为每个开发者生成 dist/<login>/index.html（canonical + meta refresh + JS replace 三重跳转）。
  * 2. dist/sitemap.xml —— 覆盖首页、码力榜首页、年度榜单页与全部开发者页。
  *
- * 在 `pnpm --filter www build`（Astro build 之后）运行；CI 中 apps/ossheroes/dist/ossheroes 随后才合并到 dist/ossheroes，
- * 因此这里只写 dist 根级内容，不依赖 ossheroes 的构建产物。
+ * 在 `pnpm --filter www build`（Astro build 之后）运行；码力榜构建产物随后合并到根目录，
+ * 因此这里只写根站点的 sitemap 和更早的根级开发者兼容地址。
  */
 
 import { readdirSync, readFileSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
@@ -48,7 +48,7 @@ const escapeHtml = (s) =>
     s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 function redirectPage(login) {
-    const newPath = `/ossheroes/${login}/`;
+    const newPath = `/hero/${login}/`;
     const newUrl = `${SITE}${newPath}`;
     return `<!DOCTYPE html>
 <html lang="zh-CN">
@@ -82,14 +82,14 @@ function generateSitemap(logins, years) {
     const lastmod = new Date().toISOString().slice(0, 10);
     const urls = [
         { loc: `${SITE}/`, changefreq: 'monthly', priority: '1.0' },
-        { loc: `${SITE}/ossheroes/`, changefreq: 'monthly', priority: '0.9' },
+        { loc: `${SITE}/heroes/`, changefreq: 'monthly', priority: '0.9' },
         ...years.map((year) => ({
-            loc: `${SITE}/ossheroes/ranking-${year}.html`,
+            loc: `${SITE}/heroes/ranking-${year}/`,
             changefreq: 'yearly',
             priority: '0.8',
         })),
         ...logins.map((login) => ({
-            loc: `${SITE}/ossheroes/${login}/`,
+            loc: `${SITE}/hero/${login}/`,
             changefreq: 'monthly',
             priority: '0.6',
         })),

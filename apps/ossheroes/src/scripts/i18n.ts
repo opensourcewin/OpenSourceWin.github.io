@@ -64,11 +64,14 @@ function apply(lang: Lang) {
   for (let i = 0; i < nodes.length; i++) {
     nodes[i].innerHTML = nodes[i].getAttribute(attr) ?? '';
   }
-  const btns = document.querySelectorAll('[data-lang-switch]');
-  for (let j = 0; j < btns.length; j++) {
-    const active = btns[j].getAttribute('data-lang-switch') === lang;
-    btns[j].classList.toggle('active', active);
-    btns[j].setAttribute('aria-pressed', active ? 'true' : 'false');
+  /* 单按钮语言切换：按钮文案为目标语言（中文页显示 EN，英文页显示 中文） */
+  const toggle = document.querySelector<HTMLButtonElement>('.lang-btn[data-lang-en]');
+  if (toggle) {
+    const label = toggle.querySelector('[data-lang-label]');
+    const text = toggle.getAttribute(`data-lang-${lang}`);
+    if (label && text) label.textContent = text;
+    const ariaLabel = toggle.getAttribute(`data-aria-${lang}`);
+    if (ariaLabel) toggle.setAttribute('aria-label', ariaLabel);
   }
 }
 

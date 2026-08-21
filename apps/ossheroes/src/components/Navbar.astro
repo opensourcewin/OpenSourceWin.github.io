@@ -42,9 +42,21 @@ const pastYears = getPastYears();
         <li class="nav-item">
           <a href="https://opensource.win/" class="nav-link" data-i18n-zh="回到官网" data-i18n-en="Main Site">回到官网</a>
         </li>
-        <!-- 语言切换：中 / EN，与官网共用 localStorage key osw-language -->
-        <li class="nav-item lang-switch" aria-label="Language / 语言">
-          <button type="button" class="lang-btn" data-lang-switch="zh" onclick="window.OSW_I18N && OSW_I18N.set('zh')">中</button><span class="lang-sep" aria-hidden="true">/</span><button type="button" class="lang-btn" data-lang-switch="en" onclick="window.OSW_I18N && OSW_I18N.set('en')">EN</button>
+        <!-- 语言切换：单按钮显示目标语言，与官网共用 localStorage key osw-language -->
+        <li class="nav-item lang-switch">
+          <button
+            type="button"
+            class="lang-btn"
+            data-lang-en="中文"
+            data-lang-zh="EN"
+            data-aria-en="切换到中文"
+            data-aria-zh="Switch to English"
+            aria-label="Switch to English"
+            onclick="window.OSW_I18N && OSW_I18N.set(document.documentElement.lang === 'zh-CN' ? 'en' : 'zh')"
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6" /><path d="m4 14 6-6 2-3" /><path d="M2 5h12" /><path d="M7 2h1" /><path d="m22 22-5-10-5 10" /><path d="M14 18h6" /></svg>
+            <span data-lang-label>EN</span>
+          </button>
         </li>
       </ul>
     </div>

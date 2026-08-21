@@ -1,0 +1,79 @@
+---
+/**
+ * 年度榜单页主体 —— URL 级三语言共用渲染器；薄壳页面负责 getStaticPaths 并传入 locale + year。
+ */
+import { getCollection } from 'astro:content';
+import { t, type Locale } from '@opensource-win/ui';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../Navbar.astro';
+import Hero from '../Hero.astro';
+import Split from '../Split.astro';
+import Partners from '../Partners.astro';
+import Footer from '../Footer.astro';
+import HeroCard from '../HeroCard.astro';
+import { getRankingByYear } from '../../lib/ranking';
+import { buildPageSeo } from '../../lib/meta';
+import { HEROES_BASE, SITE_DESCRIPTION_ZH, SITE_DESCRIPTION_EN } from '../../lib/site';
+
+interface Props {
+  locale: Locale;
+  year: number;
+}
+
+const { locale, year } = Astro.props;
+const ranking = getRankingByYear(year)!;
+
+const path = `${HEROES_BASE}/ranking-${year}/`;
+const seo = buildPageSeo({
+  pageName: t(locale, `榜单详情 ${year}`, `Rankings ${year}`),
+  description: t(locale, SITE_DESCRIPTION_ZH, SITE_DESCRIPTION_EN),
+  path,
+  locale,
+});
+
+const heroes = await getCollection('heroes');
+const heroMap = new Map(heroes.map((entry) => [String(entry.data.slug), entry]));
+---
+
+<BaseLayout seo={seo} locale={locale} path={path}>
+  {/* 头部 */}
+  <div class="header" id="head">
+    <Navbar locale={locale} path={path} />
+    {/* 头部内容：与首页一致的终端风 hero，年份取当前榜单 */}
+    <Hero locale={locale} year={year} />
+  </div>
+
+  <div class="container">
+    <Split />
+
+    <div class="list" id="detail">
+      <div class="main-title">{t(locale, '榜单详情', 'Rankings')}-{year}</div>
+
+      <div id={String(year)} class="mt-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-x-6 gap-y-4">
+          {ranking.annualRanking.map((user) => {
+            const login = String(user.login);
+            const entry = heroMap.get(login);
+            return (
+              <HeroCard
+                locale={locale}
+                login={login}
+                name={entry?.data.name}
+                description={entry?.data.description}
+                avatar={entry?.data.avatar}
+                githubAvatar={entry?.data.github_avatar}
+                hasPage={!!entry}
+              />
+            );
+          })}
+        </div>
+      </div>
+    </div>
+
+    <Split />
+
+    <Partners locale={locale} extended2021={year === 2021} />
+  </div>
+
+  <Footer />
+</BaseLayout>

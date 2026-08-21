@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
- * 校验码力榜新规范 URL 与 GitHub Pages 静态兼容跳转页。
+ * 校验码力榜新规范 URL（URL 级三语言：en 无前缀 + /zh-CN/ + /zh-TW/）
+ * 与 GitHub Pages 静态兼容跳转页。
  *
  * 用法：node scripts/verify-urls.mjs [dist-dir]
  * 默认读取 apps/ossheroes/dist。
@@ -13,6 +14,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const DEFAULT_DIST = join(__dirname, '..', 'dist');
 const DIST = process.argv[2] ? resolve(process.argv[2]) : DEFAULT_DIST;
 const SITE = 'https://opensource.win';
+/** 带前缀的语言版本（en 为默认语言，无前缀） */
+const PREFIXED_LOCALES = ['zh-CN', 'zh-TW'];
 const errors = [];
 
 function check(condition, message) {
@@ -108,6 +111,25 @@ check(
 for (const login of sample(heroLogins, 10)) {
   check(existsSync(join(heroDir, login, 'index.html')), `/hero/${login}/ 规范详情页存在`);
   checkRedirect(join(legacyDir, login, 'index.html'), `/hero/${login}/`, `/ossheroes/${login}/`);
+}
+
+/* ---- 三语言结构：/zh-CN/ 与 /zh-TW/ 前缀下产出同构页面 ---- */
+for (const locale of PREFIXED_LOCALES) {
+  const localeRoot = join(DIST, locale);
+  check(existsSync(join(localeRoot, 'heroes', 'index.html')), `/${locale}/heroes/ 语言版首页存在`);
+  for (const year of rankingYears) {
+    check(
+      existsSync(join(localeRoot, 'heroes', `ranking-${year}`, 'index.html')),
+      `/${locale}/heroes/ranking-${year}/ 语言版榜单页存在`,
+    );
+  }
+  const localeHeroDir = join(localeRoot, 'hero');
+  for (const login of sample(heroLogins, 10)) {
+    check(
+      existsSync(join(localeHeroDir, login, 'index.html')),
+      `/${locale}/hero/${login}/ 语言版详情页存在`,
+    );
+  }
 }
 
 if (errors.length) {

@@ -1,0 +1,99 @@
+---
+/**
+ * 码力榜首页主体 —— URL 级三语言（en 无前缀 / zh-CN / zh-TW）共用渲染器。
+ * 薄壳页面（pages/heroes/index.astro、pages/zh-CN/heroes/index.astro、…）仅传入 locale。
+ */
+import { getCollection } from 'astro:content';
+import { t, type Locale } from '@opensource-win/ui';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../Navbar.astro';
+import Hero from '../Hero.astro';
+import Slogan from '../Slogan.astro';
+import Split from '../Split.astro';
+import Partners from '../Partners.astro';
+import Footer from '../Footer.astro';
+import HeroCard from '../HeroCard.astro';
+import { getLatestRanking } from '../../lib/ranking';
+import { buildPageSeo } from '../../lib/meta';
+import { HEROES_BASE, SITE_DESCRIPTION_ZH, SITE_DESCRIPTION_EN } from '../../lib/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const path = `${HEROES_BASE}/`;
+const seo = buildPageSeo({ description: t(locale, SITE_DESCRIPTION_ZH, SITE_DESCRIPTION_EN), path, locale });
+
+const latest = getLatestRanking();
+const heroes = await getCollection('heroes');
+const heroMap = new Map(heroes.map((entry) => [String(entry.data.slug), entry]));
+---
+
+<BaseLayout seo={seo} locale={locale} path={path}>
+  {/* 头部 */}
+  <div class="header" id="head">
+    <Navbar locale={locale} path={path} />
+    {/* 头部内容：纯 HTML 终端风 hero（banner 图片仅保留给 twitter:image，页面不再展示） */}
+    <Hero locale={locale} />
+  </div>
+
+  <div class="container">
+    <div class="list" id="ranking">
+      <div class="main-title">{t(locale, '中国开源码力榜', 'China Open Source HeroRank')}</div>
+
+      <div class="mt-6">
+        <Slogan locale={locale} />
+      </div>
+    </div>
+
+    <Split />
+
+    <div class="list" id="standard">
+      <div class="main-title">{t(locale, '评选标准', 'Selection Criteria')}</div>
+
+      <div class="text text2">
+        <div class="flex justify-center mt-6">
+          <ol class="w-full md:w-2/3">
+            <li set:html={t(locale, "中国开发者的辨别主要依据 OpenDigger 项目中持续收录的开发者地理位置标签，初始标签依据其 GitHub 上公开的信息由志愿者手工标注辨别，如有错漏，欢迎通过提 <a href='https://github.com/X-lab2017/open-digger/issues' target='_blank'>issue</a> 贡献标签。", "Chinese developers are identified primarily through the geographic location labels continuously maintained in the OpenDigger project. Initial labels are manually annotated by volunteers based on public GitHub information. If you spot any errors or omissions, please contribute labels by filing an <a href='https://github.com/X-lab2017/open-digger/issues' target='_blank'>issue</a>.")} />
+            <li set:html={t(locale, "开发者的贡献度基于 GitHub 全域开发者在当年的协作关系数据计算得到，是一种基于图的开源贡献度计算方法。关于算法的详细介绍可以参考 <a href='https://dl.acm.org/doi/10.1145/3639477.3639734' target='_blank'>ICSE 2024 收录论文</a>。", "Developer contribution scores are computed from the collaboration network of all GitHub developers within the year — a graph-based open source contribution metric. See the <a href='https://dl.acm.org/doi/10.1145/3639477.3639734' target='_blank'>ICSE 2024 paper</a> for a detailed description of the algorithm.")} />
+            <li>{t(locale, '开发者的贡献度取决于其贡献仓库的协作影响力以及其在这些仓库中的贡献比例。一个开发者在高影响力仓库中的贡献比例高，或大量参与不同的仓库，都可以有效提升自己的贡献度。', "A developer's score depends on the collaborative influence of the repositories they contribute to and their share of contributions in those repositories. Contributing a large share to high-impact repositories, or contributing broadly across many repositories, both effectively raise the score.")}</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <Split />
+
+    <div class="list" id="detail">
+      <div class="main-title">{t(locale, '榜单详情', 'Rankings')}</div>
+
+      <div id={String(latest.year)}>
+        <p class="text-center text-secondary mt-6">{t(locale, '最近更新于', 'Last updated:')} {latest.update || 0}</p>
+        <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-x-6 gap-y-4 mt-6">
+          {latest.annualRanking.map((user) => {
+            const login = String(user.login);
+            const entry = heroMap.get(login);
+            return (
+              <HeroCard
+                locale={locale}
+                login={login}
+                name={entry?.data.name}
+                description={entry?.data.description}
+                avatar={entry?.data.avatar}
+                githubAvatar={entry?.data.github_avatar}
+                hasPage={!!entry}
+              />
+            );
+          })}
+        </div>
+      </div>
+    </div>
+
+    <Split />
+
+    <Partners locale={locale} />
+
+    <Footer />
+  </div>
+</BaseLayout>

@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 /**
- * 校验规范页面只暴露 /heroes/ 与 /hero/ URL，并校验 sitemap / llms.txt。
+ * 校验规范页面（URL 级三语言：en 无前缀 + /zh-CN/ + /zh-TW/）只暴露
+ * /heroes/ 与 /hero/ URL，校验 canonical / hreflang / og:locale / <html lang>，
+ * 并校验 sitemap / llms.txt。
  *
  * 用法：node scripts/verify-seo.mjs [ossheroes-dist] [www-dist]
  */
@@ -14,6 +16,9 @@ const DEFAULT_WWW_DIST = join(__dirname, '..', '..', 'www', 'dist');
 const DIST = process.argv[2] ? resolve(process.argv[2]) : DEFAULT_DIST;
 const WWW_DIST = process.argv[3] ? resolve(process.argv[3]) : DEFAULT_WWW_DIST;
 const SITE = 'https://opensource.win';
+/** 全站语言：en 为默认语言，URL 无前缀 */
+const LOCALES = ['en', 'zh-CN', 'zh-TW'];
+const OG_LOCALE = { en: 'en_US', 'zh-CN': 'zh_CN', 'zh-TW': 'zh_TW' };
 const errors = [];
 
 function check(condition, message) {
@@ -40,6 +45,22 @@ function getCanonical(html) {
   return html.match(/<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i)?.[1] ?? null;
 }
 
+/** hreflang → href 映射（<link rel="alternate" hreflang="..." href="...">） */
+function getHreflangs(html) {
+  const map = {};
+  const tags = html.match(/<link\b[^>]*rel=["']alternate["'][^>]*>/gi) || [];
+  for (const tag of tags) {
+    const hreflang = tag.match(/hreflang=["']([^"']+)["']/i)?.[1];
+    const href = tag.match(/href=["']([^"']+)["']/i)?.[1];
+    if (hreflang && href) map[hreflang] = href;
+  }
+  return map;
+}
+
+function getHtmlLang(html) {
+  return html.match(/<html\s+lang=["']([^"']+)["']/i)?.[1] ?? null;
+}
+
 function getJsonLd(html) {
   const matches = [...html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)];
   return matches.flatMap((match) => {
@@ -51,15 +72,34 @@ function getJsonLd(html) {
   });
 }
 
-function assertCanonicalPage(path, canonicalPath, label) {
+/** locale 中立路径 → 该语言的 URL 路径（en 无前缀） */
+function localePath(locale, path) {
+  return locale === 'en' ? path : `/${locale}${path}`;
+}
+
+/**
+ * 校验某个语言版本的规范页面：canonical / og:url 自指当前语言 URL、
+ * 4 条 hreflang alternate（x-default → en）、<html lang> 与 og:locale。
+ */
+function assertCanonicalPage(path, canonicalPath, locale, label) {
   if (!existsSync(path)) {
     check(false, `${label}: 页面存在`);
     return '';
   }
   const html = read(path);
-  const canonical = `${SITE}${canonicalPath}`;
-  check(getCanonical(html) === canonical, `${label}: canonical 为 ${canonicalPath}`);
-  check(getMeta(html, 'property', 'og:url') === canonical, `${label}: og:url 为 ${canonicalPath}`);
+  const canonical = `${SITE}${localePath(locale, canonicalPath)}`;
+  check(getCanonical(html) === canonical, `${label}: canonical 为 ${localePath(locale, canonicalPath)}`);
+  check(getMeta(html, 'property', 'og:url') === canonical, `${label}: og:url 为 ${localePath(locale, canonicalPath)}`);
+  check(getHtmlLang(html) === locale, `${label}: <html lang="${locale}">`);
+  check(getMeta(html, 'property', 'og:locale') === OG_LOCALE[locale], `${label}: og:locale 为 ${OG_LOCALE[locale]}`);
+  const hreflangs = getHreflangs(html);
+  for (const l of LOCALES) {
+    check(
+      hreflangs[l] === `${SITE}${localePath(l, canonicalPath)}`,
+      `${label}: hreflang ${l} 指向 ${localePath(l, canonicalPath)}`,
+    );
+  }
+  check(hreflangs['x-default'] === `${SITE}${localePath('en', canonicalPath)}`, `${label}: hreflang x-default 指向 en URL`);
   check(!html.includes(`${SITE}/ossheroes/`), `${label}: 不暴露旧规范 URL`);
   return html;
 }
@@ -71,14 +111,14 @@ if (!isDir(DIST)) {
 
 const heroesDir = join(DIST, 'heroes');
 const heroDir = join(DIST, 'hero');
-assertCanonicalPage(join(heroesDir, 'index.html'), '/heroes/', '/heroes/ 首页');
+assertCanonicalPage(join(heroesDir, 'index.html'), '/heroes/', 'en', '/heroes/ 首页(en)');
 
 const rankingYears = isDir(heroesDir)
   ? readdirSync(heroesDir).map((entry) => entry.match(/^ranking-(\d{4})$/)?.[1]).filter(Boolean).sort()
   : [];
 check(rankingYears.length > 0, '检测到年度榜单页面');
 for (const year of rankingYears) {
-  assertCanonicalPage(join(heroesDir, `ranking-${year}`, 'index.html'), `/heroes/ranking-${year}/`, `/heroes/ranking-${year}/`);
+  assertCanonicalPage(join(heroesDir, `ranking-${year}`, 'index.html'), `/heroes/ranking-${year}/`, 'en', `/heroes/ranking-${year}/(en)`);
 }
 
 const logins = isDir(heroDir)
@@ -87,7 +127,7 @@ const logins = isDir(heroDir)
 check(logins.length >= 3, `开发者详情页数 >= 3（实际 ${logins.length}）`);
 for (const login of logins.slice(0, 3)) {
   const canonicalPath = `/hero/${login}/`;
-  const html = assertCanonicalPage(join(heroDir, login, 'index.html'), canonicalPath, `/hero/${login}/`);
+  const html = assertCanonicalPage(join(heroDir, login, 'index.html'), canonicalPath, 'en', `/hero/${login}/(en)`);
   const jsonLd = getJsonLd(html);
   check(jsonLd.length > 0, `/hero/${login}/: JSON-LD 可解析`);
   const profile = jsonLd.find((item) => item['@type'] === 'ProfilePage');
@@ -96,11 +136,41 @@ for (const login of logins.slice(0, 3)) {
   check(!!getMeta(html, 'property', 'og:description'), `/hero/${login}/: og:description`);
   check(!!getMeta(html, 'property', 'og:image'), `/hero/${login}/: og:image`);
   check(!!getMeta(html, 'name', 'twitter:image'), `/hero/${login}/: twitter:image`);
-  check(profile?.url === `${SITE}${canonicalPath}`, `/hero/${login}/: JSON-LD url 为规范 URL`);
-  check(profile?.['@id'] === `${SITE}${canonicalPath}`, `/hero/${login}/: JSON-LD @id 为规范 URL`);
-  check(profile?.mainEntity?.url === `${SITE}${canonicalPath}`, `/hero/${login}/: Person url 为规范 URL`);
-  check(profile?.mainEntity?.['@id'] === `${SITE}${canonicalPath}#person`, `/hero/${login}/: Person @id 为规范 URL`);
+  const enUrl = `${SITE}${canonicalPath}`;
+  check(profile?.url === enUrl, `/hero/${login}/: JSON-LD url 为规范 URL`);
+  check(profile?.['@id'] === enUrl, `/hero/${login}/: JSON-LD @id 为规范 URL`);
+  check(profile?.mainEntity?.url === enUrl, `/hero/${login}/: Person url 为规范 URL`);
+  check(profile?.mainEntity?.['@id'] === `${enUrl}#person`, `/hero/${login}/: Person @id 为规范 URL`);
 }
+
+/* ---- 语言版本：/zh-CN/ 与 /zh-TW/ 的首页 + 各年榜单 + 抽样详情页 ---- */
+for (const locale of LOCALES.filter((l) => l !== 'en')) {
+  const localeRoot = join(DIST, locale);
+  assertCanonicalPage(join(localeRoot, 'heroes', 'index.html'), '/heroes/', locale, `/${locale}/heroes/ 首页`);
+  for (const year of rankingYears) {
+    assertCanonicalPage(
+      join(localeRoot, 'heroes', `ranking-${year}`, 'index.html'),
+      `/heroes/ranking-${year}/`,
+      locale,
+      `/${locale}/heroes/ranking-${year}/`,
+    );
+  }
+  for (const login of logins.slice(0, 3)) {
+    assertCanonicalPage(join(localeRoot, 'hero', login, 'index.html'), `/hero/${login}/`, locale, `/${locale}/hero/${login}/`);
+  }
+}
+
+/* zh-TW 正文应为繁体（OpenCC s2tw 构建期转换） */
+const zhTwHome = existsSync(join(DIST, 'zh-TW', 'heroes', 'index.html'))
+  ? read(join(DIST, 'zh-TW', 'heroes', 'index.html'))
+  : '';
+check(zhTwHome.includes('開源') && zhTwHome.includes('開發者'), 'zh-TW 首页正文为繁体（開源 / 開發者）');
+
+/* 首次访问重定向脚本只存在于 en 页面 */
+const enHome = read(join(heroesDir, 'index.html'));
+check(enHome.includes('osw-language') && enHome.includes('location.replace'), 'en 首页内联首访重定向脚本');
+const zhCnHome = read(join(DIST, 'zh-CN', 'heroes', 'index.html'));
+check(!zhCnHome.includes('location.replace'), 'zh-CN 首页不含重定向脚本');
 
 const sitemap = join(WWW_DIST, 'sitemap.xml');
 const llms = join(WWW_DIST, 'llms.txt');
@@ -116,6 +186,21 @@ if (existsSync(sitemap)) {
   check(xml.includes(`${SITE}/heroes/ranking-`), 'sitemap 包含 /heroes/ 年度榜单');
   check(xml.includes(`${SITE}/hero/`), 'sitemap 包含 /hero/ 开发者详情');
   check(!xml.includes('/ossheroes/'), 'sitemap 不含旧 /ossheroes/ URL');
+  check(
+    xml.includes('xmlns:xhtml="http://www.w3.org/1999/xhtml"'),
+    'sitemap 声明 xmlns:xhtml 命名空间',
+  );
+  for (const l of LOCALES) {
+    check(
+      xml.includes(`hreflang="${l}" href="${SITE}${localePath(l, '/heroes/')}"`),
+      `sitemap 含 /heroes/ 的 ${l} alternate`,
+    );
+  }
+  check(
+    xml.includes(`hreflang="x-default" href="${SITE}/heroes/"`),
+    'sitemap 含 x-default → en alternate',
+  );
+  check(xml.includes(`${SITE}/zh-CN/hero/`) && xml.includes(`${SITE}/zh-TW/hero/`), 'sitemap 含 zh-CN / zh-TW 开发者详情 URL');
 }
 check(existsSync(llms), 'llms.txt 已生成');
 if (existsSync(llms)) {

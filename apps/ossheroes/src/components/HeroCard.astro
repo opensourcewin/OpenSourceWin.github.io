@@ -1,9 +1,11 @@
 ---
 import Avatar from './Avatar.astro';
+import { localePath, type Locale } from '@opensource-win/ui';
 import { HERO_BASE } from '../lib/site';
 import { normalizeMeta } from '../lib/meta';
 
 interface Props {
+  locale: Locale;
   login: string;
   name?: string | null;
   description?: string | null;
@@ -13,13 +15,13 @@ interface Props {
   hasPage: boolean;
 }
 
-const { login, name, description, avatar, githubAvatar, hasPage } = Astro.props;
+const { locale, login, name, description, avatar, githubAvatar, hasPage } = Astro.props;
 const displayName = normalizeMeta(name) || login;
 const desc = normalizeMeta(description);
 ---
 
 {hasPage ? (
-  <a class="user-item" href={`${HERO_BASE}/${login}/`}>
+  <a class="user-item" href={localePath(locale, `${HERO_BASE}/${login}/`)}>
     <Avatar login={login} size={64} className="avatar" displayName={displayName} avatar={avatar} githubAvatar={githubAvatar} />
     <div class="nickname mt-2">{displayName}</div>
     <div class="description mt-1">{desc}</div>

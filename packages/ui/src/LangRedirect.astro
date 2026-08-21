@@ -1,0 +1,27 @@
+---
+/**
+ * 首次访问语言重定向 —— 仅内联在英文（无前缀）页面的 <head> 中。
+ *
+ * 规则：无 localStorage('osw-language') 记录且 navigator.language 以 zh 开头时，
+ * location.replace 到同路径的 /zh-CN/ 或 /zh-TW/ 页面（zh-TW / zh-HK / zh-Hant → zh-TW，
+ * 其余中文 → zh-CN）。已有记录（含旧值 'zh'，视为 zh-CN 偏好）则尊重用户选择、不重定向。
+ * 脚本只出现在 en 页面，目标语言页面不含此脚本，因此不会形成重定向循环。
+ */
+---
+
+<script is:inline>
+  (function () {
+    var KEY = 'osw-language';
+    try {
+      if (window.localStorage.getItem(KEY)) return;
+    } catch (e) {
+      /* localStorage unavailable (private mode): fall back to navigator.language */
+    }
+    var nav = (window.navigator.language || '').toLowerCase();
+    if (nav.indexOf('zh') !== 0) return;
+    var prefix = /^zh-(tw|hk|hant)/.test(nav) ? '/zh-TW' : '/zh-CN';
+    window.location.replace(
+      prefix + window.location.pathname + window.location.search + window.location.hash,
+    );
+  })();
+</script>

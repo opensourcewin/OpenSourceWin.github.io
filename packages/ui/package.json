@@ -12,15 +12,21 @@
       "types": "./dist/seo.d.ts",
       "import": "./src/seo.ts"
     },
+    "./i18n": {
+      "types": "./dist/i18n.d.ts",
+      "import": "./src/i18n.ts"
+    },
     "./tokens.css": "./src/tokens.css",
     "./SeoHead.astro": "./src/SeoHead.astro",
-    "./FooterCredit.astro": "./src/FooterCredit.astro"
+    "./FooterCredit.astro": "./src/FooterCredit.astro",
+    "./LangRedirect.astro": "./src/LangRedirect.astro"
   },
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch"
   },
   "devDependencies": {
+    "opencc-js": "^1.4.1",
     "typescript": "~5.9.3"
   }
 }

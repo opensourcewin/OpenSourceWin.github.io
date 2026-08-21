@@ -132,9 +132,11 @@ interface Props {
   login: string;
   /** 外层终端卡片 id，渲染成功后由其 hidden 属性摘除 */
   shellId: string;
+  /** 内容过长时的截断提示（按当前页面语言在构建期传入） */
+  truncatedNote: string;
 }
 
-export default function ReadmeLoader({ login, shellId }: Props) {
+export default function ReadmeLoader({ login, shellId, truncatedNote }: Props) {
   const [html, setHtml] = useState<string | null>(null);
   const [bases, setBases] = useState<{ rawBase: string; blobBase: string } | null>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
@@ -143,12 +145,6 @@ export default function ReadmeLoader({ login, shellId }: Props) {
   useEffect(() => {
     if (!login || typeof fetch !== 'function') return;
     let cancelled = false;
-
-    /* 截断提示跟随站点双语 */
-    const lang =
-      window.OSW_I18N && window.OSW_I18N.detect ? window.OSW_I18N.detect() : 'zh';
-    const truncatedNote =
-      lang === 'zh' ? '\n\n… [内容过长，已截断]' : '\n\n… [truncated]';
 
     const enc = encodeURIComponent(login);
 
@@ -181,7 +177,7 @@ export default function ReadmeLoader({ login, shellId }: Props) {
     return () => {
       cancelled = true;
     };
-  }, [login]);
+  }, [login, truncatedNote]);
 
   /* 消毒后 HTML 注入完成：DOM 后处理并揭开后外层区块 */
   useEffect(() => {

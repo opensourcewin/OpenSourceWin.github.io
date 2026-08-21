@@ -1,30 +1,40 @@
 ---
 import '../styles/global.css';
 import SeoHead from '@opensource-win/ui/SeoHead.astro';
-import type { PageSeo } from '@opensource-win/ui';
-import { HEROES_BASE as BASE, SITE_AUTHOR, SITE_KEYWORDS, SITE_TITLE_ZH } from '../lib/site';
+import LangRedirect from '@opensource-win/ui/LangRedirect.astro';
+import { t, type Locale, type PageSeo } from '@opensource-win/ui';
+import { HEROES_BASE as BASE, SITE_AUTHOR, SITE_KEYWORDS, SITE_KEYWORDS_EN, SITE_TITLE_ZH, SITE_TITLE_EN } from '../lib/site';
 
 interface Props {
   seo: PageSeo;
+  /** 当前页面语言（en / zh-CN / zh-TW） */
+  locale: Locale;
+  /** locale 中立的规范路径（如 '/heroes/'、'/hero/<login>/'），供 hreflang 与语言切换推导 */
+  path: string;
 }
 
-const { seo } = Astro.props;
+const { seo, locale, path } = Astro.props;
+const siteTitle = t(locale, SITE_TITLE_ZH, SITE_TITLE_EN);
 ---
 
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang={locale}>
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  {/* 首次访问语言重定向：仅英文（无前缀）页面内联，尽早执行避免闪烁（详见共享组件说明） */}
+  {locale === 'en' && <LangRedirect />}
+
   <SeoHead
     seo={seo}
-    siteName={SITE_TITLE_ZH}
-    locale="zh_CN"
+    locale={locale}
+    path={path}
+    siteName={siteTitle}
     author={SITE_AUTHOR}
-    twitterSite={SITE_TITLE_ZH}
-    keywordsFallback={SITE_KEYWORDS}
+    twitterSite={siteTitle}
+    keywordsFallback={t(locale, SITE_KEYWORDS, SITE_KEYWORDS_EN)}
   />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -39,7 +49,6 @@ const { seo } = Astro.props;
 <body>
   <slot />
   <script>
-    import '../scripts/i18n';
     import '../scripts/nav';
   </script>
 </body>

@@ -20,6 +20,8 @@ export const SITE_DESCRIPTION_EN =
 
 export const SITE_KEYWORDS =
   '中国开源码力榜,开源,OpenSource.Win,OpenRank,开源社,X-lab,GitHub 开发者';
+export const SITE_KEYWORDS_EN =
+  'China Open Source HeroRank,open source,OpenSource.Win,OpenRank,KAIYUANSHE,X-lab,GitHub developers';
 
 export const SITE_AUTHOR = 'OpenSource.Win';
 

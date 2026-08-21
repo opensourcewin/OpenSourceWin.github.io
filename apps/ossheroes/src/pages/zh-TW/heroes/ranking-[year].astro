@@ -1,6 +1,6 @@
 ---
-import RankingPage from '../../components/pages/RankingPage.astro';
-import { getYearsDesc } from '../../lib/ranking';
+import RankingPage from '../../../components/pages/RankingPage.astro';
+import { getYearsDesc } from '../../../lib/ranking';
 
 export function getStaticPaths() {
   return getYearsDesc().map((item) => ({
@@ -12,4 +12,4 @@ export function getStaticPaths() {
 const { year } = Astro.props;
 ---
 
-<RankingPage locale="en" year={year} />
+<RankingPage locale="zh-TW" year={year} />

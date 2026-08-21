@@ -1,32 +1,34 @@
 ---
+import { t, type Locale } from '@opensource-win/ui';
 import { HEROES_BASE as BASE } from '../lib/site';
 
 interface Props {
+  locale: Locale;
   /** 2021 年榜单页展示完整的官方支持 / 合作社区 logo 墙 */
   extended2021?: boolean;
 }
 
-const { extended2021 = false } = Astro.props;
+const { locale, extended2021 = false } = Astro.props;
 ---
 
 <div class="list" id="partner">
-  <div class="main-title" data-i18n-zh="合作伙伴" data-i18n-en="Partners">合作伙伴</div>
+  <div class="main-title">{t(locale, '合作伙伴', 'Partners')}</div>
 
-  <div class="subtitle mt-6" data-i18n-zh="联合发起方" data-i18n-en="Co-founders">联合发起方</div>
+  <div class="subtitle mt-6">{t(locale, '联合发起方', 'Co-founders')}</div>
   <div class="icons-wrap">
     <img src={`${BASE}/img/logo-opensourcewin.svg`} class="icons" alt="OpenSource.Win" loading="lazy" />
-    <img src={`${BASE}/img/logo-kys.png`} class="icons" alt="开源社" loading="lazy" />
-    {extended2021 && <img src={`${BASE}/img/logo-tyh.png`} class="icons" alt="腾源会" loading="lazy" />}
+    <img src={`${BASE}/img/logo-kys.png`} class="icons" alt={t(locale, '开源社', 'KAIYUANSHE')} loading="lazy" />
+    {extended2021 && <img src={`${BASE}/img/logo-tyh.png`} class="icons" alt={t(locale, '腾源会', 'TenYuanHui')} loading="lazy" />}
     <img src={`${BASE}/img/logo-xlab.png`} class="icons" alt="x-lab" loading="lazy" />
   </div>
 
   {extended2021 && (
     <>
-      <div class="subtitle mt-6" data-i18n-zh="官方支持" data-i18n-en="Official Support">官方支持</div>
+      <div class="subtitle mt-6">{t(locale, '官方支持', 'Official Support')}</div>
       <div class="icons-wrap">
         <a href="https://github.com" title="GitHub" target="_blank"><img src={`${BASE}/img/logo-github.png`} class="icons" alt="GitHub" loading="lazy" /></a>
       </div>
-      <div class="subtitle mt-6" data-i18n-zh="合作社区" data-i18n-en="Community Partners">合作社区</div>
+      <div class="subtitle mt-6">{t(locale, '合作社区', 'Community Partners')}</div>
       <div class="icons-wrap">
         <img src={`${BASE}/img/logo-kyuubi.png`} class="icons2" alt="Kyuubi" loading="lazy" />
         <img src={`${BASE}/img/logo-gitops.png`} class="icons2" alt="GITOPS" loading="lazy" />

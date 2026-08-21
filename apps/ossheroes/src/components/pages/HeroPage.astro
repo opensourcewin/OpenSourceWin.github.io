@@ -1,0 +1,173 @@
+---
+/**
+ * 开发者详情页主体 —— URL 级三语言共用渲染器；薄壳页面负责 getStaticPaths 并传入 locale + entry。
+ * 正文数据（markdown body）只有中文原文：zh-TW 页面对提取的 prose / 仓库简介做 OpenCC 转换，
+ * 富内容页（图片 / 多级标题等，走 <Content /> 原样渲染）保持原文。
+ */
+import { render, type CollectionEntry } from 'astro:content';
+import { marked } from 'marked';
+import { t, toZhTw, type Locale } from '@opensource-win/ui';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../Navbar.astro';
+import DetailHero from '../DetailHero.astro';
+import Avatar from '../Avatar.astro';
+import RankBadges from '../RankBadges.astro';
+import ReadmeSection from '../ReadmeSection.astro';
+import Footer from '../Footer.astro';
+import { buildDevSeo, normalizeMeta } from '../../lib/meta';
+import { parseContributions } from '../../lib/contributions';
+import { getRankHistory } from '../../lib/ranking';
+import { HERO_BASE } from '../../lib/site';
+
+interface Props {
+  locale: Locale;
+  entry: CollectionEntry<'heroes'>;
+}
+
+const { locale, entry } = Astro.props;
+const login = String(entry.data.slug);
+const displayName = normalizeMeta(entry.data.name) || login;
+const location = normalizeMeta(entry.data.description);
+const body = entry.body ?? '';
+
+const seo = buildDevSeo(
+  {
+    slug: login,
+    name: entry.data.name,
+    description: entry.data.description,
+    github_avatar: entry.data.github_avatar,
+    body,
+  },
+  locale,
+);
+
+const years = getRankHistory(login);
+
+// 从正文提取 github.com/owner/repo 链接，重构为终端风列表；
+// 富内容页（图片 / 多级标题 / 表格等，如 huan）整体回退渲染原始正文
+const parsed = parseContributions(body);
+// zh-TW：对提取出的中文 prose / 仓库简介做繁体转换（正文为本仓库可信数据，无需消毒）
+const proseSource = locale === 'zh-TW' ? toZhTw(parsed.prose) : parsed.prose;
+const repos =
+  locale === 'zh-TW'
+    ? parsed.repos.map((repo) => ({ ...repo, desc: toZhTw(repo.desc) }))
+    : parsed.repos;
+// 正文保留部分的 markdown 在构建期渲染
+const proseHtml =
+  !parsed.rich && repos.length && proseSource
+    ? marked.parse(proseSource, { gfm: true, async: false })
+    : '';
+
+const { Content } = await render(entry);
+
+const path = `${HERO_BASE}/${login}/`;
+---
+
+<BaseLayout seo={seo} locale={locale} path={path}>
+  {/* 头部（banner 大图已移除，图片文件仍保留在 static/heroes/img/） */}
+  <div class="header header-detail">
+    <Navbar locale={locale} path={path} />
+  </div>
+
+  <DetailHero locale={locale} login={login} />
+
+  {/* 详情 */}
+  <div class="container detail-content">
+    <div class="flex justify-center">
+      <div class="w-full md:w-2/3">
+        {/* 终端风 profile 卡片：$ ./whois <login> */}
+        <div class="detail-term">
+          <div class="detail-term-bar">
+            <span class="detail-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="detail-term-title">opensource@win: ~</span>
+          </div>
+          <div class="detail-term-body">
+            <div class="detail-term-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> ./whois {login}</div>
+            <div class="detail-term-result">
+              <Avatar login={login} size={160} className="detail-avatar" displayName={displayName} avatar={entry.data.avatar} githubAvatar={entry.data.github_avatar} />
+              <div class="detail-term-info">
+                <div class="detail-term-line">
+                  <span class="detail-term-out" aria-hidden="true">&gt;</span>
+                  <span class="detail-term-key">{t(locale, '名称', 'name')}</span>
+                  <span class="detail-term-sep" aria-hidden="true">::</span>
+                  <span class="detail-term-name">{displayName}</span>
+                </div>
+                <div class="detail-term-line">
+                  <span class="detail-term-out" aria-hidden="true">&gt;</span>
+                  <span class="detail-term-key">{t(locale, '所在地', 'location')}</span>
+                  <span class="detail-term-sep" aria-hidden="true">::</span>
+                  <span class="text-secondary">{location}</span>
+                </div>
+                <div class="detail-term-line">
+                  <span class="detail-term-out" aria-hidden="true">&gt;</span>
+                  <span class="detail-term-key">github</span>
+                  <span class="detail-term-sep" aria-hidden="true">::</span>
+                  <a href={`https://github.com/${login}`} target="_blank" rel="noopener">@{login}</a>
+                </div>
+                {years.length > 0 && (
+                  <div class="detail-ranks">
+                    <RankBadges locale={locale} years={years} />
+                  </div>
+                )}
+              </div>
+            </div>
+            {/* osgraph 嵌入已失效（对方证书过期），改为外链访问 */}
+            <div class="detail-term-graphs">
+              <span class="detail-term-prompt" aria-hidden="true">$</span>
+              <span class="detail-graphs-cmd">open ./graphs</span>
+              <span class="detail-graphs-arrow" aria-hidden="true">-&gt;</span>
+              <span class="detail-graphs-links">
+                <a class="detail-graph-link" href={`https://osgraph.com/graphs/developer-activity/github/${login}?user-limit=10`} target="_blank" rel="noopener">{t(locale, '开发活动', 'Developer Activity')}</a>
+                <a class="detail-graph-link" href={`https://osgraph.com/graphs/os-partner/github/${login}?user-limit=10`} target="_blank" rel="noopener">{t(locale, '开源伙伴', 'Open Source Partners')}</a>
+                <a class="detail-graph-link" href={`https://osgraph.com/graphs/os-interest/github/${login}?repo-limit=5&topic-limit=3`} target="_blank" rel="noopener">{t(locale, '开源兴趣', 'Open Source Interests')}</a>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-divider" aria-hidden="true">---</div>
+
+        <ReadmeSection locale={locale} login={login} />
+
+        <div class="contribute">
+          {repos.length > 0 ? (
+            <>
+              {proseHtml && <div class="contribute-prose" set:html={proseHtml} />}
+              <h2 class="detail-section-title">{t(locale, '主要贡献项目', 'Top Contributions')}</h2>
+              <div class="detail-term detail-repos">
+                <div class="detail-term-bar">
+                  <span class="detail-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                  <span class="detail-term-title">~/contributions</span>
+                  <span class="detail-repos-count">{repos.length} {t(locale, '个仓库', 'repos')}</span>
+                </div>
+                <div class="detail-term-body">
+                  <div class="detail-term-cmd"><span class="detail-term-prompt" aria-hidden="true">$</span> ls -la ~/contributions</div>
+                  <ul class="detail-repos-list">
+                    {repos.map(({ owner, name, desc }) => (
+                      <li class="detail-repos-row">
+                        <a href={`https://github.com/${owner}/${name}`} target="_blank" rel="noopener">
+                          <span class="detail-repos-perm" aria-hidden="true">-rw-r--r--</span>
+                          <span class="detail-repos-main">
+                            <span class="detail-repos-name">{owner}/{name}</span>
+                            {desc && <span class="detail-repos-desc">{desc}</span>}
+                          </span>
+                          <span class="detail-repos-arrow" aria-hidden="true">-&gt;</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </>
+          ) : body.trim() ? (
+            <div class="contribute-richtext">
+              <Content />
+            </div>
+          ) : null}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

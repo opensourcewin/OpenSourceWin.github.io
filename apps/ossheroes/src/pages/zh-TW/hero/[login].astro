@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import HeroPage from '../../components/pages/HeroPage.astro';
+import HeroPage from '../../../components/pages/HeroPage.astro';
 
 export async function getStaticPaths() {
   const heroes = await getCollection('heroes');
@@ -13,4 +13,4 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 ---
 
-<HeroPage locale="en" entry={entry} />
+<HeroPage locale="zh-TW" entry={entry} />

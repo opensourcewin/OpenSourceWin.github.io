@@ -1,40 +1,21 @@
 import { useEffect, useState } from "react";
 
-type Language = "en" | "zh";
-
 interface TypewriterProps {
-  /** Bilingual copy; re-types when the active language changes. */
-  texts: Record<Language, string>;
+  /** Copy in the current page locale (URL-level i18n — no client-side switching). */
+  text: string;
   speed?: number;
   startDelay?: number;
   className?: string;
 }
 
-/** Reads the persisted language, mirroring the `osw-language` key shared with ossheroes. */
-function detectLanguage(): Language {
-  try {
-    const stored = window.localStorage.getItem("osw-language");
-    if (stored === "zh" || stored === "en") return stored;
-  } catch {
-    // localStorage unavailable (private mode) — fall through to navigator.
-  }
-  return (navigator.language || "en").toLowerCase().startsWith("zh") ? "zh" : "en";
-}
-
 export default function Typewriter({
-  texts,
+  text,
   speed = 30,
   startDelay = 0,
   className = "",
 }: TypewriterProps) {
-  // Use a deterministic SSR value, then read browser preferences after hydration.
-  const [language, setLanguage] = useState<Language>("en");
   const [displayed, setDisplayed] = useState("");
   const [reducedMotion, setReducedMotion] = useState(false);
-
-  useEffect(() => {
-    setLanguage(detectLanguage());
-  }, []);
 
   // Respect prefers-reduced-motion.
   useEffect(() => {
@@ -44,18 +25,6 @@ export default function Typewriter({
     mq.addEventListener("change", onChange);
     return () => mq.removeEventListener("change", onChange);
   }, []);
-
-  // React to the language toggle dispatched by the page's i18n script.
-  useEffect(() => {
-    const onChange = (event: Event) => {
-      const lang = (event as CustomEvent<{ language?: string }>).detail?.language;
-      if (lang === "en" || lang === "zh") setLanguage(lang);
-    };
-    window.addEventListener("osw:languagechange", onChange as EventListener);
-    return () => window.removeEventListener("osw:languagechange", onChange as EventListener);
-  }, []);
-
-  const text = texts[language];
 
   useEffect(() => {
     if (reducedMotion) {

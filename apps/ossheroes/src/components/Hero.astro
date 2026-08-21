@@ -1,26 +1,28 @@
 ---
+import { t, type Locale } from '@opensource-win/ui';
 import { getLatestRanking } from '../lib/ranking';
 
 interface Props {
+  locale: Locale;
   /** 往年榜单页传入对应年份；缺省取最新一年 */
   year?: number;
 }
 
-const { year } = Astro.props;
+const { locale, year } = Astro.props;
 const heroYear = year ?? getLatestRanking().year;
 ---
 
-<!-- 终端风 hero：纯 HTML/CSS，不引入图片素材 -->
+{/* 终端风 hero：纯 HTML/CSS，不引入图片素材 */}
 <div class="hero">
   <div class="hero-inner container">
     <div class="hero-badge">
       <span class="hero-dot" aria-hidden="true"><span class="hero-dot-ping"></span><span class="hero-dot-core"></span></span>
-      <span data-i18n-zh="系统广播" data-i18n-en="System Broadcast">系统广播</span>
+      <span>{t(locale, '系统广播', 'System Broadcast')}</span>
     </div>
     <h1 class="hero-title">
       <span class="hero-cmd">./ranking --year {heroYear}</span>
-      <span class="hero-hash" aria-hidden="true">#</span> <span data-i18n-zh="中国开源码力榜" data-i18n-en="China Open Source HeroRank">中国开源码力榜</span>
+      <span class="hero-hash" aria-hidden="true">#</span> <span>{t(locale, '中国开源码力榜', 'China Open Source HeroRank')}</span>
     </h1>
-    <p class="hero-subtitle" data-i18n-zh="由 OpenSource.Win、开源社、X-lab 开放实验室联合发起，基于 OpenRank 开源贡献度算法，甄选年度最具影响力的中国开源开发者。" data-i18n-en="Co-founded by OpenSource.Win, KAIYUANSHE and X-lab — an annual ranking of China's most impactful open source developers, powered by the OpenRank algorithm.">由 OpenSource.Win、开源社、X-lab 开放实验室联合发起，基于 OpenRank 开源贡献度算法，甄选年度最具影响力的中国开源开发者。</p>
+    <p class="hero-subtitle">{t(locale, '由 OpenSource.Win、开源社、X-lab 开放实验室联合发起，基于 OpenRank 开源贡献度算法，甄选年度最具影响力的中国开源开发者。', "Co-founded by OpenSource.Win, KAIYUANSHE and X-lab — an annual ranking of China's most impactful open source developers, powered by the OpenRank algorithm.")}</p>
   </div>
 </div>

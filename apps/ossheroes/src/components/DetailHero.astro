@@ -1,12 +1,15 @@
 ---
+import { t, type Locale } from '@opensource-win/ui';
+
 interface Props {
+  locale: Locale;
   login: string;
 }
 
-const { login } = Astro.props;
+const { locale, login } = Astro.props;
 ---
 
-<!-- 终端风页面头部：纯 HTML/CSS 装饰（grid 背景 + 辉光 + 扫描线），零图片素材 -->
+{/* 终端风页面头部：纯 HTML/CSS 装饰（grid 背景 + 辉光 + 扫描线），零图片素材 */}
 <div class="detail-hero">
   <div class="detail-hero-scan" aria-hidden="true"></div>
   <div class="detail-hero-inner container">
@@ -14,7 +17,7 @@ const { login } = Astro.props;
     <div class="detail-hero-title" aria-hidden="true">&gt; DEVELOPER PROFILE<span class="detail-hero-cursor"></span></div>
     <div class="detail-hero-meta">
       <span class="hero-dot" aria-hidden="true"><span class="hero-dot-ping"></span><span class="hero-dot-core"></span></span>
-      <span data-i18n-zh="码力榜开发者档案" data-i18n-en="HeroRank Developer Profile">码力榜开发者档案</span>
+      <span>{t(locale, '码力榜开发者档案', 'HeroRank Developer Profile')}</span>
     </div>
   </div>
 </div>

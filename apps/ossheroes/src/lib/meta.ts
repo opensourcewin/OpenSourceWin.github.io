@@ -2,9 +2,11 @@
  * 开发者详情页 SEO 元数据构建 —— 移植自 Hexo 主题 head.ejs：
  * title / description / keywords / OG / JSON-LD 的组合逻辑保持一致。
  * PageSeo 契约与 <SeoHead> 渲染器由共享包 @opensource-win/ui 提供。
+ *
+ * URL 级三语言：所有构建函数接收 locale，zh-TW 文案由简体经 OpenCC 转换（见 t()）。
  */
-import type { PageSeo } from '@opensource-win/ui';
-import { SITE_URL, HERO_BASE, DEFAULT_OG_IMAGE } from './site';
+import { localeUrl, t, type Locale, type PageSeo } from '@opensource-win/ui';
+import { SITE_URL, HERO_BASE, SITE_TITLE_ZH, SITE_TITLE_EN, DEFAULT_OG_IMAGE } from './site';
 import { topRepoNames } from './contributions';
 
 /** 对外再导出共享契约，保持本模块既有公开面（BaseLayout 等可直接从包导入）。 */
@@ -27,7 +29,7 @@ export interface DevSeoInput {
   body: string;
 }
 
-export function buildDevSeo(input: DevSeoInput): PageSeo {
+export function buildDevSeo(input: DevSeoInput, locale: Locale): PageSeo {
   // 部分 login 是纯数字（如 1715173329），统一转字符串
   const devLogin = String(input.slug);
   const devName = normalizeMeta(input.name) || devLogin;
@@ -36,36 +38,69 @@ export function buildDevSeo(input: DevSeoInput): PageSeo {
   const devAvatar = /^https?:\/\//.test(rawAvatar) ? rawAvatar : '';
   const devRepos = topRepoNames(input.body ?? '', 3);
 
-  const title = `${devName} (@${devLogin}) - 中国开源码力榜开发者档案`;
+  const title = t(
+    locale,
+    `${devName} (@${devLogin}) - 中国开源码力榜开发者档案`,
+    `${devName} (@${devLogin}) - China Open Source HeroRank Developer Profile`,
+  );
 
   // 组合 name、login、location、主要贡献项目，生成可读的档案描述
-  let description = `${devName} (GitHub @${devLogin})`;
-  if (devLocation) description += `，所在地 ${devLocation}`;
-  description += '，中国开源码力榜上榜开发者';
-  if (devRepos.length) description += `，主要贡献项目包括 ${devRepos.join('、')} 等`;
+  let descriptionZh = `${devName} (GitHub @${devLogin})`;
+  if (devLocation) descriptionZh += `，所在地 ${devLocation}`;
+  descriptionZh += '，中国开源码力榜上榜开发者';
+  if (devRepos.length) descriptionZh += `，主要贡献项目包括 ${devRepos.join('、')} 等`;
   // 数据稀疏时逐句补稳定说明，保证描述落在 80–160 字的目标区间
-  const fillers = [
+  const fillersZh = [
     '，档案收录其 GitHub 开源贡献、历年在榜名次与开发活动数据',
     '，榜单由 OpenSource.Win、开源社与 X-lab 开放实验室基于 OpenRank 算法联合评选',
   ];
-  for (let i = 0; i < fillers.length && description.length < 79; i++) {
-    description += fillers[i];
+  for (let i = 0; i < fillersZh.length && descriptionZh.length < 79; i++) {
+    descriptionZh += fillersZh[i];
   }
-  description += '。';
+  descriptionZh += '。';
 
-  const keywords = [
-    devLogin,
-    devName,
-    `@${devLogin}`,
-    'GitHub 开发者',
-    '开源开发者',
-    '中国开源码力榜',
-    'OpenSource.Win',
-  ]
-    .filter((kw, i, arr) => kw && arr.indexOf(kw) === i)
-    .join(',');
+  let descriptionEn = `${devName} (GitHub @${devLogin})`;
+  if (devLocation) descriptionEn += `, based in ${devLocation}`;
+  descriptionEn += ', a listed developer on the China Open Source HeroRank';
+  if (devRepos.length) descriptionEn += `, with major contributions to ${devRepos.join(', ')}`;
+  const fillersEn = [
+    ', profiling their GitHub open source contributions, yearly rankings and developer activity',
+    ', ranked annually by OpenSource.Win, KAIYUANSHE and X-lab using the OpenRank algorithm',
+  ];
+  for (let i = 0; i < fillersEn.length && descriptionEn.length < 79; i++) {
+    descriptionEn += fillersEn[i];
+  }
+  descriptionEn += '.';
 
-  const url = `${SITE_URL}${HERO_BASE}/${devLogin}/`;
+  const description = t(locale, descriptionZh, descriptionEn);
+
+  const keywords = t(
+    locale,
+    [
+      devLogin,
+      devName,
+      `@${devLogin}`,
+      'GitHub 开发者',
+      '开源开发者',
+      '中国开源码力榜',
+      'OpenSource.Win',
+    ]
+      .filter((kw, i, arr) => kw && arr.indexOf(kw) === i)
+      .join(','),
+    [
+      devLogin,
+      devName,
+      `@${devLogin}`,
+      'GitHub developer',
+      'open source developer',
+      'China Open Source HeroRank',
+      'OpenSource.Win',
+    ]
+      .filter((kw, i, arr) => kw && arr.indexOf(kw) === i)
+      .join(','),
+  );
+
+  const url = localeUrl(SITE_URL, locale, `${HERO_BASE}/${devLogin}/`);
 
   const person: Record<string, unknown> = {
     '@type': 'Person',
@@ -86,6 +121,7 @@ export function buildDevSeo(input: DevSeoInput): PageSeo {
     '@id': url,
     name: title,
     url,
+    inLanguage: locale,
     mainEntity: person,
   };
   if (description) jsonLd.description = description;
@@ -105,15 +141,17 @@ export function buildDevSeo(input: DevSeoInput): PageSeo {
 export function buildPageSeo(opts: {
   pageName?: string;
   description: string;
+  /** locale 中立的规范路径（如 '/heroes/'） */
   path: string;
+  locale: Locale;
 }): PageSeo {
-  const title = opts.pageName ? `${opts.pageName} - 中国开源码力榜` : '中国开源码力榜';
-  const canonical = `${SITE_URL}${opts.path}`;
+  const siteTitle = t(opts.locale, SITE_TITLE_ZH, SITE_TITLE_EN);
+  const title = opts.pageName ? `${opts.pageName} - ${siteTitle}` : siteTitle;
   return {
     title,
     description: opts.description,
     ogType: 'website',
     ogImage: DEFAULT_OG_IMAGE,
-    canonical,
+    canonical: localeUrl(SITE_URL, opts.locale, opts.path),
   };
 }

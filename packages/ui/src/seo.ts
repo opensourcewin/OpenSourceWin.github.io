@@ -2,6 +2,7 @@
  * 共享 SEO 契约 —— apps/www 与 apps/ossheroes 共用的页面元数据结构。
  * 各 app 自行构造 PageSeo（如 ossheroes 的 buildDevSeo / buildPageSeo），
  * 再交给 packages/ui 的 <SeoHead> 渲染标准 title / OG / Twitter / canonical / JSON-LD。
+ * canonical 为当前语言版本的自指 URL（locale 推导见 ./i18n）。
  */
 
 /** 页面 SEO 元数据契约：title / description / keywords / OG / canonical / JSON-LD */
@@ -11,15 +12,9 @@ export interface PageSeo {
   keywords?: string;
   ogType: 'website' | 'article';
   ogImage: string;
+  /** 当前语言版本的自指 canonical（绝对 URL） */
   canonical: string;
   jsonLd?: Record<string, unknown>;
-}
-
-/** 可选的双语变体：提供时 <SeoHead> 在 title / description 等标签上额外输出
- *  data-i18n-en / data-i18n-zh 属性，供两个 app 共用的客户端语言切换脚本互换。 */
-export interface SeoI18n {
-  en?: { title?: string; description?: string };
-  zh?: { title?: string; description?: string };
 }
 
 /**

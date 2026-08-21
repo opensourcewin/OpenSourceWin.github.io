@@ -50,12 +50,16 @@ export function hreflangAlternates(siteUrl: string, path: string): HreflangAlter
   ];
 }
 
-/** OpenCC s2tw（简体 → 台湾正体）转换器，进程内单例。 */
-const s2tw = OpenCC.Converter({ from: 'cn', to: 'tw' });
+/** OpenCC s2tw（简体 → 台湾正体）转换器，首次调用 toZhTw 时惰性初始化（en / zh-CN 构建零开销）。 */
+let s2tw: ((text: string) => string) | null = null;
+function getS2tw(): (text: string) => string {
+  if (s2tw === null) s2tw = OpenCC.Converter({ from: 'cn', to: 'tw' });
+  return s2tw;
+}
 
 /** 简体中文 → 繁体中文（台湾标准）；ASCII（品牌名 / URL / 代码）不受影响。 */
 export function toZhTw(text: string): string {
-  return s2tw(text);
+  return getS2tw()(text);
 }
 
 /** 递归转换内容树中的所有字符串（用于整页文案数据对象）。 */

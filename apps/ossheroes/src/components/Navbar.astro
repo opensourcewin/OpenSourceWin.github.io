@@ -66,7 +66,7 @@ const LANG_LABELS: Record<Locale, string> = { en: 'EN', 'zh-CN': '简', 'zh-TW':
                 href={localePath(item, path)}
                 hreflang={item}
                 rel="alternate"
-                aria-pressed={item === locale ? 'true' : 'false'}
+                aria-current={item === locale ? 'true' : undefined}
                 onclick={`try{window.localStorage.setItem('osw-language','${item}')}catch(e){}`}
               >{LANG_LABELS[item]}</a>
             </>

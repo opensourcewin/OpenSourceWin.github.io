@@ -13,7 +13,8 @@
   (function () {
     var KEY = 'osw-language';
     try {
-      if (window.localStorage.getItem(KEY)) return;
+      var stored = window.localStorage.getItem(KEY);
+      if (stored === 'en' || stored === 'zh' || stored === 'zh-CN' || stored === 'zh-TW') return;
     } catch (e) {
       /* localStorage unavailable (private mode): fall back to navigator.language */
     }

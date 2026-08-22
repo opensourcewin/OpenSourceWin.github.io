@@ -642,33 +642,6 @@ a.user-item:hover .nickname {
   line-height: 1.8;
 }
 
-/* 导航语言切换：单按钮显示目标语言，与官网首页 #lang-toggle 同款观感 */
-.lang-switch {
-  padding: 0.5rem;
-}
-.lang-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: none;
-  border: none;
-  border-radius: 0;
-  color: var(--osw-muted);
-  font-family: var(--osw-font);
-  font-size: 14px;
-  padding: 0;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: color 0.2s;
-}
-.lang-btn:hover,
-.lang-btn:focus {
-  color: var(--osw-primary);
-}
-.lang-btn svg {
-  width: 1rem;
-  height: 1rem;
-}
 
 /* 详情页顶部终端风页面头部：grid 背景 + 径向辉光 + 扫描线 + 描边大字，零图片素材 */
 .detail-hero {

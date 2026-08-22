@@ -1,0 +1,217 @@
+---
+/**
+ * 共享语言切换器 —— kimi 风格「翻译图标按钮 + 下拉菜单」。
+ *
+ * apps/www（首页导航）与 apps/ossheroes（Navbar）复用，替换旧的
+ * 「EN / 简 / 繁」三文字链接并排，解决移动端拥挤折行问题。
+ *
+ * 行为契约（与全站 URL 级三语言方案一致，勿改）：
+ * - 菜单项即跨语言跳转链接：href = 当前页面对应语言 URL（localePath），
+ *   带 hreflang + rel="alternate"，onclick 写 localStorage('osw-language')；
+ * - 勾选状态构建期按 props.locale 直接渲染进 HTML，纯静态、无客户端数据依赖；
+ * - 开关交互为下方一小段 vanilla JS：点击切换、点击外部 / Esc 关闭，aria-expanded 同步。
+ *
+ * 样式：scoped，颜色取自 --osw-* 设计 token（两个 app 均已引入 tokens.css），
+ * 暗色卡片 + 圆角 + 细边框 + 阴影，菜单相对按钮右对齐。
+ */
+import { LOCALES, localePath, type Locale } from './i18n';
+
+interface Props {
+  /** 当前页面语言（构建期已知，决定 ✓ 勾选与 aria-current） */
+  locale: Locale;
+  /** locale 中立的规范路径（如 '/'、'/heroes/'、'/hero/<login>/'），供跨语言跳转 */
+  path: string;
+}
+
+const { locale, path } = Astro.props;
+
+/** 下拉菜单显示的完整语言名 */
+const LANG_NAMES: Record<Locale, string> = {
+  en: 'English',
+  'zh-CN': '简体中文',
+  'zh-TW': '繁體中文',
+};
+
+const items = LOCALES.map((item) => ({
+  locale: item,
+  href: localePath(item, path),
+  name: LANG_NAMES[item],
+  current: item === locale,
+}));
+---
+
+<div class="lang-switcher" data-lang-switcher>
+  <button
+    type="button"
+    class="lang-switcher-toggle"
+    aria-haspopup="true"
+    aria-expanded="false"
+    aria-label="Switch language / 切换语言"
+  >
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m5 8 6 6"></path>
+      <path d="m4 14 6-6 2-3"></path>
+      <path d="M2 5h12"></path>
+      <path d="M7 2h1"></path>
+      <path d="m22 22-5-10-5 10"></path>
+      <path d="M14 18h6"></path>
+    </svg>
+  </button>
+  <ul class="lang-switcher-menu" aria-label="Language / 语言">
+    {items.map((item) => (
+      <li>
+        <a
+          href={item.href}
+          hreflang={item.locale}
+          rel="alternate"
+          aria-current={item.current ? 'true' : undefined}
+          onclick={`try{window.localStorage.setItem('osw-language','${item.locale}')}catch(e){}`}
+          class:list={['lang-switcher-item', { 'is-active': item.current }]}
+        >
+          <span>{item.name}</span>
+          {item.current && (
+            <svg class="lang-switcher-check" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6 9 17l-5-5"></path>
+            </svg>
+          )}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .lang-switcher {
+    position: relative;
+    display: inline-flex;
+  }
+
+  /* 图标按钮：与导航文字链接同节奏（0.5rem 内边距），hover/展开有 subtle 底色 */
+  .lang-switcher-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    background: none;
+    border: none;
+    border-radius: 0.5rem;
+    color: var(--osw-muted);
+    cursor: pointer;
+    transition:
+      color 0.2s,
+      background-color 0.2s;
+  }
+  .lang-switcher-toggle:hover,
+  .lang-switcher.open .lang-switcher-toggle {
+    color: var(--osw-primary);
+    background-color: oklch(0.85 0.2 140 / 0.08);
+  }
+  .lang-switcher-toggle:focus-visible {
+    outline: 2px solid var(--osw-primary);
+    outline-offset: 2px;
+  }
+  .lang-switcher-toggle svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  /* 下拉卡片：暗色 + 圆角 + 细边框 + 阴影，相对按钮右对齐 */
+  .lang-switcher-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.375rem);
+    z-index: 60;
+    min-width: 9.5rem;
+    max-width: calc(100vw - 2rem);
+    margin: 0;
+    padding: 0.375rem;
+    list-style: none;
+    background-color: var(--osw-card);
+    border: 1px solid var(--osw-border);
+    border-radius: 0.75rem;
+    box-shadow:
+      0 10px 30px oklch(0 0 0 / 0.5),
+      0 2px 8px oklch(0 0 0 / 0.4);
+  }
+  .lang-switcher.open .lang-switcher-menu {
+    display: block;
+  }
+
+  .lang-switcher-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    color: var(--osw-muted);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    white-space: nowrap;
+    text-decoration: none;
+    transition:
+      color 0.15s,
+      background-color 0.15s;
+  }
+  .lang-switcher-item:hover,
+  .lang-switcher-item:focus-visible {
+    color: var(--osw-primary);
+    background-color: oklch(0.85 0.2 140 / 0.08);
+    outline: none;
+  }
+  .lang-switcher-item.is-active {
+    color: var(--osw-primary);
+  }
+  .lang-switcher-check {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+  }
+</style>
+
+<script>
+  /* 语言切换器开关：点击按钮切换，点击外部 / Esc 关闭并同步 aria-expanded。
+   * Astro 会把这段脚本按页面打包一次，多实例共存时用 closest 委托即可。 */
+  function initLangSwitchers() {
+    const switchers = document.querySelectorAll<HTMLElement>('[data-lang-switcher]');
+
+    function closeAll(except?: HTMLElement) {
+      switchers.forEach((switcher) => {
+        if (switcher === except) return;
+        switcher.classList.remove('open');
+        switcher.querySelector('.lang-switcher-toggle')?.setAttribute('aria-expanded', 'false');
+      });
+    }
+
+    switchers.forEach((switcher) => {
+      const toggle = switcher.querySelector<HTMLButtonElement>('.lang-switcher-toggle');
+      if (!toggle) return;
+      toggle.addEventListener('click', () => {
+        const willOpen = !switcher.classList.contains('open');
+        closeAll(switcher);
+        switcher.classList.toggle('open', willOpen);
+        toggle.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!(event.target as HTMLElement).closest('[data-lang-switcher]')) closeAll();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeAll();
+        // Esc 关闭后把焦点还给仍聚焦在菜单内的触发按钮
+        const active = document.activeElement as HTMLElement | null;
+        if (active && !active.closest('[data-lang-switcher]')) return;
+        active?.closest('[data-lang-switcher]')?.querySelector<HTMLElement>('.lang-switcher-toggle')?.focus();
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLangSwitchers);
+  } else {
+    initLangSwitchers();
+  }
+</script>

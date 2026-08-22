@@ -8,7 +8,8 @@ import Typewriter from "./Typewriter.tsx";
 import SeoHead from "@opensource-win/ui/SeoHead.astro";
 import FooterCredit from "@opensource-win/ui/FooterCredit.astro";
 import LangRedirect from "@opensource-win/ui/LangRedirect.astro";
-import { LOCALES, localePath, localeUrl, t, toZhTwDeep, type Locale } from "@opensource-win/ui";
+import LangSwitcher from "@opensource-win/ui/LangSwitcher.astro";
+import { localeUrl, t, toZhTwDeep, type Locale } from "@opensource-win/ui";
 import "../styles/global.css";
 
 import heroImg from "../assets/hero_network.jpg";
@@ -39,13 +40,6 @@ const roles = meta.roles.map((role) => ({ url: role.url, text: t(locale, role.zh
 const heroesUrl = localeUrl(SITE, locale, "/heroes/");
 const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&hashtags=OpenSourceWin`;
 const xUrl = locale === "en" ? "https://x.com/sunnyygao" : "https://x.com/gaoyangio";
-
-const LANG_LABELS: Record<Locale, string> = { en: "EN", "zh-CN": "简", "zh-TW": "繁" };
-const langLinks = LOCALES.map((item) => ({
-  locale: item,
-  href: localePath(item, "/"),
-  label: LANG_LABELS[item],
-}));
 
 /** Escape a string for safe interpolation into generated attribute HTML. */
 function escapeHtml(value: string): string {
@@ -177,25 +171,8 @@ const jsonLd = {
           </div>
 
           <div class="flex items-center gap-4">
-            {/* 语言切换：跳转到当前页面对应的其他语言 URL，并记录 localStorage('osw-language') */}
-            <div class="inline-flex items-center font-mono text-sm" aria-label="Language / 语言">
-              {langLinks.map((item, i) => (
-                <>
-                  {i > 0 && <span class="text-muted-foreground" aria-hidden="true">/</span>}
-                  <a
-                    href={item.href}
-                    hreflang={item.locale}
-                    rel="alternate"
-                    aria-current={item.locale === locale ? "true" : undefined}
-                    onclick={`try{window.localStorage.setItem('osw-language','${item.locale}')}catch(e){}`}
-                    class:list={[
-                      "px-2 py-2 transition-colors",
-                      item.locale === locale ? "text-primary" : "text-muted-foreground hover:text-primary",
-                    ]}
-                  >{item.label}</a>
-                </>
-              ))}
-            </div>
+            {/* 语言切换：图标按钮 + 下拉（跳对应语言 URL 并写 localStorage，见共享组件） */}
+            <LangSwitcher locale={locale} path="/" />
 
             <a href={heroesUrl} class="inline-flex items-center justify-center border bg-background text-sm px-4 py-2 font-mono text-foreground hover:bg-accent hover:text-accent-foreground transition-colors hidden sm:inline-flex">
               {navHeroes}

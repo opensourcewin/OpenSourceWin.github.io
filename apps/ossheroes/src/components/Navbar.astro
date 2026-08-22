@@ -1,5 +1,6 @@
 ---
-import { LOCALES, localePath, localeUrl, t, type Locale } from '@opensource-win/ui';
+import { localePath, localeUrl, t, type Locale } from '@opensource-win/ui';
+import LangSwitcher from '@opensource-win/ui/LangSwitcher.astro';
 import { HEROES_BASE as BASE, SITE_URL } from '../lib/site';
 import { getPastYears } from '../lib/ranking';
 
@@ -15,8 +16,6 @@ const pastYears = getPastYears();
 /** 当前语言的榜单首页路径（锚点链接拼接用） */
 const home = localePath(locale, `${BASE}/`);
 const mainSite = localeUrl(SITE_URL, locale, '/');
-
-const LANG_LABELS: Record<Locale, string> = { en: 'EN', 'zh-CN': '简', 'zh-TW': '繁' };
 ---
 
 {/* 导航 */}
@@ -56,21 +55,9 @@ const LANG_LABELS: Record<Locale, string> = { en: 'EN', 'zh-CN': '简', 'zh-TW':
         <li class="nav-item">
           <a href={mainSite} class="nav-link">{t(locale, '回到官网', 'Main Site')}</a>
         </li>
-        {/* 语言切换：跳转到当前页面对应的其他语言 URL，并记录 localStorage('osw-language') */}
-        <li class="nav-item lang-switch" aria-label="Language / 语言">
-          {LOCALES.map((item, i) => (
-            <>
-              {i > 0 && <span class="lang-sep" aria-hidden="true">/</span>}
-              <a
-                class:list={['lang-btn', { active: item === locale }]}
-                href={localePath(item, path)}
-                hreflang={item}
-                rel="alternate"
-                aria-current={item === locale ? 'true' : undefined}
-                onclick={`try{window.localStorage.setItem('osw-language','${item}')}catch(e){}`}
-              >{LANG_LABELS[item]}</a>
-            </>
-          ))}
+        {/* 语言切换：图标按钮 + 下拉（跳对应语言 URL 并写 localStorage，见共享组件） */}
+        <li class="nav-item">
+          <LangSwitcher locale={locale} path={path} />
         </li>
       </ul>
     </div>

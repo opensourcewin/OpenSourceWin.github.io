@@ -19,7 +19,8 @@
     "./tokens.css": "./src/tokens.css",
     "./SeoHead.astro": "./src/SeoHead.astro",
     "./FooterCredit.astro": "./src/FooterCredit.astro",
-    "./LangRedirect.astro": "./src/LangRedirect.astro"
+    "./LangRedirect.astro": "./src/LangRedirect.astro",
+    "./LangSwitcher.astro": "./src/LangSwitcher.astro"
   },
   "scripts": {
     "build": "tsc",
